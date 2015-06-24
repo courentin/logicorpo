@@ -1,0 +1,30 @@
+<section class="menu" ng-class="{hidden:menu}" ng-init="menu=false">
+	<div class="tools">
+		<button id="tools-logout" onclick="location.href='{{ path('logout') }}';" title="Déconnexion"></button>
+		<!--
+		<button ng-init="badge=false" ng-click="badge=!badge" id="tools-badge"><i>1</i></button>-->
+		<button id="tools-toogle-menu" ng-click="menu=!menu"></button>
+	</div>
+	<header class="user-infos">
+		<p class="user-name">{{app.user.nom | upper}} {{ app.user.prenom |title }}</p>
+		<span class="user-role">{{app.user.rang}}</span>
+		<span class="solde:{{app.user.solde}}"></span>
+	</header>
+	<nav>
+
+		<a href="{{path('lc_commande_new')}}">Passer commande</a>
+		<a href="{{path('lc_compte_home')}}">Mon compte</a>
+		<a href="{{path('lc_produit_home')}}">Produits</a>
+		{% if is_granted('ROLE_PARTICIPANT') %}
+		<a href="{{path('lc_service_do_choice')}}">Effectuer un service</a>
+		<a href="{{path('lc_utilisateur_home')}}">Gestion utilisateurs</a>
+		{% endif %}
+		{% if is_granted('ROLE_SECRETAIRE') %}
+		<a href="#">Paramètres</a>
+		<a href="#">Gestion services</a>
+		{% endif %}
+		{% if is_granted('ROLE_TRESORIER') %}
+		<a href="#">Gestion caisse</a>
+		{% endif %}
+	</nav>
+</section>

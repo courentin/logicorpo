@@ -1,0 +1,38 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Liste des produits' %}
+{% block head %}
+{{parent()}}
+<a href="{{path('lc_produit_new')}}" class="btn">Nouveau produit</a>
+<a href="#" class="btn">Réapprovisionnement</a>
+{% endblock%}
+{% block content %}
+	
+	<table class="table" width="100%">
+		<thead>
+			<tr>
+				<td>Libellé</td>
+				<td>Prix de vente</td>
+				<td>Stock</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for produit in produits %}
+				<tr onclick="">
+					<td>{{produit.libelle}}</td>
+					<td>[[ {{produit.prixVente}} | currency ]]</td>
+					<td>{% if produit.dispo %}
+						{% if produit.stock!=null %}
+							{{produit.stock}}
+						{% else %}
+							Oui
+						{% endif %}
+						{% else %}
+							Non
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

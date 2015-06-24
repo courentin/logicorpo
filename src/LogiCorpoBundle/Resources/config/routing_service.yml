@@ -1,0 +1,30 @@
+lc_service_home:
+    path:     /
+    defaults: { _controller: LogiCorpoBundle:Service:index }
+
+lc_service_do_choice:
+    path:     /effectuer
+    defaults: { _controller: LogiCorpoBundle:Service:effectuerChoice }
+
+lc_service_do:
+    path:     /effectuer/{id}
+    defaults: { _controller: LogiCorpoBundle:Service:effectuer }
+    requirements:
+        id: \d+
+
+lc_service_do_api:
+    path:     /effectuer/api/{id}
+    defaults: { _controller: LogiCorpoBundle:Service:effectuerApi }
+    requirements:
+        id: \d+
+
+lc_service_new_now:
+    path:     /nouveau/now
+    defaults: { _controller: LogiCorpoBundle:Service:nouveau }
+
+lc_service_new:
+    path:     /nouveau/
+    defaults: { _controller: LogiCorpoBundle:Service:nouveau }
+
+
+

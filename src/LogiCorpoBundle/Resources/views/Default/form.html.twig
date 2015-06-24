@@ -1,0 +1,26 @@
+
+{% block form_row %}
+	<label class="form-input">
+		<p>{{ form_label(form) }}</p>
+		{{ form_widget(form) }}
+		<div class="form-input-helper err">{{ form_errors(form) }}</div>
+	</label>
+{% endblock %}
+
+{% block money_widget %}
+   {% set money_pattern = '{{ widget }} <span>&euro;<span>' %}
+   {{ money_pattern|replace({ '{{ widget }}': block('form_widget_simple') })|raw }}
+{%- endblock money_widget %}
+
+{% block percent_widget %}
+   {% set money_pattern = '{{ widget }} <span>%<span>' %}
+   {{ money_pattern|replace({ '{{ widget }}': block('form_widget_simple') })|raw }}
+{%- endblock percent_widget %}
+
+{% block checkbox_row %}
+	<label class="form-check">
+		<input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+		{{label}}
+	</label>
+{% endblock checkbox_row %}
+

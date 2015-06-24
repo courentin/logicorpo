@@ -1,0 +1,7 @@
+lc_produit_home:
+    path:     /
+    defaults: { _controller: LogiCorpoBundle:Produit:index }
+
+lc_produit_new:
+    path:     /nouveau
+    defaults: { _controller: LogiCorpoBundle:Produit:nouveau }

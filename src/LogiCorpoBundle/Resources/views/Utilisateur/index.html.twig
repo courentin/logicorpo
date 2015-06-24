@@ -1,0 +1,32 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Liste des utilisateurs' %}
+{% block head %}
+{{parent()}}
+<a href="{{path('lc_utilisateur_new')}}" class="btn">Nouvel utilisateur</a>
+<a href="#" class="btn">Créditer/débiter compte</a>
+<p>Cliquez sur un utilisateur pour le modifier.</p>
+{% endblock %}
+{% block content %}
+	
+	<table class="table" width="100%">
+		<thead>
+			<tr>
+				<td>Nom</td>
+				<td>Login</td>
+				<td>Rang</td>
+				<td>Solde</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for utilisateur in utilisateurs %}
+				<tr onclick="location.href='{{ path('lc_utilisateur_editer', {'id': utilisateur.id}) }}'">
+					<td>{{utilisateur.nom | upper}} {{utilisateur.prenom | title}}</td>
+					<td>{{utilisateur.username | title}}</td>
+					<td>{{utilisateur.rang.nom | title}}</td>
+					<td><span class="solde:{{utilisateur.solde}}"></span></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

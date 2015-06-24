@@ -1,0 +1,7 @@
+lc_compte_home:
+    path:     /
+    defaults: { _controller: LogiCorpoBundle:Compte:index }
+
+lc_compte_mdp:
+    path:     /edit-mdp
+    defaults: { _controller: LogiCorpoBundle:Security:changePass }

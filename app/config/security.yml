@@ -1,0 +1,40 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        LogiCorpoBundle\Entity\Utilisateur:
+            algorithm: sha512
+            iterations: 1
+            encode_as_base64: false
+
+    role_hierarchy:
+        ROLE_MEMBRE:       ROLE_NON_MEMBRE
+        ROLE_PARTICIPANT: [ROLE_NON_MEMBRE, ROLE_MEMBRE]
+        ROLE_SECRETAIRE:  [ROLE_NON_MEMBRE, ROLE_MEMBRE, ROLE_PARTICIPANT]
+        ROLE_TRESORIER:   [ROLE_NON_MEMBRE, ROLE_MEMBRE, ROLE_PARTICIPANT, ROLE_SECRETAIRE]
+        ROLE_PRESIDENT:   [ROLE_NON_MEMBRE, ROLE_MEMBRE, ROLE_PARTICIPANT, ROLE_SECRETAIRE, ROLE_TRESORIER]
+
+    providers:
+        bdd:
+            entity:
+                class: LogiCorpoBundle\Entity\Utilisateur
+                property: username
+
+    access_control:
+        - { path: ^/(login|login_check), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_NON_MEMBRE }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            anonymous: true
+            provider: bdd
+            form_login:
+                login_path: login
+                check_path: login_check
+            logout:
+                path: logout
+                target: login

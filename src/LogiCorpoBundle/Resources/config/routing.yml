@@ -1,0 +1,3 @@
+lc_homepage:
+    path:     /
+    defaults: { _controller: LogiCorpoBundle:Default:index }

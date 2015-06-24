@@ -1,0 +1,41 @@
+{% set title = 'logiCorpo' %}
+<!doctype html>
+<html ng-app="logicorpo">
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}{{title}}
+	{% if subtitle is defined %}
+	- {{ subtitle}}
+	{% endif %}
+	{% endblock %}</title>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{asset('/public/css/app.css')}}">
+	{% endblock %}
+	
+	{% block javascripts %}{% endblock %}
+	<script src="{{ asset('/public/js/angularjs-1.3.16.min.js') }}"></script>
+	<script src="{{ asset('/public/js/angular-locale_fr-fr.js') }}"></script>
+	<script src="{{ asset('/public/js/clickoutside.directive.js') }}"></script>
+	<script src="{{ asset('/public/js/app.js') }}"></script>
+	<link rel="icon" type="image/png" href="{{ asset('/public/img/favicon.png') }}" />
+</head>
+<body ng-controller="MainCtrl">
+
+	{% for type, message in app.session.flashbag.all %}
+		<flash type="{{ type }}">{{ message[0] }}</flash>
+	{% endfor %}
+	
+	{{ include('menu.html.twig') }}
+
+	<section class="content">
+		<header>
+		{%block head %}
+			<h1 class="content-title">{{ subtitle }}</h1>
+		{% endblock %}
+		</header>
+		{%block content %}{% endblock %}
+
+	</section>
+</body>
+</html>

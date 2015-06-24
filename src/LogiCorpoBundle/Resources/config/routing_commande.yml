@@ -1,0 +1,3 @@
+lc_commande_new:
+    path:     /nouvelle
+    defaults: { _controller: LogiCorpoBundle:Produit:index }

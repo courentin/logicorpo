@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="logicorpo">
+<head>
+	<title>Logicorpo - Connexion</title>
+	<meta charset="utf-8">
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{{asset('/public/css/login.css')}}">
+	<script src="{{ asset('/public/js/angularjs-1.3.16.min.js') }}"></script>
+	<script src="{{ asset('/public/js/clickoutside.directive.js') }}"></script>
+	<script src="{{ asset('/public/js/app.js') }}"></script>
+	<link rel="icon" type="image/png" href="{{ asset('/public/img/favicon.png') }}" />
+</head>
+<body ng-controller="MainCtrl">
+	{% if error %}
+		<flash type="err">{{ error.message }}</flash>
+	{% endif %}
+	<div class="box">
+		<div class="logo"></div>
+			{%block form %}
+			{% endblock %}
+	</div>
+</body>
+</html>

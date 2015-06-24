@@ -1,0 +1,4 @@
+services:
+#    logi_corpo.example:
+#        class: LogiCorpoBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

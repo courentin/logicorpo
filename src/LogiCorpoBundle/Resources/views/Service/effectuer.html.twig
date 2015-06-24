@@ -1,0 +1,45 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Service de ' ~ (service.debut | date("h\\hi")) %}
+{% block head %}
+{{parent()}}
+<h2></h2>
+{% endblock %}
+{% block content %}
+
+{% for commande in service.commandes %}
+<div class="commande">
+	<div class="user-infos">
+		<p class="user-name">{{ commande.utilisateur.nom | upper }} {{ commande.utilisateur.prenom | title}}</p>
+		<a href="#" class="solde:{{commande.utilisateur.solde}}"></a>
+		<p class="commande-options">
+			<a href="#">modifier</a>
+			<a href="#">supprimer</a>
+		</p>
+	</div>
+
+	<div class="commande-produits">
+		<div class="commande-produit">
+			<i></i>
+			<div class="commande-produit-nom">
+				<span></span>
+				<ul>
+					<li ng-repeat="supplement in produit.supplements">[[supplement]]</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="commande-actions">
+		<!-- ✓ -->
+		<button ng-click="commande.changeState('P')" title="Prête">P</button>
+		<button ng-click="commande.changeState('S')" title="Servie">S</button>
+	</div>
+
+	<div class="commande-prix">
+		<span>[[commande.prix | number:2]]€</span>
+		<button>Régler</button>
+	</div>
+</div>
+{% endfor %}
+
+{% endblock %}

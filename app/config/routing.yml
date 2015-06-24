@@ -1,0 +1,38 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+lc_home:
+    resource: "@LogiCorpoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lc_utilisateur:
+    resource: "@LogiCorpoBundle/Resources/config/routing_utilisateur.yml"
+    prefix:   /utilisateur
+
+lc_produit:
+    resource: "@LogiCorpoBundle/Resources/config/routing_produit.yml"
+    prefix:   /produit
+
+lc_commande:
+    resource: "@LogiCorpoBundle/Resources/config/routing_commande.yml"
+    prefix:   /commande
+
+lc_service:
+    resource: "@LogiCorpoBundle/Resources/config/routing_service.yml"
+    prefix:   /service
+
+lc_compte:
+    resource: "@LogiCorpoBundle/Resources/config/routing_compte.yml"
+    prefix:   /compte
+
+
+login:
+    path:   /login
+    defaults:  { _controller: LogiCorpoBundle:Security:login }
+
+login_check:
+    path:   /login_check
+
+logout:
+    path:   /logout

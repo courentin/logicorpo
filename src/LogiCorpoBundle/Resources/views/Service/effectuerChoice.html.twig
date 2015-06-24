@@ -1,0 +1,18 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Effectuer un service' %}
+{% block head %}
+{{parent()}}
+<a href="{{path('lc_service_new_now')}}" class="btn">Lancer un service</a>
+{% endblock %}
+{% block content %}
+
+	{% if services is empty %}
+	<h2 class="content-title">Aucun service programmé ajourd'hui</h2>
+	{% else %}
+
+	<h2 class="content-title">Prochains services</h2>
+	{% for service in services %}
+		<p>Service de {{service.debut | date('h\\hi')}} : <a href="{{path('lc_service_do', {'id': service.id})}}" class="btn">Effectuer le service</a></p>
+	{% endfor %}
+	{% endif %}
+{% endblock %}
