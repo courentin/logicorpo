@@ -45,9 +45,9 @@ class ProduitController extends Controller
 		$form->handleRequest($req);
 
 		if($form->isValid()) {
-    		$em = $this->getDoctrine()->getManager();
-    		$em->persist($produit);
-    		$em->flush();
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($produit);
+			$em->flush();
 
 			$req->getSession()->getFlashBag()->add('succes', 'Le produit "'.$produit.'" a bien été ajouté');
 			return $this->redirect($this->generateUrl('lc_produit_home'));

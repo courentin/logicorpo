@@ -7,8 +7,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
-    {
-        return $this->render('LogiCorpoBundle:Default:index.html.twig');
-    }
+	public function indexAction()
+	{
+		return $this->render('LogiCorpoBundle:Default:index.html.twig');
+	}
 }
