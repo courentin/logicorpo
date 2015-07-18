@@ -1,0 +1,10 @@
+/* Tablette */
+@media screen and (max-width: 1000px) {
+  .content {
+    padding: 0 20px; } }
+/* Phone */
+@media screen and (max-width: 630px) {
+  .menu {
+    width: 100%; } }
+
+/*# sourceMappingURL=responsive.css.map */

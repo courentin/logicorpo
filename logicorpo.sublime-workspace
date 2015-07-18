@@ -1,0 +1,901 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"max-",
+				"max-height"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"fot",
+				"font-size"
+			],
+			[
+				"reqi",
+				"required"
+			],
+			[
+				"va",
+				"$values〔variable〕"
+			],
+			[
+				"ma",
+				"$matches〔variable〕"
+			],
+			[
+				"stat",
+				"static"
+			],
+			[
+				"req",
+				"required"
+			],
+			[
+				"array",
+				"array"
+			],
+			[
+				"sta",
+				"static〔keyword〕"
+			],
+			[
+				"si",
+				"siteKey"
+			],
+			[
+				"Simple",
+				"SimpleValidator\\Validator〔class〕"
+			],
+			[
+				"err",
+				"errors"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"json",
+				"json_encode〔function〕"
+			],
+			[
+				"js",
+				"$jsonContent〔variable〕"
+			],
+			[
+				"hea",
+				"header	Tag"
+			],
+			[
+				"con",
+				"container"
+			],
+			[
+				"la",
+				"largecontent"
+			],
+			[
+				"he",
+				"header	Tag"
+			],
+			[
+				"end",
+				"endif"
+			],
+			[
+				"sy",
+				"stylesheet"
+			],
+			[
+				"blo",
+				"block"
+			],
+			[
+				"bu",
+				"buttons"
+			],
+			[
+				"fun",
+				"function〔keyword〕"
+			],
+			[
+				"re",
+				"repositories"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"da",
+				"$data〔variable〕"
+			],
+			[
+				"fi",
+				"$fields〔variable〕"
+			],
+			[
+				"cond",
+				"$conditions〔variable〕"
+			],
+			[
+				"is",
+				"isSet"
+			],
+			[
+				"fie",
+				"$field〔variable〕"
+			],
+			[
+				"thr",
+				"throw〔keyword〕"
+			],
+			[
+				"data",
+				"$datas〔variable〕"
+			],
+			[
+				"var",
+				"var_dump〔function〕"
+			],
+			[
+				"th",
+				"$this〔variable〕"
+			],
+			[
+				"ca",
+				"callable"
+			],
+			[
+				"cla",
+				"class_name"
+			],
+			[
+				"spl_autoload_",
+				"spl_autoload_register"
+			],
+			[
+				"h",
+				"haut"
+			],
+			[
+				"hori",
+				"horizontal"
+			],
+			[
+				"pa",
+				"parrois"
+			],
+			[
+				"lo",
+				"loop"
+			],
+			[
+				"eb",
+				"ebx"
+			],
+			[
+				"loo",
+				"loopParoi"
+			],
+			[
+				"dess",
+				"dessineParoi"
+			],
+			[
+				"et",
+				"etoiles"
+			],
+			[
+				"wri",
+				"writeStars"
+			],
+			[
+				"write",
+				"WriteString"
+			],
+			[
+				"arr",
+				"array2"
+			],
+			[
+				"tr",
+				"trier"
+			],
+			[
+				"tri",
+				"trie2"
+			],
+			[
+				"trie",
+				"trie"
+			],
+			[
+				"ED",
+				"ENDP"
+			],
+			[
+				"rea",
+				"readTen"
+			],
+			[
+				"END",
+				"ENDP"
+			],
+			[
+				"jo",
+				"jou"
+			],
+			[
+				"e",
+				"esi"
+			],
+			[
+				"joueur",
+				"joueurs"
+			],
+			[
+				"Wr",
+				"WriteInt"
+			],
+			[
+				"le",
+				"leJoueur"
+			],
+			[
+				"de",
+				"deflim"
+			],
+			[
+				"def",
+				"defilim"
+			],
+			[
+				"co",
+				"coups"
+			],
+			[
+				"w",
+				"WriteInt"
+			],
+			[
+				"cmp",
+				"cmpt"
+			],
+			[
+				"bcl",
+				"bcl2"
+			],
+			[
+				"add",
+				"add"
+			],
+			[
+				"en",
+				"ent1"
+			],
+			[
+				"ent",
+				"ent2"
+			],
+			[
+				"bon",
+				"bonnea"
+			],
+			[
+				"journ",
+				"journee"
+			],
+			[
+				"bjr",
+				"bjrnom"
+			],
+			[
+				"bone",
+				"bonnej"
+			],
+			[
+				"Bon",
+				"Bonjour"
+			],
+			[
+				"ro",
+				"robots"
+			],
+			[
+				"pl",
+				"plut"
+			],
+			[
+				"se",
+				"selRobot"
+			],
+			[
+				"nb",
+				"nbMinerais"
+			],
+			[
+				"ask",
+				"askRobot"
+			],
+			[
+				"as",
+				"askAction"
+			],
+			[
+				"sel",
+				"selAction"
+			],
+			[
+				"M",
+				"MAX_C"
+			],
+			[
+				"MI",
+				"MIN_C"
+			],
+			[
+				"pri",
+				"println"
+			],
+			[
+				"cle",
+				"clearConsole"
+			],
+			[
+				"b",
+				"b"
+			],
+			[
+				"S",
+				"System"
+			],
+			[
+				"Rob",
+				"RobotPlutonium"
+			],
+			[
+				"rob",
+				"Robot"
+			],
+			[
+				"rand",
+				"randomCase"
+			],
+			[
+				"n",
+				"null"
+			],
+			[
+				"arg",
+				"argHauteur"
+			],
+			[
+				"get",
+				"getNbWords"
+			],
+			[
+				"ind",
+				"indicatifPays"
+			],
+			[
+				"inf",
+				"indicatifPays"
+			],
+			[
+				"l",
+				"length"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"les",
+				"lesContacts"
+			],
+			[
+				"Adr",
+				"AdrPostale"
+			],
+			[
+				"ta",
+				"taille"
+			],
+			[
+				"C",
+				"Coordonnees"
+			],
+			[
+				"in",
+				"indicatifLocal"
+			],
+			[
+				"v",
+				"ville"
+			],
+			[
+				"Htt",
+				"HttpPost"
+			],
+			[
+				"avr",
+				"avrdude"
+			],
+			[
+				"so",
+				"sommets"
+			],
+			[
+				"somm",
+				"sommets"
+			],
+			[
+				"P",
+				"Polygone"
+			],
+			[
+				"Pi",
+				"Pixel"
+			],
+			[
+				"es",
+				"estPleine"
+			],
+			[
+				"est",
+				"estVide"
+			],
+			[
+				"put",
+				"putC"
+			],
+			[
+				"F",
+				"fCarte"
+			],
+			[
+				"f",
+				"fCarte"
+			],
+			[
+				"tra",
+				"trameData"
+			],
+			[
+				"str",
+				"strData"
+			],
+			[
+				"st",
+				"strTab"
+			],
+			[
+				"ar",
+				"argErrno"
+			],
+			[
+				"aj",
+				"ajouterUnEnfant"
+			],
+			[
+				"U",
+				"UPADTE_PAGE"
+			],
+			[
+				"num",
+				"numEtud"
+			],
+			[
+				"send",
+				"sendRequest"
+			],
+			[
+				"u",
+				"updates"
+			],
+			[
+				"pr",
+				"println"
+			],
+			[
+				"Po",
+				"Point"
+			],
+			[
+				"pt",
+				"pts"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 216.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/corentin/Dropbox/Projets/logicorpo/site"
+	],
+	"file_history":
+	[
+		"/home/corentin/Dropbox/Projets/logicorpo/site/css",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/base.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/layout.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/glide.css",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/contact.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/index.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/habitat.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/header.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/large.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/.gitignore",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/app.scss",
+		"/home/corentin/.config/sublime-text-3/Packages/User/Distraction Free.sublime-settings",
+		"/home/corentin/Dropbox/Projets/ebip/site/class/Conf.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/boutons.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/form.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/class/MoreValidation.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/view/index.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/view/industrie.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/view/contact.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/view/layout.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/js/app.js",
+		"/home/corentin/Dropbox/Projets/ebip/site/view/large-screen.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/view/menu.html",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/index/index.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/simple-validator/simple-validator/src/SimpleValidator/Validator.php",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/contact/index.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/simple-validator/simple-validator/src/SimpleValidator/SimpleValidatorException.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/simple-validator/simple-validator/errors/fr.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/.htaccess",
+		"/home/corentin/Dropbox/Projets/ebip/site/composer.json",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/config/conf.php",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/controller/ContactController.php",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/core/Form.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/js/form.js",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/webroot/.htaccess",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/.htaccess",
+		"/usr/share/doc/msmtp/examples/set_sendmail/set_sendmail.conf",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/large-screen.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/contact.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/ExtendValidator.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/layout.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/industrie.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/notFound.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/slim/slim/Slim/Http/Request.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/slim/twig-view/src/Twig.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/slim/slim/Slim/Http/Response.php",
+		"/home/corentin/Dropbox/Projets/FormHelper/Validator.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/logicorpo/.gitignore",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/contact/post.php",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/industrie/index.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/menu.html",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/layout/default.php",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/webroot/css/compass/sass/contact.scss",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/nikic/fast-route/src/RouteParser/Std.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/slim/slim/Slim/Router.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/slim/slim/Slim/CallableResolver.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/twig/twig/lib/Twig/SimpleFunction.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/vendor/twig/twig/lib/Twig/Environment.php",
+		"/home/corentin/Dropbox/Projets/freelance/demarcharge.txt",
+		"/home/corentin/Dropbox/Projets/freelance/demarcharge",
+		"/home/corentin/Dropbox/Projets/app",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/habitat.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/README.md",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/habitat/index.php",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/habitat.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/index.html",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/contact.html",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/industrie.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/config.rb",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/css/style.css",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/.sass-cache/c6c5c4c0692386c2377ea334b430c4775009d07f/animate.scssc",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/default.css",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/app.css",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/css/vars.css",
+		"/home/corentin/Téléchargements/Glide.js-2.0.0/examples/basic.html",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/js/glide/glide.css",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/glide.html",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/footer.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/header.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/composer.lock",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/webroot/index.php",
+		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/core/Request.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/src/FormHelper.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/src/Validator.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/src/Form.php",
+		"/home/corentin/Téléchargements/Créer un Router/src/Router/Route.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/src/Route.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/src/RouterException.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/src/Router.php",
+		"/home/corentin/Téléchargements/Créer un Router/src/Router/Router.php",
+		"/home/corentin/Téléchargements/Créer un Router/vendor/autoload.php",
+		"/home/corentin/Téléchargements/Créer un Router/vendor/composer/autoload_real.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/Router.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/routes.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/Autoloader.php",
+		"/C/Masm615/tp43.asm",
+		"/C/Masm615/tp41.asm",
+		"/C/Masm615/tp42.asm",
+		"/C/Masm615/td4.asm",
+		"/C/Masm615/tp3.asm",
+		"/C/Masm615/tp4.asm",
+		"/C/Masm615/tp1.asm",
+		"/C/Masm615/tp33.asm",
+		"/C/Masm615/coul.asm",
+		"/C/Masm615/td4sauv.asm",
+		"/C/Masm615/tp2.asm",
+		"/C/Masm615/invString.asm",
+		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/habitat.html",
+		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/contact.html",
+		"/C/Masm615/essai.asm",
+		"/C/Masm615/fctParam.asm",
+		"/C/Masm615/fctAdd.asm",
+		"/C/Masm615/test.asm",
+		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/img/choice.svg",
+		"/C/Users/Corentin/Dropbox/ok.txt",
+		"/C/Masm615/tp1test.asm",
+		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/css/style.css",
+		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/index.html",
+		"/C/Users/Corentin/Dropbox/test java/Arduinotest.java",
+		"/home/corentin/DUT/S2/M2103/TP4/Mine.java",
+		"/home/corentin/DUT/S2/M2103/TP4/MinePlutonium.java",
+		"/home/corentin/DUT/S2/M2103/TP4/Jeux.java",
+		"/home/corentin/DUT/S2/M2103/TP4/Monde.java",
+		"/home/corentin/DUT/S2/M2103/TP4/Robot.java",
+		"/home/corentin/DUT/S2/M2103/TP4/Joueur.java",
+		"/home/corentin/DUT/S2/M2103/TP4/Case.java",
+		"/home/corentin/DUT/S2/M2103/TP4/MineUranium.java",
+		"/home/corentin/Documents/tests java/televerser.java"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"in",
+			"workspace",
+			"transition ?: ?(.*);",
+			"transform",
+			"transition ?: ?(.*);",
+			"transition ?:(.*);",
+			"transition",
+			"transform",
+			"url",
+			"baseU",
+			"logo",
+			"logo ",
+			"url_for",
+			"<\\?= Router::webroot\\(\"(.*)\"\\); \\?>",
+			"<\\?= Router::webroot\\(\"(.)*\"\\); \\?>",
+			"<\\?= Router::webroot\\((.*)\\); \\?>",
+			"<\\?= Router::webroot\\((.)*\\); \\?>",
+			"<?= Router::webroot\\((.)*\\); \\?>",
+			"\\{\\{ webroot\\(\"(.*)\"\\) \\}\\}",
+			"\\{\\{ webroot\\((.*)\\) \\}\\}",
+			"{{ webroot(\"css/form.css\") }}",
+			"\\{\\{ webroot\\((.*)\\) \\}\\}",
+			"?>",
+			"\n				",
+			"ran",
+			"random",
+			";",
+			"Excepti",
+			"];\n",
+			"affiche_grille",
+			"for",
+			"repaint",
+			"paintCom",
+			"toPixelAr",
+			"System",
+			"null",
+			" \\((.+)?\\)",
+			"\\((.+)?\\)",
+			" \\. ",
+			"/**\n",
+			"3",
+			"#left",
+			"left",
+			"tada",
+			">\n",
+			"argv\\[([0-9])\\]"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"@include transition($1);",
+			"path_for",
+			"{{ url_for('$1') }}",
+			"{{ url_for($1) }}",
+			"public/$1",
+			"../$1",
+			"../$",
+			"../$1",
+			"}}",
+			";\\n",
+			"($1)",
+			"($)",
+			".",
+			"a$1"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 124.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.nfc":
+	{
+		"height": 118.0
+	},
+	"output.test":
+	{
+		"height": 118.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 124.0
+	},
+	"pinned_build_system": "",
+	"project": "logicorpo.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Documents/C/C.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 201.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

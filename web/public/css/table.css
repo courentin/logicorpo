@@ -1,0 +1,29 @@
+.table {
+  font-size: 24px;
+  border-collapse: collapse; }
+  .table td {
+    padding: .1em .8em; }
+  .table thead {
+    text-align: left;
+    font-size: 1.2em;
+    color: #323232; }
+    .table thead tr td {
+      border-bottom: 1px solid #969696; }
+  .table tbody tr {
+    color: #5a5a5a; }
+    .table tbody tr td {
+      padding: .1em 1em;
+      transition: all .1s; }
+  .table tbody tr[onclick]:hover td {
+    background: #aaaaaa !important;
+    color: #FFF;
+    cursor: pointer; }
+  .table tbody tr:nth-child(2n) td {
+    background: #f2f2f2; }
+  .table tfoot {
+    font-size: 1.25em;
+    color: #323232; }
+    .table tfoot tr td {
+      border-top: 1px solid #969696; }
+
+/*# sourceMappingURL=table.css.map */

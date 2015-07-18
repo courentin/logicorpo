@@ -1,0 +1,31 @@
+.moreinfos {
+  box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.3);
+  display: table;
+  border-radius: 3px;
+  min-width: 150px;
+  max-width: 600px;
+  padding: .7rem 1rem;
+  position: absolute;
+  bottom: -20px;
+  right: 50%;
+  transform: translateX(50%) translateY(100%);
+  background: #FFF;
+  z-index: 1000;
+  color: initial;
+  line-height: initial; }
+  .moreinfos:before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 25px;
+    height: 25px;
+    background-image: url(../img/icons/triangle.png);
+    background-repeat: no-repeat; }
+
+.moreinfos-parent {
+  position: relative;
+  display: inline-block; }
+
+/*# sourceMappingURL=moreinfos.css.map */

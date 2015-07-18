@@ -1,0 +1,534 @@
+/*
+Style des elements de base
+*/
+* {
+  outline: none none !important;
+  font-family: "Open Sans", sans-serif; }
+
+*:focus {
+  outline: 0; }
+
+html {
+  font-size: 16px;
+  box-sizing: border-box; }
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #000;
+  margin: 0;
+  font-weight: lighter; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: lighter; }
+
+hr {
+  border: 0;
+  border-bottom: 1px solid;
+  border-color: #e9e9e9; }
+
+.cb {
+  clear: both; }
+
+button::-moz-focus-inner {
+  border: 0; }
+
+.lien {
+  text-decoration: underline; }
+
+/*
+Represente les infos de l'utilisateur (nom, prenom, solde)
+*/
+.user-infos .user-name {
+  font-size: 1em;
+  margin: 0 0 0 0;
+  margin-bottom: -.42em;
+  word-wrap: break-word; }
+.user-infos .user-role {
+  display: block;
+  font-size: .5em;
+  margin-top: .5em; }
+
+.user-solde {
+  font-size: .55em;
+  margin: 0;
+  padding: 0em .4em;
+  border-radius: 3px;
+  background: #2980b9;
+  color: #FFF; }
+
+.user-solde.negative {
+  background: #bf3737; }
+
+/*
+Structure du site
+*/
+.tools {
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  display: flex;
+  transition: all 0.3s; }
+  .tools button {
+    border: none;
+    background: none;
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: 0;
+    margin: 0 .3em;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    transition: all 0.3s; }
+    .tools button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      background-repeat: no-repeat;
+      background-position: center; }
+  .tools #tools-logout {
+    background-image: url(../img/icons/close-red.svg);
+    background-size: 45%; }
+  .tools #tools-toogle-menu {
+    background-image: url(../img/icons/left.svg);
+    background-size: 55%; }
+  .tools #tools-badge {
+    background-image: url(../img/icons/credit.svg);
+    background-size: 55%;
+    position: relative; }
+    .tools #tools-badge i {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      color: #FFF;
+      background: #bf3737;
+      font-style: normal;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      font-size: 12px;
+      line-height: 15px;
+      text-align: center; }
+
+/*
+MENU de gauche
+*/
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 335px;
+  background: #595959;
+  color: #FFF;
+  transition: all 0.3s; }
+  .menu .user-infos {
+    font-size: 2.2rem;
+    padding: 0 1.5rem; }
+  .menu header {
+    height: 190px;
+    padding-top: 55px !important; }
+  .menu nav a {
+    display: block;
+    font-size: 1.63rem;
+    padding: .85rem 1.5rem;
+    transition: all 0.3s; }
+    .menu nav a:hover {
+      background: rgba(255, 255, 255, 0.2); }
+
+/*
+CONTENU DE LA PAGE
+*/
+.content {
+  margin-left: 335px;
+  padding: 0 69px;
+  transition: all 0.3s; }
+  .content header {
+    height: 190px;
+    padding-top: 55px; }
+  .content h1.content-title {
+    font-size: 2.8rem;
+    margin: 0;
+    margin-bottom: 1rem;
+    line-height: 1; }
+  .content h2.content-title {
+    font-size: 2.2rem;
+    color: #595959;
+    margin: 0; }
+
+.two {
+  width: 50%;
+  float: left; }
+
+.three {
+  width: 33.32%;
+  float: left; }
+
+/* Modules */
+@keyframes entrance {
+  0% {
+    opacity: 0;
+    transform: translateX(100%); }
+  100% {
+    opacity: 1;
+    transform: translateX(0%); } }
+@keyframes leave {
+  0% {
+    opacity: 1;
+    transform: translateX(0%); }
+  100% {
+    opacity: 0;
+    transform: translateX(100%); } }
+.flash {
+  background: #27ae60;
+  min-width: 200px;
+  max-width: 400px;
+  color: #FFF;
+  position: fixed;
+  right: 35px;
+  top: 35px;
+  z-index: 100;
+  border-radius: 4px;
+  padding: .7rem .9rem;
+  font-size: .95rem;
+  transform: translateX(100%);
+  opacity: 0;
+  animation: entrance .7s;
+  animation-delay: .5s;
+  animation-fill-mode: forwards; }
+  .flash .flash-close {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    background-image: url(../img/icons/close.svg);
+    background-size: 12px;
+    background-repeat: no-repeat;
+    height: 12px;
+    width: 12px;
+    opacity: .8;
+    transition: all 0.3s; }
+    .flash .flash-close:hover {
+      opacity: 1; }
+
+.flash.ng-hide {
+  display: block !important;
+  animation: leave .5s;
+  animation-fill-mode: forwards; }
+
+.flash.err {
+  background: #bf3737; }
+
+.flash.notice {
+  background: #2980b9; }
+
+.btn, .form input[type="submit"], .form input[type="button"], .form button {
+  border: 1px solid #595959;
+  border-radius: 5px;
+  padding: .417rem 2.2em;
+  font-size: 1.2rem;
+  display: inline-block;
+  transition: all 0.3s; }
+  .btn:hover, .form input[type="submit"]:hover, .form input[type="button"]:hover, .form button:hover {
+    background: #595959;
+    color: #FFF; }
+
+.moreinfos {
+  box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.3);
+  display: table;
+  border-radius: 3px;
+  min-width: 150px;
+  max-width: 600px;
+  padding: .7rem 1rem;
+  position: absolute;
+  bottom: -20px;
+  right: 50%;
+  transform: translateX(50%) translateY(100%);
+  background: #FFF;
+  z-index: 1000;
+  color: initial;
+  line-height: initial; }
+  .moreinfos:before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 25px;
+    height: 25px;
+    background-image: url(../img/icons/triangle.png);
+    background-repeat: no-repeat; }
+
+.moreinfos-parent {
+  position: relative;
+  display: inline-block; }
+
+.table {
+  font-size: 24px;
+  border-collapse: collapse; }
+  .table td {
+    padding: .1em .8em; }
+  .table thead {
+    text-align: left;
+    font-size: 1.2em;
+    color: #323232; }
+    .table thead tr td {
+      border-bottom: 1px solid #969696; }
+  .table tbody tr {
+    color: #5a5a5a; }
+    .table tbody tr td {
+      padding: .1em 1em;
+      transition: all .1s; }
+  .table tbody tr[onclick]:hover td {
+    background: #aaaaaa !important;
+    color: #FFF;
+    cursor: pointer; }
+  .table tbody tr:nth-child(2n) td {
+    background: #f2f2f2; }
+  .table tfoot {
+    font-size: 1.25em;
+    color: #323232; }
+    .table tfoot tr td {
+      border-top: 1px solid #969696; }
+
+.form {
+  font-size: 1rem; }
+  .form .form-input-base, .form .form-specialcheck, .form .form-input input, .form .form-input select {
+    border: 1px solid #bdbdbd;
+    padding: .4em 1em;
+    border-radius: 5px;
+    color: #858585;
+    font-size: 1.15em;
+    font-weight: lighter;
+    box-shadow: none;
+    background: #FFF;
+    box-sizing: border-box;
+    transition: all 0.3s; }
+    .form .form-input-base:focus, .form .form-specialcheck:focus, .form .form-input input:focus, .form .form-input select:focus {
+      color: #000; }
+    .form .form-input-base:focus:invalid, .form .form-specialcheck:focus:invalid, .form .form-input input:focus:invalid, .form .form-input select:focus:invalid {
+      border-color: #bf3737; }
+    .form .form-input-base:focus:valid, .form .form-specialcheck:focus:valid, .form .form-input input:focus:valid, .form .form-input select:focus:valid {
+      border-color: #27ae60; }
+  .form .form-label-base, .form .form-input p {
+    color: #828282;
+    margin: 0 0 .1em 0;
+    font-size: 1.53em; }
+  .form input[type="submit"], .form input[type="button"], .form button {
+    background: none;
+    color: #595959;
+    font-weight: lighter;
+    cursor: pointer; }
+  .form .form-specialcheck {
+    position: relative;
+    display: inline-block;
+    width: 300px; }
+    .form .form-specialcheck * {
+      cursor: pointer; }
+    .form .form-specialcheck i {
+      font-style: normal; }
+    .form .form-specialcheck input[type="text"] {
+      font-weight: lighter;
+      border: none;
+      position: absolute;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: none;
+      padding: 0 .3em;
+      width: 2em;
+      font-size: 1em;
+      color: #858585;
+      text-align: center; }
+    .form .form-specialcheck input[type="checkbox"] {
+      display: none; }
+    .form .form-specialcheck .form-specialcheck-label {
+      padding-left: 1.4em;
+      height: 100%; }
+    .form .form-specialcheck .form-specialcheck-prix {
+      position: absolute;
+      right: .4em;
+      text-align: right; }
+  .form .form-specialcheck.checked {
+    background: #909090;
+    border-color: #909090;
+    color: #FFF; }
+    .form .form-specialcheck.checked input[type="text"] {
+      color: #FFF; }
+  .form .form-specialcheck.indispo {
+    background-image: url(../img/icons/motif-diago.png);
+    color: #878787;
+    cursor: initial;
+    text-decoration: line-through; }
+  .form .form-input {
+    margin-bottom: 1.5em;
+    position: relative;
+    vertical-align: bottom;
+    display: table; }
+    .form .form-input input {
+      position: relative;
+      width: 15em;
+      margin: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none; }
+    .form .form-input select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 15em;
+      background-image: url(../img/icons/down.svg);
+      background-size: 1em;
+      background-repeat: no-repeat;
+      background-position: right 9px center;
+      padding-right: 30px; }
+    .form .form-input span {
+      color: #858585;
+      font-size: 1.2em;
+      position: absolute;
+      right: 12px;
+      bottom: .4em; }
+    .form .form-input .form-input-helper {
+      position: absolute;
+      color: #757575;
+      font-size: .9em;
+      line-height: 1em;
+      margin-top: .5em; }
+      .form .form-input .form-input-helper ul {
+        margin: 0;
+        padding: 0;
+        list-style: none; }
+        .form .form-input .form-input-helper ul li {
+          margin: 0;
+          padding: 0; }
+    .form .form-input .form-input-helper.err {
+      color: #bf3737; }
+  .form .form-check {
+    color: #828282;
+    font-size: 1.53em;
+    vertical-align: middle; }
+    .form .form-check input {
+      margin: 0 .5em;
+      vertical-align: middle; }
+
+.menu.hidden {
+  transform: translateX(-100%); }
+  .menu.hidden .tools {
+    transform: translateX(100%); }
+    .menu.hidden .tools button {
+      background-color: rgba(0, 0, 0, 0.5); }
+      .menu.hidden .tools button:hover {
+        background-color: rgba(0, 0, 0, 0.7); }
+    .menu.hidden .tools #tools-toogle-menu {
+      background-image: url(../img/icons/menu.svg); }
+
+.menu.hidden + .content {
+  margin-left: 0; }
+
+.commande {
+  display: table;
+  width: 100%;
+  background: #595959;
+  color: #FFF;
+  border-collapse: collapse;
+  border-radius: 7px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  margin-bottom: 3em; }
+  .commande button {
+    font-size: 2em;
+    color: #FFF;
+    padding: 0;
+    font-weight: lighter;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: all 0.3s; }
+    .commande button:hover {
+      background: rgba(255, 255, 255, 0.2); }
+  .commande .commande-produits, .commande .commande-actions, .commande .commande-prix, .commande .user-infos {
+    display: table-cell;
+    border: 1px solid; }
+  .commande .user-infos {
+    padding: .5em .8em;
+    width: 30%;
+    font-size: 1.9em; }
+    .commande .user-infos .commande-options {
+      font-size: .5em;
+      opacity: .8;
+      vertical-align: bottom; }
+      .commande .user-infos .commande-options a {
+        text-decoration: underline;
+        margin-right: 1em; }
+  .commande .commande-produits {
+    vertical-align: top; }
+    .commande .commande-produits .commande-produit {
+      font-size: 1.7em;
+      border-bottom: 1px solid;
+      padding: .3em 0;
+      position: relative; }
+      .commande .commande-produits .commande-produit i {
+        display: table-cell;
+        font-style: normal;
+        text-align: center;
+        width: 50px;
+        vertical-align: top; }
+      .commande .commande-produits .commande-produit .commande-produit-nom {
+        display: table-cell;
+        width: auto; }
+      .commande .commande-produits .commande-produit ul {
+        font-size: .6em;
+        padding: 0;
+        margin: 0;
+        margin-left: 1.2em; }
+        .commande .commande-produits .commande-produit ul li {
+          line-height: 1.2; }
+      .commande .commande-produits .commande-produit:last-child {
+        border-bottom: none; }
+  .commande .commande-actions {
+    text-align: center;
+    padding: 0;
+    width: 7%;
+    vertical-align: middle;
+    position: relative; }
+    .commande .commande-actions button {
+      width: 100%;
+      height: 50%;
+      position: absolute;
+      display: block;
+      top: 50%;
+      left: 0; }
+      .commande .commande-actions button:first-child {
+        top: 0;
+        border-bottom: 1px solid; }
+  .commande .commande-prix {
+    width: 125px;
+    font-size: 2em;
+    text-align: center;
+    vertical-align: middle; }
+    .commande .commande-prix button {
+      display: none; }
+
+.commande.orange {
+  background: #e67e22; }
+
+.commande.vert {
+  background: #27ae60; }
+
+/* Tablette */
+@media screen and (max-width: 1000px) {
+  .content {
+    padding: 0 20px; } }
+/* Phone */
+@media screen and (max-width: 630px) {
+  .menu {
+    width: 100%; } }
+
+/*# sourceMappingURL=app.css.map */
