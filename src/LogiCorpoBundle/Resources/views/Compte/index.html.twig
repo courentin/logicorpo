@@ -3,6 +3,9 @@
 {% block head %}
 {{parent()}}
 <a href="{{path('lc_compte_mdp')}}" class="btn">Changer de mot de passe</a>
+	{% if canUpgrade %}
+	<a href="{{path('lc_compte_upgrade')}}" class="btn">Devenir membre (5,00 €)</a>
+	{% endif %}
 {% endblock%}
 {% block content %}
 	<h2 class="content-title">Historique</h2>

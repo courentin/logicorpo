@@ -5,3 +5,7 @@ lc_compte_home:
 lc_compte_mdp:
     path:     /edit-mdp
     defaults: { _controller: LogiCorpoBundle:Security:changePass }
+
+lc_compte_upgrade:
+    path:     /upgrade
+    defaults: { _controller: LogiCorpoBundle:Compte:upgrade }

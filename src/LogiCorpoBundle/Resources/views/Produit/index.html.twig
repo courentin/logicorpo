@@ -15,8 +15,15 @@
 				<td>Stock</td>
 			</tr>
 		</thead>
+
+		{% for categorie, lesProduits in produits %}
+		<thead>
+			<tr>
+				<td colspan="3">{{categorie}}</td>
+			</tr>
+		</thead>
 		<tbody>
-			{% for produit in produits %}
+			{% for produit in lesProduits %}
 				<tr onclick="">
 					<td>{{produit.libelle}}</td>
 					<td>[[ {{produit.prixVente}} | currency ]]</td>
@@ -32,7 +39,10 @@
 					</td>
 				</tr>
 			{% endfor %}
+
 		</tbody>
+		{% endfor %}
+
 	</table>
 
 {% endblock %}

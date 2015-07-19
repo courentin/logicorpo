@@ -13,7 +13,7 @@ class ProduitController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$repository = $em->getRepository('LogiCorpoBundle:Produit');
-		$produits = $repository->findAll();
+		$produits = $repository->getProductsByCategory();
 
 		return $this->render('LogiCorpoBundle:Produit:index.html.twig', ['produits' => $produits]);
 	}
