@@ -201,4 +201,21 @@ class Transaction
     {
         return $this->commande;
     }
+
+    public function getViewType() {
+        switch ($this->getType()) {
+            case 'approvisionement': return 'Approvisionement stock';
+            break;
+            case 'mouvement_carte' : return 'Approvisionement compte';
+            break;
+            case 'achat_commande'  : return 'Achat/Commande';
+            break;
+            case 'mouvement_banque': return 'Mouvement banque';
+            break;
+            case 'erreur_caisse'   : return 'Erreur de caisse';
+            break;
+            case 'remboursement'   : return 'Remboursement';
+            break;
+        }
+    }
 }

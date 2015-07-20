@@ -14,6 +14,10 @@ lc_utilisateur_newlist:
     path:     /nouveaux
     defaults: { _controller: LogiCorpoBundle:Utilisateur:nouveauListe }
 
+lc_utilisateur_newlist_recap:
+    path:     /nouveaux/recap
+    defaults: { _controller: LogiCorpoBundle:Utilisateur:recap }
+
 lc_utilisateur_editer:
     path:     /editer/{id}
     defaults: { _controller: LogiCorpoBundle:Utilisateur:modifier }

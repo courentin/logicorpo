@@ -19,7 +19,7 @@ class UtilisateurController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$repository = $em->getRepository('LogiCorpoBundle:Utilisateur');
-		$utilisateurs = $repository->findAll();
+		$utilisateurs = $repository->findBy(array(), array('nom'=>'asc'));;
 
 		return $this->render('LogiCorpoBundle:Utilisateur:index.html.twig', ['utilisateurs' => $utilisateurs]);
 	}
@@ -96,22 +96,86 @@ class UtilisateurController extends Controller
 			if($fichier->isValid()) {
 
 				$point  = fopen($fichier->getPathName(),"r");
+				$utilisateurs = $this->csv_to_array($point);
+				/*
+				* Vérifie que les champs nom, prenom et membre sont présent
+				*/
+				if(array_key_exists('nom',$utilisateurs[0]) && array_key_exists('prenom',$utilisateurs[0]) && array_key_exists('membre',$utilisateurs[0])) {
+					/*
+					* Recupère les rangs
+					*/
+					$em = $this->getDoctrine()->getManager();
+					$repository = $em->getRepository('LogiCorpoBundle:Rang');
+					$rang = [
+						0 => $repository->findOneBySlug('NON_MEMBRE'),
+						1 => $repository->findOneBySlug('MEMBRE')
+					];
+
+					$users = [];
+					$i=0;
+					foreach ($utilisateurs as $utilisateur) {
+						$u = $users[$i++] = new Utilisateur();
+						$u->setNom($utilisateur['nom']);
+						$u->setPrenom($utilisateur['prenom']);
+						$u->setRang($rang[$utilisateur['membre']]);
+
+						/**
+						* Si le solde initial est spécifié, on le renseigne, sinon on l'initialise à 0
+						*/
+						if(isset($utilisateur['solde']))
+							$u->setSolde(floatval($utilisateur['solde']));
+						else
+							$u->setSolde(0);
+
+						/**
+						* Si le login est spécifié, on le renseigne, sinon on l'initialise à :
+						* première lettre du prenom + 6 premières lettres du nom + "_"
+						*/
+						if(isset($utilisateur['login']))
+							$login = $utilisateur['login'];
+						else
+							$login = substr($u->getPrenom(),0,1) . substr($u->getNom(),0,6) . "_";
+						$u->setUsername(strtolower($login));
+
+						/**
+						* Si le mdp est spécifié, on le renseigne, sinon on l'initialise par une valeur aléatoire
+						*/
+						if(isset($utilisateur['mdp']))
+							$u->setPassword($utilisateur['mdp']);
+						else
+							$u->setPassword('12345');//uniqid();
+					}
+					dump($users);
+					// Recapitulatif
+
+				} else {
+					$req->getSession()->getFlashBag()->add('err',"Les champs nom, prenom et membre, doivent être dans le fichier.");
+				}
+			} else {
+				$req->getSession()->getFlashBag()->add('err',"Le fichier n'est pas valide");
+			}
+
+			/*
+				die();
+
+
 				$fields = array_map('strtolower',fgetcsv($point));
 
 				/*
 				* Vérifie que les champs nom, prenom et membre sont présent
-				*/
+				*
 				if(in_array('nom', $fields) && in_array('prenom', $fields) && in_array('membre', $fields)) {
 					$fields = array_flip($fields);
+
 					$em = $this->getDoctrine()->getManager();
 
 					$repository = $em->getRepository('LogiCorpoBundle:Rang');
 					$rang = [
-						$repository->findOneBySlug('NON_MEMBRE'),
-						$repository->findOneBySlug('MEMBRE')
+						0 => $repository->findOneBySlug('NON_MEMBRE'),
+						1 => $repository->findOneBySlug('MEMBRE')
 					];
 					$resume = [];
-					// Pour chaque lignes du fichier
+					// Pour chaque lignes du fichiers
 					while($ligne = fgetcsv($point)) {
 						$user = new Utilisateur();
 
@@ -123,21 +187,21 @@ class UtilisateurController extends Controller
 
 						/**
 						* Si le solde initial est spécifié, on le renseigne, sinon on l'initialise à 0
-						*/
+						*
 						if(isset($fields['solde']))	 $user->setSolde(floatval($ligne[$fields['solde']]));
 						else                         $user->setSolde(0);
 
 						/**
 						* Si le login est spécifié, on le renseigne, sinon on l'initialise à :
 						* première lettre du prenom + 6 premières lettres du nom + "_"
-						*/
+						*
 						if(isset($fields['login']))  $login = $ligne[$fields['login']];
 						else                         $login = substr($user->getPrenom(),0,1) . substr($user->getNom(),0,6) . "_";
 						$user->setUsername(strtolower($login));
 
 						/**
 						* Si le mdp est spécifié, on le renseigne, sinon on l'initialise par une valeur aléatoire
-						*/
+						*
 						if(isset($fields['mdp'])) $mdp = $ligne[$fields['mdp']];
 						else                      $mdp = '12345';//uniqid();
 
@@ -156,9 +220,18 @@ class UtilisateurController extends Controller
 
 						$em->persist($user);
 					}
-					dump($em->flush());
-
-					$req->getSession()->getFlashBag()->add('success',"62 utilisateurs ont été créés");
+					fclose($point);
+					try {
+						dump($em->flush());
+						$req->getSession()->getFlashBag()->add('success',"62 utilisateurs ont été créés");
+					} catch (\Exception $e) {
+						dump($e);
+						if(isset($e->previous)) {
+							dump($e->previous->code);
+						}
+						$req->getSession()->getFlashBag()->add('err',"Erreur sql");
+					}
+					
 
 				} else {
 					$req->getSession()->getFlashBag()->add('err',"Les champs nom, prenom et membre, doivent être dans le fichier.");
@@ -167,8 +240,26 @@ class UtilisateurController extends Controller
 			} else {
 				$req->getSession()->getFlashBag()->add('err',"Le fichier n'est pas valide");
 			}
+			*/
 		}
 		return $this->render('LogiCorpoBundle:Utilisateur:nouveaux.html.twig', ['form' => $form->createView(), 'max_size'=> $max_size]);
+	}
+
+	private function csv_to_array($handle, $delimiter=',')
+	{
+	    $header = NULL;
+	    $data = array();
+
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+        {
+            if(!$header)
+                $header = $row;
+            else
+                $data[] = array_combine(array_map('strtolower', $header), $row);
+        }
+        fclose($handle);
+
+	    return $data;
 	}
 
 	public function modifierAction($id, Utilisateur $user, Request $req) {
