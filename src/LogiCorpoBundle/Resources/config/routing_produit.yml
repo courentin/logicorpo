@@ -5,3 +5,7 @@ lc_produit_home:
 lc_produit_new:
     path:     /nouveau
     defaults: { _controller: LogiCorpoBundle:Produit:nouveau }
+
+lc_produit_list:
+    path:     /list
+    defaults: { _controller: LogiCorpoBundle:Produit:jsonList }

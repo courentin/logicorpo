@@ -2,6 +2,10 @@ lc_utilisateur_home:
     path:     /
     defaults: { _controller: LogiCorpoBundle:Utilisateur:index }
 
+lc_utilisateur_list:
+    path:     /list
+    defaults: { _controller: LogiCorpoBundle:Utilisateur:jsonList }
+
 lc_utilisateur_new:
     path:     /nouveau
     defaults: { _controller: LogiCorpoBundle:Utilisateur:nouveau }
@@ -13,5 +17,11 @@ lc_utilisateur_newlist:
 lc_utilisateur_editer:
     path:     /editer/{id}
     defaults: { _controller: LogiCorpoBundle:Utilisateur:modifier }
+    requirements:
+        id: \d+
+
+lc_utilisateur_solde:
+    path:     /solde/{id}
+    defaults: { _controller: LogiCorpoBundle:Utilisateur:solde }
     requirements:
         id: \d+

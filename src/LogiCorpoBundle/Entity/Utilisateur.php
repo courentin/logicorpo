@@ -315,6 +315,6 @@ class Utilisateur implements UserInterface
     }
 
     public function __toString() {
-        return $this->getUsername();
+        return strtoupper($this->getNom()). ' ' .ucfirst($this->getPrenom());
     }
 }

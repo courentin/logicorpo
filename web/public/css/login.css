@@ -30,6 +30,36 @@ hr {
   border-bottom: 1px solid;
   border-color: #e9e9e9; }
 
+dl {
+  font-size: 0; }
+  dl dd, dl dt {
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    margin: 0;
+    margin: .2em 0;
+    padding: .3em .9em;
+    min-height: 3em;
+    vertical-align: top;
+    line-height: 1;
+    display: inline-block; }
+  dl dt {
+    width: 30%;
+    background: #595959;
+    color: #FFF;
+    position: relative; }
+    dl dt:after {
+      content: '';
+      background: #595959;
+      width: 20px;
+      height: 3em;
+      position: absolute;
+      right: -10px;
+      bottom: 0;
+      transform: skewX(187deg); }
+  dl dd {
+    width: 70%;
+    border: 1px solid #595959; }
+
 .cb {
   clear: both; }
 

@@ -1,6 +1,6 @@
 /*
 Error: Undefined variable: "$vert".
-        on line 28 of sass/boutons.scss
+        on line 28 of front-end/sass/boutons.scss
 
 23: 	}
 24: }
@@ -15,7 +15,7 @@ Error: Undefined variable: "$vert".
 33: 	right: 35px;
 
 Backtrace:
-sass/boutons.scss:28
+front-end/sass/boutons.scss:28
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/script/tree/variable.rb:49:in `_perform'
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/script/tree/node.rb:50:in `perform'
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/tree/visitors/perform.rb:394:in `visit_prop'
@@ -67,4 +67,4 @@ sass/boutons.scss:28
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$vert\".\A         on line 28 of sass/boutons.scss\A \A 23: 	}\A 24: }\A 25: \A 26: \A 27: .flash {\A 28: 	background:$vert;\A 29: 	min-width: 200px;\A 30: 	max-width: 400px;\A 31: 	color: #FFF;\A 32: 	position: fixed;\A 33: 	right: 35px;"; }
+  content: "Error: Undefined variable: \"$vert\".\A         on line 28 of front-end/sass/boutons.scss\A \A 23: 	}\A 24: }\A 25: \A 26: \A 27: .flash {\A 28: 	background:$vert;\A 29: 	min-width: 200px;\A 30: 	max-width: 400px;\A 31: 	color: #FFF;\A 32: 	position: fixed;\A 33: 	right: 35px;"; }

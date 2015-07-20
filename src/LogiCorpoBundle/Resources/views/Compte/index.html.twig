@@ -8,8 +8,18 @@
 	{% endif %}
 {% endblock%}
 {% block content %}
-	<h2 class="content-title">Historique</h2>
+	<h2 class="content-title">Résumé</h2>
+	<dl>
+		<dt>Type de compte</dt>
+		<dd>{{app.user.rang}}</dd>
+		<dt>Réduction</dt>
+		<dd>{{ app.user.rang.reduction ~ ' ' ~ app.user.rang.typeReduc}} sur certain produit</dd>
+		<dt>Login</dt>
+		<dd>{{app.user.username}}</dd>
+	</dl>
 	<br/>
+	{% if transactions is not empty%}
+	<h2 class="content-title">Historique</h2>
 	<br/>
 	<table class="table" width="100%">
 		<thead>
@@ -22,12 +32,14 @@
 		<tbody>
 			{% for transaction in transactions %}
 			<tr>
-				<td>{{transaction.date | date('d/m à h\\hi')}}</td>
+				<td>{{transaction.date | date('d/m à H\\hi')}}</td>
 				<td>{{transaction.type}}</td>
 				<td>[[ {{transaction.solde}} | currency ]]</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-
+	{% else %}
+	<h2 class="content-title">Aucune transaction recente</h2>
+	{% endif %}
 {% endblock %}

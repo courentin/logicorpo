@@ -1,10 +1,11 @@
 {% extends '::layout.html.twig' %}
-{% set subtitle = 'Nouvel utilisateur' %}
+{% set subtitle = 'Créditer/Débiter' %}
 
 
 {% block head %}
 {{parent()}}
-<a href="{{path('lc_utilisateur_newlist')}}" class="btn">Ajouter liste d'utilisateur</a>
+<h2 class="content-title">{{user}} <span class="solde:{{user.solde}}"></span></h2>
+
 {% endblock %}
 
 {% block content %}

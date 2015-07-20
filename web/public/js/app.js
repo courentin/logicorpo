@@ -4,8 +4,20 @@ logicorpo.config(function($interpolateProvider){
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
 });
 
-logicorpo.controller('MainCtrl', function ($scope) {
+logicorpo.controller('MainCtrl', function ($scope, $http) {
 	$scope.flash=true;
+
+
+$http.get('/app_dev.php/produit/list').
+  success(function(data, status, headers, config) {
+    console.log(data);
+  }).
+  error(function(data, status, headers, config) {
+    console.log('failed');
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+  });
+
 
 $scope.commandes = [
 	{

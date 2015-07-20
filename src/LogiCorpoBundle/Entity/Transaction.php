@@ -73,6 +73,9 @@ class Transaction
      */
     private $commande;
 
+    public function __construct() {
+        $this->date = new \DateTime();
+    }
 
     /**
      * Get id
@@ -92,7 +95,7 @@ class Transaction
      */
     public function setType($type)
     {
-        $this->typeTransaction = $type;
+        $this->type = $type;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LogiCorpoBundle\Entity\Produit;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProduitController extends Controller
 {
@@ -18,16 +19,25 @@ class ProduitController extends Controller
 		return $this->render('LogiCorpoBundle:Produit:index.html.twig', ['produits' => $produits]);
 	}
 
+	public function jsonListAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		$repository = $em->getRepository('LogiCorpoBundle:Produit');
+		$produits = $repository->getProductsByCategory();
+
+		$response = new JsonResponse();
+		$response->setData($produits);
+
+		return $response;
+	}
+
 	public function nouveauAction(Request $req)
 	{
 		$produit = new Produit();
 		$form = $this->get('form.factory')->createBuilder('form', $produit)
-			->add('categorie', 'entity', [
-				'class' => 'LogiCorpoBundle:Produit',
-				'property' => 'categorie',
-				'query_builder' => function(EntityRepository $repository) {
-					return $repository->createQueryBuilder('p');
-				}
+			->add('categorie', 'choice', [
+				'choices' => $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Produit')->getAllCategories(),
+				'empty_value' => 'Choisir une catégorie'
 			])
 			->add('libelle', 'text',['label' => 'Libellé'])
 			->add('dispo', 'checkbox', ['label' => 'Disponible'])
@@ -37,7 +47,8 @@ class ProduitController extends Controller
 			->add('reduction', 'checkbox', ['label' => 'Appliquer les réductions'])
 			->add('supplementDisponible', 'entity', [
 				'class' => 'LogiCorpoBundle:Supplement',
-				'multiple' => true
+				'multiple' => true,
+				'label' => 'Suppléments disponibles'
 			])
 			->add('Ajouter', 'submit')
 			->getForm();
