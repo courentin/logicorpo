@@ -301,7 +301,8 @@ class UtilisateurController extends Controller
 	public function soldeAction($id, Utilisateur $user, Request $req)
 	{
 		$transaction = new Transaction();
-		$transaction->setUtilisateur($user);
+		$transaction->setUtilisateur($user)
+					->setMoyenPaiement('espece');
 		$form = $this->get('form.factory')->createBuilder('form', $transaction)
 			->add('type','choice',[
 				'choices' => [

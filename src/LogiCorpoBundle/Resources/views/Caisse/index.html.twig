@@ -1,0 +1,55 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Gestion de la caisse' %}
+
+{% block head %}
+{{parent()}}
+<a href="#" class="btn">Nouvelle transaction</a>
+{% endblock%}
+
+{% block content %}
+<h2 class="content-title">Détail</h2>
+<dl>
+	<dt>Solde physique</dt>
+	<dd>[[{{solde.physique}} | currency ]]</dd>
+
+	<dt>Solde disponible</dt>
+	<dd>[[{{solde.dispo}} | currency ]]</dd>
+
+	<dt>Solde non-dispo</dt>
+	<dd>[[{{solde.nonDispo}} | currency ]]</dd>
+
+	<dt>Solde ventes</dt>
+	<dd>[[{{solde.ventes}} | currency ]]</dd>
+
+	<dt>Solde achats</dt>
+	<dd>[[{{solde.achats}} | currency ]]</dd>
+
+	<dt>Erreurs de caisse</dt>
+	<dd>[[{{solde.errCaisse}} | currency ]]</dd>
+
+	<dt>Bénefices</dt>
+	<dd>[[{{solde.benefices}} | currency ]]</dd>
+
+</dl>
+<h2 class="content-title">{{max}} dernières transactions</h2>
+<table class="table" width="100%">
+	<thead>
+		<tr>
+			<td>Date</td>
+			<td>Utilisateur</td>
+			<td>Type</td>
+			<td>Montant</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for transaction in transactions %}
+		<tr>
+			<td>{{transaction.date | date('d/m à H\\hi')}}</td>
+			<td>{{transaction.utilisateur}}</td>
+			<td>{{transaction.viewType}}</td>
+			<td>[[ {{transaction.solde}} | currency ]]</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,3 @@
+lc_caisse_home:
+    path:     /{max}
+    defaults: { _controller: LogiCorpoBundle:Caisse:index, max: 25 }

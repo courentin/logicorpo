@@ -26,6 +26,10 @@ lc_compte:
     resource: "@LogiCorpoBundle/Resources/config/routing_compte.yml"
     prefix:   /compte
 
+lc_caisse:
+    resource: "@LogiCorpoBundle/Resources/config/routing_caisse.yml"
+    prefix:   /caisse
+
 
 login:
     path:   /login

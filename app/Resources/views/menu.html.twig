@@ -24,7 +24,7 @@
 		<a href="#">Gestion services</a>
 		{% endif %}
 		{% if is_granted('ROLE_TRESORIER') %}
-		<a href="#">Gestion caisse</a>
+		<a href="{{path('lc_caisse_home')}}">Gestion caisse</a>
 		{% endif %}
 	</nav>
 </section>

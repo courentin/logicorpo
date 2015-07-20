@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="transactionn", indexes={@ORM\Index(name="IDX_89AE769550EAE44", columns={"id_utilisateur"}), @ORM\Index(name="IDX_89AE76953E314AE8", columns={"id_commande"})})
  * @ORM\Entity
+ * @ORM\Entity(
+ *  repositoryClass="LogiCorpoBundle\Entity\TransactionRepository"
+ * )
  */
 class Transaction
 {
@@ -29,11 +32,23 @@ class Transaction
      * @ORM\Column(name="type_transaction", type="text", nullable=false)
      * @Assert\NotBlank(message="Le type de transaction doit être renseigné")
      * @Assert\Choice(
-     *     choices = {"approvisionement","mouvement_carte","achat_commande","mouvement_banque","erreur_caisse","remboursement"},
+     *     choices = {"approvisionnement","mouvement_carte","achat_commande","mouvement_banque","erreur_caisse","remboursement"},
      *     message = "Erreur type incorrect"
      * )
      */
     private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="moyen_paiement", type="text", nullable=false)
+     * @Assert\NotBlank(message="Le moyen de transaction doit être renseigné")
+     * @Assert\Choice(
+     *     choices = {"espece","compte"},
+     *     message = "Erreur type incorrect"
+     * )
+     */
+    private $moyenPaiement;
 
     /**
      * @var string
@@ -96,7 +111,6 @@ class Transaction
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -111,6 +125,28 @@ class Transaction
     }
 
     /**
+     * Set moyenPaiement
+     *
+     * @param string $moyenPaiement
+     * @return Transactionn
+     */
+    public function setMoyenPaiement($moyenPaiement)
+    {
+        $this->moyenPaiement = $moyenPaiement;
+        return $this;
+    }
+
+    /**
+     * Get moyenPaiement
+     *
+     * @return string 
+     */
+    public function getMoyenPaiement()
+    {
+        return $this->moyenPaiement;
+    }
+
+    /**
      * Set solde
      *
      * @param string $solde
@@ -119,7 +155,6 @@ class Transaction
     public function setSolde($solde)
     {
         $this->solde = $solde;
-
         return $this;
     }
 
@@ -204,9 +239,9 @@ class Transaction
 
     public function getViewType() {
         switch ($this->getType()) {
-            case 'approvisionement': return 'Approvisionement stock';
+            case 'approvisionnement': return 'Approvisionnement stock';
             break;
-            case 'mouvement_carte' : return 'Approvisionement compte';
+            case 'mouvement_carte' : return 'Approvisionnement compte';
             break;
             case 'achat_commande'  : return 'Achat/Commande';
             break;

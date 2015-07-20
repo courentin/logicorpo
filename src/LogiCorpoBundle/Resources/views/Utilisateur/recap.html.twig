@@ -1,0 +1,14 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Rrécapitulatif' %}
+
+
+{% block head %}
+{{parent()}}
+<p>Ajout de {{}} utilisateurs</p>
+{% endblock %}
+
+{% block content %}
+	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+	{{ form_errors(form) }}
+	{{ form(form, { 'attr': {'class': 'form'} }) }}
+{% endblock %}
