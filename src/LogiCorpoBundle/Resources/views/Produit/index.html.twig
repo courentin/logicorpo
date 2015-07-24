@@ -13,18 +13,19 @@
 				<td>Libellé</td>
 				<td>Prix de vente</td>
 				<td>Stock</td>
+				<td width="30px">Action</td>
 			</tr>
 		</thead>
 
 		{% for categorie, lesProduits in produits %}
 		<thead>
 			<tr>
-				<td colspan="3">{{categorie}}</td>
+				<td colspan="4">{{categorie}}</td>
 			</tr>
 		</thead>
 		<tbody>
 			{% for produit in lesProduits %}
-				<tr onclick="">
+				<tr>
 					<td>{{produit.libelle}}</td>
 					<td>[[ {{produit.prixVente}} | currency ]]</td>
 					<td>{% if produit.dispo %}
@@ -37,6 +38,7 @@
 							Non
 						{% endif %}
 					</td>
+					<td align="center"><a href="#"><img title="Editer" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>
 				</tr>
 			{% endfor %}
 

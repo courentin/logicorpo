@@ -48,8 +48,7 @@ class UtilisateurController extends Controller
 			->add('rang', 'entity', [
 				'class' => 'LogiCorpoBundle:Rang'])
 			->add('Ajouter', 'submit')
-			->getForm()
-		;
+			->getForm();
 
 		$form->handleRequest($req);
 
@@ -267,16 +266,21 @@ class UtilisateurController extends Controller
 			->add('nom', 'text')
 			->add('prenom', 'text', ['label' => 'Prénom'])
 			->add('username', 'text', ['label' => 'Login'])
-			->add('solde', 'money', ['label' => 'Solde initial'])
-			->add('password', 'password', ['label' => 'Mot de passe'])
 			->add('rang', 'entity', [
 				'class' => 'LogiCorpoBundle:Rang'])
-			->add('Ajouter', 'submit')
+			->add('Enregistrer', 'submit')
+			->add('Supprimer', 'submit', [
+				'attr' => ['class' => 'btn-rouge']
+			])
 			->getForm();
 
 		$form->handleRequest($req);
 
 		if($form->isValid()) {
+			if($form->get('Supprimmer')->isClicked()) {
+				$this->redirect($this->generateUrl('lc_utilisateur_suppr', ['user' => $user->getId()]));
+			}
+
 			$em = $this->getDoctrine()->getManager();
 
 			$factory = $this->get('security.encoder_factory');
@@ -290,12 +294,19 @@ class UtilisateurController extends Controller
 
 			$em->persist($user);
 			$em->flush();
-			$req->getSession()->getFlashBag()->add('success','L\'utilisateur "'.$user.'" a été crée');
+			$req->getSession()->getFlashBag()->add('success','L\'utilisateur "'.$user.'" a été modifié');
 			
 			return $this->redirect($this->generateUrl('lc_utilisateur_home'));
 		}
 
-		return $this->render('LogiCorpoBundle:Utilisateur:nouveau.html.twig', ['form' => $form->createView()]);
+		return $this->render('LogiCorpoBundle:Utilisateur:editer.html.twig', ['form' => $form->createView()]);
+	}
+
+	public function supprimerAction($id, Utilisateur $user, Request $req) {
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($user);
+		$em->flush();
+		return $this->redirect($this->generateUrl('lc_utilisateur_home'));
 	}
 
 	public function soldeAction($id, Utilisateur $user, Request $req)

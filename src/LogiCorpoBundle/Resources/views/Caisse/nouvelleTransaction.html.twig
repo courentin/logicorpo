@@ -1,0 +1,11 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Nouvelle transaction' %}
+
+
+
+{% block content %}
+	<p>Le montent sera ajouté (si positif) au solde disponible de la caisse, et retiré si négatif.</p>
+	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+	{{ form_errors(form) }}
+	{{ form(form, { 'attr': {'class': 'form'} }) }}
+{% endblock %}

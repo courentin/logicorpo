@@ -259,16 +259,22 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
 .flash.notice {
   background: #2980b9; }
 
-.btn, .form input[type="submit"], .form input[type="button"], .form button {
+.btn, .form input[type="submit"], .form input[type="button"], .form button, .btn-rouge {
   border: 1px solid #595959;
   border-radius: 5px;
   padding: .417rem 2.2em;
   font-size: 1.2rem;
   display: inline-block;
   transition: all 0.3s; }
-  .btn:hover, .form input[type="submit"]:hover, .form input[type="button"]:hover, .form button:hover {
+  .btn:hover, .form input[type="submit"]:hover, .form input[type="button"]:hover, .form button:hover, .btn-rouge:hover {
     background: #595959;
     color: #FFF; }
+
+.btn-rouge {
+  color: #bf3737;
+  border-color: #bf3737; }
+  .btn-rouge:hover {
+    background: #bf3737; }
 
 body {
   background: #595959; }

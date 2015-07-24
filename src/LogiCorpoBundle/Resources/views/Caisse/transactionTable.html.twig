@@ -1,0 +1,28 @@
+<table class="table" width="100%">
+	<thead>
+		<tr>
+			<td width="20px">Ref.</td>
+			<td>Date</td>
+			<td>Utilisateur</td>
+			<td>Type</td>
+			<td>Montant</td>
+			{% if is_granted('ROLE_PRESIDENT') %}
+			<td width="20px">Action</td>
+			{% endif %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for transaction in transactions %}
+		<tr>
+			<td>{{transaction.id}}</td>
+			<td>{{transaction.date | date('d/m à H\\hi')}}</td>
+			<td>{{transaction.utilisateur}}</td>
+			<td>{{transaction.viewType}}</td>
+			<td align="right">[[ {{transaction.solde}} | currency ]]</td>
+			{% if is_granted('ROLE_PRESIDENT') %}
+			<td align="center"><a href="{{path('lc_caisse_transaction_corriger',{'id': transaction.id})}}"><img title="Corriger" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

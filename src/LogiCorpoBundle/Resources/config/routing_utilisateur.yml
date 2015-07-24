@@ -24,6 +24,12 @@ lc_utilisateur_editer:
     requirements:
         id: \d+
 
+lc_utilisateur_suppr:
+    path:     /supprimer/{id}
+    defaults: { _controller: LogiCorpoBundle:Utilisateur:supprimer }
+    requirements:
+        id: \d+
+
 lc_utilisateur_solde:
     path:     /solde/{id}
     defaults: { _controller: LogiCorpoBundle:Utilisateur:solde }

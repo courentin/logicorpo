@@ -163,7 +163,7 @@ CONTENU DE LA PAGE
 */
 .content {
   margin-left: 335px;
-  padding: 0 69px;
+  padding: 0 69px 30px 69px;
   transition: all 0.3s; }
   .content header {
     height: 190px;
@@ -251,16 +251,22 @@ CONTENU DE LA PAGE
 .flash.notice {
   background: #2980b9; }
 
-.btn, .form input[type="submit"], .form input[type="button"], .form button {
+.btn, .btn-rouge, .form input[type="submit"], .form input[type="button"], .form button {
   border: 1px solid #595959;
   border-radius: 5px;
   padding: .417rem 2.2em;
   font-size: 1.2rem;
   display: inline-block;
   transition: all 0.3s; }
-  .btn:hover, .form input[type="submit"]:hover, .form input[type="button"]:hover, .form button:hover {
+  .btn:hover, .btn-rouge:hover, .form input[type="submit"]:hover, .form input[type="button"]:hover, .form button:hover {
     background: #595959;
     color: #FFF; }
+
+.btn-rouge {
+  color: #bf3737;
+  border-color: #bf3737; }
+  .btn-rouge:hover {
+    background: #bf3737; }
 
 .moreinfos {
   box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.3);
@@ -297,6 +303,17 @@ CONTENU DE LA PAGE
   border-collapse: collapse; }
   .table td {
     padding: .1em .8em; }
+    .table td a img {
+      width: 22px;
+      transition: all 0.3s;
+      filter: invert(30%);
+      padding: 7px;
+      margin: -3px 6px;
+      vertical-align: -16%; }
+      .table td a img:hover {
+        filter: invert(100%);
+        background: #595959;
+        border-radius: 50%; }
   .table thead {
     text-align: left;
     font-size: 1.2em;

@@ -1,3 +1,15 @@
 lc_caisse_home:
     path:     /{max}
     defaults: { _controller: LogiCorpoBundle:Caisse:index, max: 25 }
+
+lc_caisse_transaction_nouvelle:
+    path:     /transaction/nouvelle
+    defaults: { _controller: LogiCorpoBundle:Caisse:nouvelleTransaction}
+
+lc_caisse_transaction_corriger:
+    path:     /transaction/corriger
+    defaults: { _controller: LogiCorpoBundle:Caisse:corriger}
+
+lc_caisse_transaction_chercher:
+    path:     /transaction/chercher
+    defaults: { _controller: LogiCorpoBundle:Caisse:chercher}

@@ -1,0 +1,32 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Chercher une transaction' %}
+
+
+
+{% block content %}
+	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+	{{ form_errors(form) }}
+
+	{{ form_start(form, { 'attr': {'class': 'form'} }) }}
+	<div class="two">
+		{{ form_row(form.ref) }}
+		{{ form_row(form.type) }}
+		{{ form_row(form.utilisateur) }}
+	</div>
+	<div class="two">
+		{{ form_row(form.du) }}
+		{{ form_row(form.au) }}
+	</div>
+	{{ form_end(form)}}
+	{% if transactions is defined %}
+	<hr/>
+		{% if transactions|length > 0 %}
+		<h2 class="content-title">{{ transactions|length }} résultat{{ (transactions|length > 1) ? 's' }}</h2>
+		{{ include('LogiCorpoBundle:Caisse:transactionTable.html.twig', {'transactions':transactions}) }}
+		{% else %}
+		<h2 class="content-title">Aucun résultat</h2>
+		{% endif %}
+	{% endif %}
+	
+
+{% endblock %}

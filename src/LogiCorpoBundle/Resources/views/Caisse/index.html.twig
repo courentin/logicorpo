@@ -3,7 +3,9 @@
 
 {% block head %}
 {{parent()}}
-<a href="#" class="btn">Nouvelle transaction</a>
+<a href="{{path('lc_caisse_transaction_nouvelle')}}" class="btn">Nouvelle transaction</a>
+<a href="{{path('lc_caisse_transaction_chercher')}}" class="btn">Recherche de transaction</a>
+<p>Seul le président peut corriger une transaction.</p>
 {% endblock%}
 
 {% block content %}
@@ -31,25 +33,10 @@
 	<dd>[[{{solde.benefices}} | currency ]]</dd>
 
 </dl>
+{% if transactions is not empty %}
 <h2 class="content-title">{{max}} dernières transactions</h2>
-<table class="table" width="100%">
-	<thead>
-		<tr>
-			<td>Date</td>
-			<td>Utilisateur</td>
-			<td>Type</td>
-			<td>Montant</td>
-		</tr>
-	</thead>
-	<tbody>
-		{% for transaction in transactions %}
-		<tr>
-			<td>{{transaction.date | date('d/m à H\\hi')}}</td>
-			<td>{{transaction.utilisateur}}</td>
-			<td>{{transaction.viewType}}</td>
-			<td>[[ {{transaction.solde}} | currency ]]</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
+{{ include('LogiCorpoBundle:Caisse:transactionTable.html.twig', {'transactions':transactions}) }}
+{% else %}
+<h2 class="content-title">Aucune transactions</h2>
+{% endif %}
 {% endblock %}

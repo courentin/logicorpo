@@ -4,6 +4,178 @@
 		"selected_items":
 		[
 			[
+				"tr",
+				"transaction"
+			],
+			[
+				"emp",
+				"empty_value"
+			],
+			[
+				"form",
+				"form_row"
+			],
+			[
+				"get",
+				"getManager〔function〕"
+			],
+			[
+				"re",
+				"redirect"
+			],
+			[
+				"border",
+				"border-color"
+			],
+			[
+				"bord",
+				"border-radius"
+			],
+			[
+				"tra",
+				"transactions"
+			],
+			[
+				"en",
+				"endblock"
+			],
+			[
+				"trans",
+				"transactions"
+			],
+			[
+				"set",
+				"setUtilisateur〔function〕"
+			],
+			[
+				"ach",
+				"achats"
+			],
+			[
+				"ty",
+				"$typeSolde〔variable〕"
+			],
+			[
+				"flo",
+				"floatval〔function〕"
+			],
+			[
+				"cre",
+				"createQuery〔function〕"
+			],
+			[
+				"crea",
+				"createQueryBuilder"
+			],
+			[
+				"tran",
+				"transaction"
+			],
+			[
+				"h",
+				"head"
+			],
+			[
+				"ut",
+				"$utilisateur〔variable〕"
+			],
+			[
+				"uti",
+				"utilisateur"
+			],
+			[
+				"f",
+				"font-weight"
+			],
+			[
+				"so",
+				"solid"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"strto",
+				"strtolower"
+			],
+			[
+				"fiel",
+				"$fields〔variable〕"
+			],
+			[
+				"strt",
+				"strtolower〔function〕"
+			],
+			[
+				"pri",
+				"private〔keyword〕"
+			],
+			[
+				"ma",
+				"$max_size〔variable〕"
+			],
+			[
+				"ul",
+				"utilisateurs"
+			],
+			[
+				"u",
+				"utilisateurs"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"ie",
+				"inline-block"
+			],
+			[
+				"ine",
+				"inline-block"
+			],
+			[
+				"is",
+				"isValid"
+			],
+			[
+				"prod",
+				"produits"
+			],
+			[
+				"por",
+				"produits"
+			],
+			[
+				"cate",
+				"$categorie〔variable〕"
+			],
+			[
+				"pr",
+				"products"
+			],
+			[
+				"ret",
+				"ret1	return true"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"va",
+				"$value〔variable〕"
+			],
+			[
+				"fo",
+				"foreach	foreach …"
+			],
+			[
+				"can",
+				"canUpgrade"
+			],
+			[
 				"max-",
 				"max-height"
 			],
@@ -22,14 +194,6 @@
 			[
 				"reqi",
 				"required"
-			],
-			[
-				"va",
-				"$values〔variable〕"
-			],
-			[
-				"ma",
-				"$matches〔variable〕"
 			],
 			[
 				"stat",
@@ -58,10 +222,6 @@
 			[
 				"err",
 				"errors"
-			],
-			[
-				"for",
-				"for	for (…) {…}"
 			],
 			[
 				"json",
@@ -108,10 +268,6 @@
 				"function〔keyword〕"
 			],
 			[
-				"re",
-				"repositories"
-			],
-			[
 				"print",
 				"print_r"
 			],
@@ -126,10 +282,6 @@
 			[
 				"cond",
 				"$conditions〔variable〕"
-			],
-			[
-				"is",
-				"isSet"
 			],
 			[
 				"fie",
@@ -162,10 +314,6 @@
 			[
 				"spl_autoload_",
 				"spl_autoload_register"
-			],
-			[
-				"h",
-				"haut"
 			],
 			[
 				"hori",
@@ -206,10 +354,6 @@
 			[
 				"arr",
 				"array2"
-			],
-			[
-				"tr",
-				"trier"
 			],
 			[
 				"tri",
@@ -280,10 +424,6 @@
 				"add"
 			],
 			[
-				"en",
-				"ent1"
-			],
-			[
 				"ent",
 				"ent2"
 			],
@@ -344,10 +484,6 @@
 				"MIN_C"
 			],
 			[
-				"pri",
-				"println"
-			],
-			[
 				"cle",
 				"clearConsole"
 			],
@@ -378,147 +514,51 @@
 			[
 				"arg",
 				"argHauteur"
-			],
-			[
-				"get",
-				"getNbWords"
-			],
-			[
-				"ind",
-				"indicatifPays"
-			],
-			[
-				"inf",
-				"indicatifPays"
-			],
-			[
-				"l",
-				"length"
-			],
-			[
-				"to",
-				"toString"
-			],
-			[
-				"les",
-				"lesContacts"
-			],
-			[
-				"Adr",
-				"AdrPostale"
-			],
-			[
-				"ta",
-				"taille"
-			],
-			[
-				"C",
-				"Coordonnees"
-			],
-			[
-				"in",
-				"indicatifLocal"
-			],
-			[
-				"v",
-				"ville"
-			],
-			[
-				"Htt",
-				"HttpPost"
-			],
-			[
-				"avr",
-				"avrdude"
-			],
-			[
-				"so",
-				"sommets"
-			],
-			[
-				"somm",
-				"sommets"
-			],
-			[
-				"P",
-				"Polygone"
-			],
-			[
-				"Pi",
-				"Pixel"
-			],
-			[
-				"es",
-				"estPleine"
-			],
-			[
-				"est",
-				"estVide"
-			],
-			[
-				"put",
-				"putC"
-			],
-			[
-				"F",
-				"fCarte"
-			],
-			[
-				"f",
-				"fCarte"
-			],
-			[
-				"tra",
-				"trameData"
-			],
-			[
-				"str",
-				"strData"
-			],
-			[
-				"st",
-				"strTab"
-			],
-			[
-				"ar",
-				"argErrno"
-			],
-			[
-				"aj",
-				"ajouterUnEnfant"
-			],
-			[
-				"U",
-				"UPADTE_PAGE"
-			],
-			[
-				"num",
-				"numEtud"
-			],
-			[
-				"send",
-				"sendRequest"
-			],
-			[
-				"u",
-				"updates"
-			],
-			[
-				"pr",
-				"println"
-			],
-			[
-				"Po",
-				"Point"
-			],
-			[
-				"pt",
-				"pts"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Default/form.html.twig",
+			"settings":
+			{
+				"buffer_size": 1121,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Controller/CaisseController.php",
+			"settings":
+			{
+				"buffer_size": 2906,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig",
+			"settings":
+			{
+				"buffer_size": 1151,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Caisse/transactionTable.html.twig",
+			"settings":
+			{
+				"buffer_size": 826,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Caisse/chercher.html.twig",
+			"settings":
+			{
+				"buffer_size": 853,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -528,12 +568,20 @@
 	"command_palette":
 	{
 		"height": 392.0,
-		"last_filter": "",
+		"last_filter": "ins",
 		"selected_items":
 		[
 			[
 				"ins",
 				"Package Control: Install Package"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"Snippet: ",
+				"Snippet: #!/usr/bin/env"
 			],
 			[
 				"install",
@@ -564,10 +612,67 @@
 	},
 	"expanded_folders":
 	[
-		"/home/corentin/Dropbox/Projets/logicorpo/site"
+		"/home/corentin/Dropbox/Projets/logicorpo/site",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default",
+		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass"
 	],
 	"file_history":
 	[
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse/transactionTable.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default/transactionTable.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Transaction.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Produit/nouveau.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Produit/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/editer.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/boutons.scss",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/solde.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_utilisateur.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/UtilisateurController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/CaisseController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse/nouvelleTransaction.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/table.scss",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default/form.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/date_widget.html.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/datetime_widget.html.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse/chercher.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_caisse.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/ProduitController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/layout.scss",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/TransactionRepository.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/recap.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/nouveaux.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/ServiceRepository.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/Resources/views/menu.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/routing.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Compte/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/base.scss",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Utilisateur.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/nouveau.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Commande.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/CompteController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/js/app.js",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/ProduitRepository.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_produit.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Login/login.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/UtilisateurRepository.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/security.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_compte.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/cache/.gitkeep",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/robots.txt",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/css",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/logicorpo.sublime-project",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/.gitignore",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/css",
 		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/base.scss",
 		"/home/corentin/Dropbox/Projets/ebip/site/public/css/sass/layout.scss",
@@ -647,59 +752,11 @@
 		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/glide.html",
 		"/home/corentin/Dropbox/Projets/ebip/site/public/view/footer.php",
 		"/home/corentin/Dropbox/Projets/ebip/site/public/view/header.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/composer.lock",
-		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/webroot/index.php",
-		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/core/Request.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/src/FormHelper.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/src/Validator.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/src/Form.php",
-		"/home/corentin/Téléchargements/Créer un Router/src/Router/Route.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/src/Route.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/src/RouterException.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/src/Router.php",
-		"/home/corentin/Téléchargements/Créer un Router/src/Router/Router.php",
-		"/home/corentin/Téléchargements/Créer un Router/vendor/autoload.php",
-		"/home/corentin/Téléchargements/Créer un Router/vendor/composer/autoload_real.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/Router.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/routes.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/Autoloader.php",
-		"/C/Masm615/tp43.asm",
-		"/C/Masm615/tp41.asm",
-		"/C/Masm615/tp42.asm",
-		"/C/Masm615/td4.asm",
-		"/C/Masm615/tp3.asm",
-		"/C/Masm615/tp4.asm",
-		"/C/Masm615/tp1.asm",
-		"/C/Masm615/tp33.asm",
-		"/C/Masm615/coul.asm",
-		"/C/Masm615/td4sauv.asm",
-		"/C/Masm615/tp2.asm",
-		"/C/Masm615/invString.asm",
-		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/habitat.html",
-		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/contact.html",
-		"/C/Masm615/essai.asm",
-		"/C/Masm615/fctParam.asm",
-		"/C/Masm615/fctAdd.asm",
-		"/C/Masm615/test.asm",
-		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/img/choice.svg",
-		"/C/Users/Corentin/Dropbox/ok.txt",
-		"/C/Masm615/tp1test.asm",
-		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/css/style.css",
-		"/C/Users/Corentin/Dropbox/ebip/Maj site/www/index.html",
-		"/C/Users/Corentin/Dropbox/test java/Arduinotest.java",
-		"/home/corentin/DUT/S2/M2103/TP4/Mine.java",
-		"/home/corentin/DUT/S2/M2103/TP4/MinePlutonium.java",
-		"/home/corentin/DUT/S2/M2103/TP4/Jeux.java",
-		"/home/corentin/DUT/S2/M2103/TP4/Monde.java",
-		"/home/corentin/DUT/S2/M2103/TP4/Robot.java",
-		"/home/corentin/DUT/S2/M2103/TP4/Joueur.java",
-		"/home/corentin/DUT/S2/M2103/TP4/Case.java",
-		"/home/corentin/DUT/S2/M2103/TP4/MineUranium.java",
-		"/home/corentin/Documents/tests java/televerser.java"
+		"/home/corentin/Dropbox/Projets/ebip/site/composer.lock"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -714,6 +771,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"btn",
+			"approvisionement",
+			"type",
+			"prenom",
+			"type",
+			"Le type de ",
 			"in",
 			"workspace",
 			"transition ?: ?(.*);",
@@ -767,6 +830,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"approvisionnement",
 			"@include transition($1);",
 			"path_for",
 			"{{ url_for('$1') }}",
@@ -791,8 +855,157 @@
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/LogiCorpoBundle/Resources/views/Default/form.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1121,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								871,
+								871
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/LogiCorpoBundle/Controller/CaisseController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2906,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								299,
+								299
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1151,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1061,
+								1061
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 378.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/LogiCorpoBundle/Resources/views/Caisse/transactionTable.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 826,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								826,
+								826
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/LogiCorpoBundle/Resources/views/Caisse/chercher.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 853,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								761,
+								761
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -851,7 +1064,7 @@
 	"project": "logicorpo.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -860,6 +1073,62 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"viewutili",
+				"site/src/LogiCorpoBundle/Resources/views/Utilisateur/index.html.twig"
+			],
+			[
+				"viewcaissein",
+				"site/src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig"
+			],
+			[
+				"viewnoue",
+				"site/src/LogiCorpoBundle/Resources/views/Produit/nouveau.html.twig"
+			],
+			[
+				"viewproduit",
+				"site/src/LogiCorpoBundle/Resources/views/Produit/index.html.twig"
+			],
+			[
+				"viewrecher",
+				"site/src/LogiCorpoBundle/Resources/views/Caisse/chercher.html.twig"
+			],
+			[
+				"entitytransact",
+				"site/src/LogiCorpoBundle/Entity/Transaction.php"
+			],
+			[
+				"caisse",
+				"site/src/LogiCorpoBundle/Controller/CaisseController.php"
+			],
+			[
+				"viewdefautfro",
+				"site/src/LogiCorpoBundle/Resources/views/Default/form.html.twig"
+			],
+			[
+				"caisseindex",
+				"site/src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig"
+			],
+			[
+				"datetwig",
+				"site/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/datetime_widget.html.php"
+			],
+			[
+				"dbal",
+				"site/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php"
+			],
+			[
+				"produitindex",
+				"src/LogiCorpoBundle/Resources/views/Produit/index.html.twig"
+			],
+			[
+				"secur",
+				"app/config/security.yml"
+			],
+			[
+				"css",
+				"web/css"
+			]
 		],
 		"width": 0.0
 	},
@@ -893,7 +1162,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 201.0,
+	"side_bar_width": 341.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

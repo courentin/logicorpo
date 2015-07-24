@@ -1,0 +1,8 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Editer un utilisateur' %}
+
+{% block content %}
+	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+	{{ form_errors(form) }}
+	{{ form(form, { 'attr': {'class': 'form'} }) }}
+{% endblock %}
