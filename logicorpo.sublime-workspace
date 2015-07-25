@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"getR",
+				"getResult"
+			],
+			[
+				"get",
+				"getDoctrine〔function〕"
+			],
+			[
+				"Date",
+				"DateInterval〔class〕"
+			],
+			[
 				"tr",
 				"transaction"
 			],
@@ -14,10 +26,6 @@
 			[
 				"form",
 				"form_row"
-			],
-			[
-				"get",
-				"getManager〔function〕"
 			],
 			[
 				"re",
@@ -506,14 +514,6 @@
 			[
 				"rand",
 				"randomCase"
-			],
-			[
-				"n",
-				"null"
-			],
-			[
-				"arg",
-				"argHauteur"
 			]
 		]
 	},
@@ -531,7 +531,15 @@
 			"file": "src/LogiCorpoBundle/Controller/CaisseController.php",
 			"settings":
 			{
-				"buffer_size": 2906,
+				"buffer_size": 3480,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Entity/Transaction.php",
+			"settings":
+			{
+				"buffer_size": 5768,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +547,7 @@
 			"file": "src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig",
 			"settings":
 			{
-				"buffer_size": 1151,
+				"buffer_size": 1207,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +563,7 @@
 			"file": "src/LogiCorpoBundle/Resources/views/Caisse/chercher.html.twig",
 			"settings":
 			{
-				"buffer_size": 853,
+				"buffer_size": 855,
 				"line_ending": "Unix"
 			}
 		}
@@ -617,6 +625,7 @@
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse",
@@ -625,6 +634,7 @@
 	],
 	"file_history":
 	[
+		"/home/corentin/Dropbox/Projets/logicorpo/site/composer.json",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse/transactionTable.html.twig",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default/transactionTable.html.twig",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/index.html.twig",
@@ -751,8 +761,7 @@
 		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/js/glide/glide.css",
 		"/home/corentin/Dropbox/Projets/ebip/Maj site/www/glide.html",
 		"/home/corentin/Dropbox/Projets/ebip/site/public/view/footer.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/public/view/header.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/composer.lock"
+		"/home/corentin/Dropbox/Projets/ebip/site/public/view/header.php"
 	],
 	"find":
 	{
@@ -855,7 +864,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -884,7 +893,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -893,21 +902,81 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2906,
+						"buffer_size": 3480,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								299,
-								299
+								3149,
+								3149
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
 							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1177.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/LogiCorpoBundle/Entity/Transaction.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5768,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 648.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1207,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								427,
+								427
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -918,37 +987,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "src/LogiCorpoBundle/Resources/views/Caisse/index.html.twig",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1151,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1061,
-								1061
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 378.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "src/LogiCorpoBundle/Resources/views/Caisse/transactionTable.html.twig",
 					"semi_transient": false,
 					"settings":
@@ -974,24 +1013,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "src/LogiCorpoBundle/Resources/views/Caisse/chercher.html.twig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 853,
+						"buffer_size": 855,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								761,
-								761
+								296,
+								296
 							]
 						],
 						"settings":
@@ -1003,7 +1042,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1073,6 +1112,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"entitytra",
+				"site/src/LogiCorpoBundle/Entity/Transaction.php"
+			],
 			[
 				"viewutili",
 				"site/src/LogiCorpoBundle/Resources/views/Utilisateur/index.html.twig"

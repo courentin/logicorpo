@@ -73,7 +73,6 @@ class CaisseController extends Controller
 				],
 				'empty_value' => 'Tous les types',
 				'empty_data' => null,
-				'data' => null,
 				'required'    => false
 			])
 			->add('du','date', [
@@ -82,8 +81,6 @@ class CaisseController extends Controller
 			->add('au','date', [
 				'data' => new \DateTime(),
 				'constraints' => [
-					'moreThanOrEqual' => '18/15/65',
-					'lessThanOrEqual' => new \DateTime()
 				]
 			])
 			->add('utilisateur','entity', [
@@ -97,11 +94,21 @@ class CaisseController extends Controller
 			])
 			->add('rechercher', 'submit')
 			->getForm();
-
 		$form->handleRequest($req);
 
 		if($form->isValid()) {
+			$repository = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction');
+			$query = $repository->createQueryBuilder('t')
+								->where('t.date BETWEEN :du AND :au')
+								->setParameter('du',$form->get('du')->getData())
+								->setParameter('au',$form->get('au')->getData())
+								->orderBy('t.date');
 			
+			$query = $query->getQuery();
+			return $this->render('LogiCorpoBundle:Caisse:chercher.html.twig', [
+				'form'         => $form->createView(),
+				'transactions' => $query->getResult()
+			]);
 		}
 		return $this->render('LogiCorpoBundle:Caisse:chercher.html.twig', ['form' => $form->createView()]);
 	}
