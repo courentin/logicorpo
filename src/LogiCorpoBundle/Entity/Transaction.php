@@ -168,19 +168,6 @@ class Transaction
         return $this->montant;
     }
 
-    public function getSolde()
-    {
-        dump('getSolde est obsolete, utiliser getMontant');
-        return $this->getMontant();
-    }
-
-    public function setSolde($montant)
-    {
-        dump('setSolde est obsolete, utiliser setMontant');
-        $this->setMontant($montant);
-        return $this;
-    }
-
     /**
      * Set date
      *

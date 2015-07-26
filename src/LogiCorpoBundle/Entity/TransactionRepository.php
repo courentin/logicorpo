@@ -5,7 +5,13 @@ use Doctrine\ORM\EntityRepository;
 
 class TransactionRepository extends EntityRepository {
 
-	public function getSoldes(\DateTime $until = null) {
+	/**
+	* Calcul les différents soldes de la caisse
+	* @param until : date jusqu'à laquelle doivent être calculés les soldes
+	* @return tableau des différents soldes
+	*/
+	public function getSoldes(\DateTime $until = null)
+	{
 		if($until) $dateSelector = " AND t.date <= " . $until->format("'Y-m-d H:i:s'");
 		else $dateSelector = "";
 
@@ -28,7 +34,19 @@ class TransactionRepository extends EntityRepository {
 		return $soldes;
 	}
 
-	public function getSoldesPeriod(\DateTime $from, \DateTime $until, $step) {
+	/**
+	* Calcul les différents soldes de la caisse sur une période
+	* @param $step : le pas de la période
+	* @param $from : date de début de période
+	* @param $until: date de fin de période
+	* @return tableau de getSoldes
+	*/
+	public function getSoldesPeriod(\DateInterval $step, \DateTime $from, \DateTime $until = null )
+	{
 
+		for ($current = $from; $current <= $until; $current->add($step)) {
+			$result[$current->format("Y-m-d H:i:s")] = $this->getSoldes($current);
+		}
+		return $result;
 	}
 }

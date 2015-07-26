@@ -7,10 +7,33 @@ logicorpo.config(function($interpolateProvider){
 logicorpo.controller('MainCtrl', function ($scope, $http) {
 	$scope.flash=true;
 
-
-$http.get('/app_dev.php/produit/list').
+$http.get('/app_dev.php/caisse/soldes/2015-07-26/T30M').
   success(function(data, status, headers, config) {
-    console.log(data);
+    
+  	
+  $scope.labels = Object.keys(data);
+
+  $scope.series = ['physique','nonDispo','ventes','achats','errCaisse','dispo','benefices'];
+
+  $scope.data = [
+  	[],
+  	[],
+  	[],
+  	[],
+  	[],
+  	[],
+  	[],
+  ];
+
+  for (date in data) {
+  	i = 0;
+  	for(number in data[date]) {
+  		$scope.data[i].push(data[date][number]);
+  		i++;
+  	}
+  }
+
+
   }).
   error(function(data, status, headers, config) {
     console.log('failed');

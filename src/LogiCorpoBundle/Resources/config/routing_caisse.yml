@@ -15,3 +15,7 @@ lc_caisse_transaction_corriger:
 lc_caisse_transaction_chercher:
     path:     /transaction/rechercher
     defaults: { _controller: LogiCorpoBundle:Caisse:chercher}
+
+lc_caisse_soldes_period:
+    path: /soldes/{from}/{step}
+    defaults: { _controller: LogiCorpoBundle:Caisse:jsonSoldesPeriod, step: '1D' }

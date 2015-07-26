@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityRepository;
 use LogiCorpoBundle\Entity\Transaction;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
 * @Security("has_role('ROLE_TRESORIER')")
 */
@@ -21,11 +23,22 @@ class CaisseController extends Controller
 					 ->getQuery();
 		$transactions = $query->getResult();
 
+
 		return $this->render('LogiCorpoBundle:Caisse:index.html.twig', [
 			'transactions' => $transactions,
 			'max' => sizeof($transactions),
 			'solde' => $rep->getSoldes()
 		]);
+	}
+
+	public function jsonSoldesPeriodAction($from, $step) {
+		$rep = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction');
+		$result = $rep->getSoldesPeriod(new \DateInterval('P' . $step), new \DateTime($from), new \DateTime());
+
+		$response = new JsonResponse();
+		$response->setData($result);
+
+		return $response;
 	}
 
 	public function nouvelleTransactionAction(Request $req)
