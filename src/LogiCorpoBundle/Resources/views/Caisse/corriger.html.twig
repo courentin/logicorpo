@@ -1,0 +1,14 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Corriger une transaction' %}
+
+{% block head %}
+{{parent()}}
+<h2 class="content-title">{{ transaction.date | date('d/m à H\\hi') }}</h2>
+{% endblock %}
+
+
+{% block content %}
+	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+	{{ form_errors(form) }}
+	{{ form(form, { 'attr': {'class': 'form'} }) }}
+{% endblock %}

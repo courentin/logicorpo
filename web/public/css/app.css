@@ -365,6 +365,9 @@ CONTENU DE LA PAGE
     color: #595959;
     font-weight: lighter;
     cursor: pointer; }
+  .form input[disabled] {
+    background-image: url(../img/icons/motif-diago.png);
+    opacity: .7; }
   .form .form-specialcheck {
     position: relative;
     display: inline-block;

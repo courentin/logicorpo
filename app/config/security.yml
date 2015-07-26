@@ -20,7 +20,7 @@ security:
                 property: username
 
     access_control:
-        - { path: ^/(login|login_check), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_NON_MEMBRE }
 
     firewalls:

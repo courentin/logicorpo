@@ -54,10 +54,10 @@ class Transaction
      * @var string
      *
      * @ORM\Column(name="solde", type="decimal", precision=8, scale=2, nullable=false)
-     * @Assert\NotBlank(message="Le solde doit être renseigné")
-     * @Assert\Type(type="numeric",message = "Le solde doit être une valeur décimale.")
+     * @Assert\NotBlank(message="Le motant doit être renseigné")
+     * @Assert\Type(type="numeric",message = "Le motant doit être une valeur décimale.")
      */
-    private $solde;
+    private $montant;
 
     /**
      * @var \DateTime
@@ -147,25 +147,38 @@ class Transaction
     }
 
     /**
-     * Set solde
+     * Set montant
      *
-     * @param string $solde
+     * @param string $montant
      * @return Transactionn
      */
-    public function setSolde($solde)
+    public function setMontant($montant)
     {
-        $this->solde = $solde;
+        $this->montant = $montant;
         return $this;
     }
 
     /**
-     * Get solde
+     * Get montant
      *
      * @return string 
      */
+    public function getMontant()
+    {
+        return $this->montant;
+    }
+
     public function getSolde()
     {
-        return $this->solde;
+        dump('getSolde est obsolete, utiliser getMontant');
+        return $this->getMontant();
+    }
+
+    public function setSolde($montant)
+    {
+        dump('setSolde est obsolete, utiliser setMontant');
+        $this->setMontant($montant);
+        return $this;
     }
 
     /**
@@ -252,5 +265,9 @@ class Transaction
             case 'remboursement'   : return 'Remboursement';
             break;
         }
+    }
+
+    public function __toString() {
+        return '#'.$this->getId().' - [['.$this->getMontant().' | currency ]]';
     }
 }

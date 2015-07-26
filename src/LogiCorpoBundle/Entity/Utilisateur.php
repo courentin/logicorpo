@@ -301,6 +301,12 @@ class Utilisateur implements UserInterface
         }
     }
 
+    public function appendSolde($montant) {
+        $this->setSolde( $this->getSolde() + $montant );
+
+        return $this;
+    }
+
     /**
      * Set salt
      *

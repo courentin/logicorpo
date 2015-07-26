@@ -19,7 +19,7 @@ class UtilisateurController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$repository = $em->getRepository('LogiCorpoBundle:Utilisateur');
-		$utilisateurs = $repository->findBy(array(), array('nom'=>'asc'));;
+		$utilisateurs = $repository->findBy(array(), array('nom'=>'asc'));
 
 		return $this->render('LogiCorpoBundle:Utilisateur:index.html.twig', ['utilisateurs' => $utilisateurs]);
 	}
@@ -29,8 +29,6 @@ class UtilisateurController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$repository = $em->getRepository('LogiCorpoBundle:Utilisateur');
 		$utilisateurs = $repository->findAll();
-		dump($utilisateurs);
-		die();
 		$response = new JsonResponse();
 		$response->setData($utilisateurs);
 
@@ -133,7 +131,9 @@ class UtilisateurController extends Controller
 						if(isset($utilisateur['login']))
 							$login = $utilisateur['login'];
 						else
-							$login = substr($u->getPrenom(),0,1) . substr($u->getNom(),0,6) . "_";
+							$login = preg_replace("/[^A-Z]+/", "",substr($u->getPrenom(),0,1))
+								   . preg_replace("/[^A-Z]+/", "", substr($u->getNom(),0,6))
+								   . "_";
 						$u->setUsername(strtolower($login));
 
 						/**
@@ -323,9 +323,7 @@ class UtilisateurController extends Controller
 				'preferred_choices' => 'mouvement_carte',
 				'label' => 'Motif'
 			])
-			->add('solde','money', [
-				'label' => 'Montant'
-			])
+			->add('motant','money')
 			->add('submit','submit', [
 				'label' => 'Débiter/Créditer'
 			])
@@ -335,7 +333,7 @@ class UtilisateurController extends Controller
 		
 		if($form->isValid()) {
 
-			$user->setSolde( $user->getSolde() + $transaction->getSolde() );
+			$user->appendSolde($transaction->getMontant());
 
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($transaction);

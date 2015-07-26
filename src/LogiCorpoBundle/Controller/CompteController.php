@@ -17,7 +17,7 @@ class CompteController extends Controller
 		$transactions = $query->getResult();
 
 		$canUpgrade = false;
-		if(!$this->get('security.context')->isGranted('ROLE_MEMBRE'))
+		if(!$this->get('security.authorization_checker')->isGranted('ROLE_MEMBRE'))
 			$canUpgrade = $this->getUser()->canPay();
 
 		return $this->render('LogiCorpoBundle:Compte:index.html.twig', ['transactions' => $transactions, 'canUpgrade' => $canUpgrade]);

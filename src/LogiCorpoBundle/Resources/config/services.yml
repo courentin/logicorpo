@@ -1,4 +1,6 @@
 services:
-#    logi_corpo.example:
-#        class: LogiCorpoBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    logicorpo.security.authentication_event_listener:
+        class: LogiCorpoBundle\Listeners\AuthenticationListener
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: ['@security.authorization_checker','@doctrine.orm.entity_manager']

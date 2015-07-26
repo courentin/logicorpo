@@ -108,6 +108,9 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
     color: #595959;
     font-weight: lighter;
     cursor: pointer; }
+  .form input[disabled] {
+    background-image: url(../img/icons/motif-diago.png);
+    opacity: .7; }
   .form .form-specialcheck {
     position: relative;
     display: inline-block;
