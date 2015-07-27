@@ -277,7 +277,7 @@ class UtilisateurController extends Controller
 		$form->handleRequest($req);
 
 		if($form->isValid()) {
-			if($form->get('Supprimmer')->isClicked()) {
+			if($form->get('Supprimer')->isClicked()) {
 				$this->redirect($this->generateUrl('lc_utilisateur_suppr', ['user' => $user->getId()]));
 			}
 
@@ -323,7 +323,7 @@ class UtilisateurController extends Controller
 				'preferred_choices' => 'mouvement_carte',
 				'label' => 'Motif'
 			])
-			->add('motant','money')
+			->add('montant','money')
 			->add('submit','submit', [
 				'label' => 'Débiter/Créditer'
 			])

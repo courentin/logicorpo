@@ -32,20 +32,19 @@ hr {
 
 dl {
   font-size: 1.2rem; }
-
-dl dt {
-  background: #5f9be3;
-  color: #fff;
-  float: left;
-  font-weight: normal;
-  margin-right: 10px;
-  padding: 5px;
-  min-width: 8em; }
-
-dl dd {
-  margin: 2px 0;
-  padding: 5px 0;
-  border-bottom: 1px solid #5f9be3; }
+  dl dt {
+    background: #5f9be3;
+    color: #fff;
+    float: left;
+    font-weight: normal;
+    margin-right: 10px;
+    padding: 5px;
+    min-width: 10em;
+    text-align: right; }
+  dl dd {
+    margin: 2px 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #5f9be3; }
 
 .cb {
   clear: both; }

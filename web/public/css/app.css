@@ -32,20 +32,19 @@ hr {
 
 dl {
   font-size: 1.2rem; }
-
-dl dt {
-  background: #5f9be3;
-  color: #fff;
-  float: left;
-  font-weight: normal;
-  margin-right: 10px;
-  padding: 5px;
-  min-width: 8em; }
-
-dl dd {
-  margin: 2px 0;
-  padding: 5px 0;
-  border-bottom: 1px solid #5f9be3; }
+  dl dt {
+    background: #5f9be3;
+    color: #fff;
+    float: left;
+    font-weight: normal;
+    margin-right: 10px;
+    padding: 5px;
+    min-width: 10em;
+    text-align: right; }
+  dl dd {
+    margin: 2px 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #5f9be3; }
 
 .cb {
   clear: both; }
@@ -298,6 +297,41 @@ CONTENU DE LA PAGE
   position: relative;
   display: inline-block; }
 
+.popup-parent {
+  position: relative; }
+
+.popup {
+  min-width: 10%;
+  max-width: 90%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 1.2rem;
+  padding: 1em;
+  background: #FFF;
+  border-radius: 3px;
+  box-shadow: 0 10px 15px #AAA; }
+  .popup .popup-title {
+    font-size: 1.5em;
+    margin-bottom: .9em; }
+  .popup .popup-list {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .popup .popup-list > * {
+      display: block;
+      padding: .4em;
+      border-top: 1px solid #e6e6e6; }
+  .popup .popup-actions {
+    color: #2980b9;
+    font-weight: normal;
+    text-align: right;
+    text-transform: uppercase;
+    margin-top: .5em;
+    font-size: .9em; }
+    .popup .popup-actions * {
+      margin: 0 .5em; }
+
 .table {
   font-size: 24px;
   border-collapse: collapse; }
@@ -475,95 +509,205 @@ CONTENU DE LA PAGE
   margin-left: 0; }
 
 .commande {
-  display: table;
   width: 100%;
-  background: #595959;
-  color: #FFF;
-  border-collapse: collapse;
-  border-radius: 7px;
-  font-size: 1rem;
-  transition: all 0.3s;
-  margin-bottom: 3em; }
-  .commande button {
-    font-size: 2em;
-    color: #FFF;
-    padding: 0;
-    font-weight: lighter;
-    border: none;
-    background: none;
-    cursor: pointer;
-    transition: all 0.3s; }
-    .commande button:hover {
-      background: rgba(255, 255, 255, 0.2); }
-  .commande .commande-produits, .commande .commande-actions, .commande .commande-prix, .commande .user-infos {
-    display: table-cell;
-    border: 1px solid; }
-  .commande .user-infos {
-    padding: .5em .8em;
-    width: 30%;
-    font-size: 1.9em; }
-    .commande .user-infos .commande-options {
-      font-size: .5em;
-      opacity: .8;
-      vertical-align: bottom; }
-      .commande .user-infos .commande-options a {
-        text-decoration: underline;
-        margin-right: 1em; }
-  .commande .commande-produits {
-    vertical-align: top; }
-    .commande .commande-produits .commande-produit {
-      font-size: 1.7em;
-      border-bottom: 1px solid;
-      padding: .3em 0;
-      position: relative; }
-      .commande .commande-produits .commande-produit i {
-        display: table-cell;
-        font-style: normal;
-        text-align: center;
-        width: 50px;
-        vertical-align: top; }
-      .commande .commande-produits .commande-produit .commande-produit-nom {
-        display: table-cell;
-        width: auto; }
-      .commande .commande-produits .commande-produit ul {
-        font-size: .6em;
-        padding: 0;
-        margin: 0;
-        margin-left: 1.2em; }
-        .commande .commande-produits .commande-produit ul li {
-          line-height: 1.2; }
-      .commande .commande-produits .commande-produit:last-child {
-        border-bottom: none; }
-  .commande .commande-actions {
-    text-align: center;
-    padding: 0;
-    width: 7%;
-    vertical-align: middle;
+  font-size: 1.4rem;
+  display: block;
+  box-shadow: 0 1px 2px #AAA;
+  border-radius: 3px;
+  position: relative;
+  margin-bottom: 50px;
+  box-sizing: border-box; }
+  .commande .commande-infos {
+    background: #FFF;
+    padding: 1.3em;
     position: relative; }
-    .commande .commande-actions button {
-      width: 100%;
-      height: 50%;
+    .commande .commande-infos:before {
+      content: '';
       position: absolute;
-      display: block;
+      left: 17px;
       top: 50%;
-      left: 0; }
-      .commande .commande-actions button:first-child {
-        top: 0;
-        border-bottom: 1px solid; }
-  .commande .commande-prix {
-    width: 125px;
-    font-size: 2em;
-    text-align: center;
-    vertical-align: middle; }
-    .commande .commande-prix button {
-      display: none; }
+      transform: translateY(-50%);
+      background: #27ae60;
+      width: 5px;
+      height: 70%;
+      border-radius: 15px;
+      display: block; }
+    .commande .commande-infos .commande-user, .commande .commande-infos .commande-tools, .commande .commande-infos .commande-price {
+      display: inline-block; }
+    .commande .commande-infos .commande-user {
+      margin-left: .5em;
+      font-size: 1.7em; }
+    .commande .commande-infos .commande-price {
+      font-size: 1.6em;
+      float: right; }
+  .commande .commande-products {
+    background: #FFF; }
+  .commande .commande-products > ul {
+    margin: 0;
+    list-style: none;
+    padding: 0; }
+  .commande .commande-products > ul > li {
+    border-top: 1px solid #e6e6e6;
+    padding: .4em 1.3em; }
+    .commande .commande-products > ul > li span {
+      margin-right: 1em; }
+  .commande .commande-products > ul > li > ul {
+    font-size: .8em;
+    color: #646464;
+    margin: 0 0 0 2em;
+    padding: 0;
+    list-style: none; }
+  .commande .commande-toggle {
+    position: absolute;
+    left: 50%;
+    bottom: -3em;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    cursor: pointer; }
+    .commande .commande-toggle img {
+      width: 2em;
+      transition: all .3s;
+      transform: scaleY(-1); }
+
+a img {
+  width: 22px;
+  transition: all 0.3s;
+  filter: invert(30%);
+  padding: 7px;
+  margin: -3px 6px;
+  vertical-align: -16%; }
+  a img:hover {
+    filter: invert(100%);
+    background: #595959;
+    border-radius: 50%; }
+
+/*
+.commande {
+	display: table;
+	width:100%;
+	background: $gris;
+	color: #FFF;
+	border-collapse:collapse;
+	border-radius: 7px;
+	font-size: 1rem;
+	transition: all $anim-duration;
+
+	margin-bottom: 3em;
+
+	button {
+		font-size: 2em;
+		color: #FFF;
+		padding: 0;
+		font-weight: lighter;
+		border: none;
+		background: none;
+		cursor: pointer;
+		transition:all $anim-duration;
+		&:hover {
+			background:rgba(255,255,255,.2);
+		}
+	}
+
+	.commande-produits, .commande-actions, .commande-prix, .user-infos {
+		display: table-cell;
+		border:1px solid;
+	}
+
+	.user-infos {
+		padding: .5em .8em;
+		width: 30%;
+		font-size: 1.9em;
+		
+		.commande-options {
+			font-size: .5em;
+			opacity: .8;
+			vertical-align: bottom;
+			a {
+				text-decoration: underline;
+				margin-right: 1em;
+			}
+		}
+	}
+
+	.commande-produits {
+		vertical-align: top;
+
+		.commande-produit {		
+			font-size: 1.7em;
+			border-bottom: 1px solid;
+			padding: .3em 0;
+			position: relative;
+			
+			i {
+				display: table-cell;
+				font-style: normal;
+				text-align: center;
+				width: 50px;
+				vertical-align: top;
+			}
+
+			.commande-produit-nom {
+				display: table-cell;
+				width: auto;
+
+			}
+
+			ul {
+				font-size: .6em;
+				padding: 0;
+				margin: 0;
+				margin-left: 1.2em;
+				li {
+					line-height: 1.2;
+				}
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+
+	.commande-actions {
+		text-align: center;
+		padding: 0;
+		width: 7%;
+		vertical-align: middle;
+		position: relative;
+
+		button {
+			width: 100%;
+			height: 50%;
+			position: absolute;
+			display: block;
+			top:50%;
+			left:0;
+			&:first-child {
+				top:0;
+				border-bottom: 1px solid;
+			}
+		}
+	}
+
+	.commande-prix {
+		width: 125px;
+		font-size: 2em;
+		text-align: center;
+		vertical-align: middle;
+		button {
+			display: none;
+		}
+	}
+}
 
 .commande.orange {
-  background: #e67e22; }
-
+	background: $orange;
+}
 .commande.vert {
-  background: #27ae60; }
-
+	background: $vert;
+}
+*/
 /* Tablette */
 @media screen and (max-width: 1000px) {
   .content {
