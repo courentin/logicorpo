@@ -4,21 +4,21 @@
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %}{{title}}
-	{% if subtitle is defined %}
-	- {{ subtitle}}
-	{% endif %}
+			{% if subtitle is defined %} - {{ subtitle}}{% endif %}
 	{% endblock %}</title>
-	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	
+	<link rel="icon" type="image/png" href="{{ asset('/public/img/favicon.png') }}" />
+
 	{% block stylesheets %}
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="{{asset('/public/css/app.css')}}">
 	{% endblock %}
-	
+
+	{% block javascripts %}
 	<script src="{{ asset('/public/js/angularjs-1.3.16.min.js') }}"></script>
 	<script src="{{ asset('/public/js/angular-locale_fr-fr.js') }}"></script>
-	<script src="{{ asset('/public/js/clickoutside.directive.js') }}"></script>
-	<script src="{{ asset('/public/js/app.js') }}"></script>
-	<link rel="icon" type="image/png" href="{{ asset('/public/img/favicon.png') }}" />
-	{% block javascripts %}{% endblock %}
+	<script src="{{ asset('/public/js/angular/MainCtrl.js') }}"></script>
+	{% endblock %}
 </head>
 <body ng-controller="MainCtrl">
 

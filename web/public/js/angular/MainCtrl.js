@@ -1,4 +1,4 @@
-var logicorpo = angular.module('logicorpo', ['mouse.utils']);
+var logicorpo = angular.module('logicorpo', []);
 
 logicorpo.config(function($interpolateProvider){
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
