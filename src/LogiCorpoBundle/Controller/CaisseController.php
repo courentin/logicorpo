@@ -120,9 +120,12 @@ class CaisseController extends Controller
 				$query->where('t.id = :ref')
 					  ->setParameter('ref',$ref);
 			} else {
+				$du = $form->get('du')->getData()->setTime(0,0,0);
+				$au = $form->get('au')->getData()->setTime(23,59,59);
+
 				$query->where('t.date BETWEEN :du AND :au')
-					  ->setParameter('du',$form->get('du')->getData())
-					  ->setParameter('au',$form->get('au')->getData());
+					  ->setParameter('du',$du)
+					  ->setParameter('au',$au);
 			
 				if($user = $form->get('utilisateur')->getData()) {
 					$query->andWhere('t.utilisateur = :user')
