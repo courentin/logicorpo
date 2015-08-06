@@ -41,6 +41,7 @@ class UtilisateurController extends Controller
 			->add('nom', 'text')
 			->add('prenom', 'text', ['label' => 'Prénom'])
 			->add('username', 'text', ['label' => 'Login'])
+			->add('mail', 'email')
 			->add('solde', 'text', ['label' => 'Solde initial'])
 			->add('password', 'password', ['label' => 'Mot de passe'])
 			->add('rang', 'entity', [

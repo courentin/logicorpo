@@ -98,8 +98,27 @@ class Utilisateur implements UserInterface
      */
     private $rang;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="text")
+     * @Assert\Email(message="L'email est incorrect")
+     */
+    private $mail;
+
     public function __construct() {
         $this->salt = md5(uniqid(rand(),true));
+    }
+
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+        return $this;
     }
 
     /**
@@ -302,8 +321,7 @@ class Utilisateur implements UserInterface
     }
 
     public function appendSolde($montant) {
-        $this->setSolde( $this->getSolde() + $montant );
-
+        $this->solde += $montant;
         return $this;
     }
 
