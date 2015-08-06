@@ -42,7 +42,10 @@ class UtilisateurController extends Controller
 			->add('prenom', 'text', ['label' => 'Prénom'])
 			->add('username', 'text', ['label' => 'Login'])
 			->add('mail', 'email')
-			->add('solde', 'text', ['label' => 'Solde initial'])
+			->add('solde', 'money', [
+				'label' => 'Solde initial',
+				'data'  => 0
+			])
 			->add('password', 'password', ['label' => 'Mot de passe'])
 			->add('rang', 'entity', [
 				'class' => 'LogiCorpoBundle:Rang'])
@@ -267,6 +270,7 @@ class UtilisateurController extends Controller
 			->add('nom', 'text')
 			->add('prenom', 'text', ['label' => 'Prénom'])
 			->add('username', 'text', ['label' => 'Login'])
+			->add('mail', 'email')
 			->add('rang', 'entity', [
 				'class' => 'LogiCorpoBundle:Rang'])
 			->add('Enregistrer', 'submit')
