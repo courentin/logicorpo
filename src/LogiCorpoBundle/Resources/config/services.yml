@@ -4,3 +4,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
         arguments: ['@security.authorization_checker','@doctrine.orm.entity_manager']
+
+    logicorpo.settings:
+        class: SettingsBundle\Service\SettingsService
+        arguments: ['@doctrine.orm.entity_manager']

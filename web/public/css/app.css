@@ -390,7 +390,7 @@ CONTENU DE LA PAGE
       border-color: #bf3737; }
     .form .form-input-base:focus:valid, .form .form-specialcheck:focus:valid, .form .form-input input:focus:valid, .form .form-input select:focus:valid {
       border-color: #27ae60; }
-  .form .form-label-base, .form .form-input p {
+  .form .form-label-base, .form .form-input p, .form .form-partition p {
     color: #828282;
     margin: 0 0 .1em 0;
     font-size: 1.53em; }
@@ -493,6 +493,29 @@ CONTENU DE LA PAGE
     .form .form-check input {
       margin: 0 .5em;
       vertical-align: middle; }
+  .form .form-partition {
+    position: relative; }
+    .form .form-partition input {
+      width: 15em;
+      margin: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin-top: 2.7em; }
+    .form .form-partition .form-partition-label, .form .form-partition .form-partition-left, .form .form-partition .form-partition-right {
+      position: absolute; }
+      .form .form-partition .form-partition-label span, .form .form-partition .form-partition-left span, .form .form-partition .form-partition-right span {
+        display: block;
+        line-height: 1;
+        font-size: 1.2em;
+        padding-bottom: 22px; }
+    .form .form-partition .form-partition-left {
+      border-left: 1px solid #646464;
+      margin-left: 19px;
+      padding-left: 10px; }
+    .form .form-partition .form-partition-right {
+      text-align: right;
+      right: 0; }
 
 .menu.hidden {
   transform: translateX(-100%); }

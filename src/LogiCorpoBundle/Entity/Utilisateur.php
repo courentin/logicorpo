@@ -270,6 +270,10 @@ class Utilisateur implements UserInterface
         return $this->lastLog;
     }
 
+    public function neverLogged() {
+        return $this->lastLog===null;
+    }
+
     /**
      * Set rang
      *
