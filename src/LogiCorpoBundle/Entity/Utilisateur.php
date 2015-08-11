@@ -311,7 +311,7 @@ class Utilisateur implements UserInterface
     }
 
     public function canPay($prix = false) {
-
+/*
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('LogiCorpoBundle:Config');
         $conf = $repository->find(1);
@@ -322,8 +322,9 @@ class Utilisateur implements UserInterface
         } else {
             return $this->getSolde() > $conf->getSeuil();
         }
+*/
+        return true;
     }
-
     public function appendSolde($montant) {
         $this->solde += $montant;
         return $this;

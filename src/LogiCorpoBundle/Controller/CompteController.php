@@ -20,28 +20,29 @@ class CompteController extends Controller
 		if(!$this->get('security.authorization_checker')->isGranted('ROLE_MEMBRE'))
 			$canUpgrade = $this->getUser()->canPay();
 
-		return $this->render('LogiCorpoBundle:Compte:index.html.twig', ['transactions' => $transactions, 'canUpgrade' => $canUpgrade]);
+		return $this->render('LogiCorpoBundle:Compte:index.html.twig', [
+			'transactions'    => $transactions,
+			'canUpgrade'      => $canUpgrade,
+			'montantAdhesion' => $this->get('logicorpo.settings')->montantAdhesion
+		]);
 	}
 
 	/**
 	 * @Security("!has_role('ROLE_MEMBRE')")
 	 */
 	public function upgradeAction() {
-		define("__PRICE__", 5);
-
-
-
+		$montantAdhesion = $this->get('logicorpo.settings')->montantAdhesion;
 		$user = $this->getUser();
-		$u_solde = $user->getSolde();
-		if($u_solde >= __PRICE__) {
-			$user->setSolde($u_solde-__PRICE__);
+
+		if($user->getSolde() >= $montantAdhesion) {
+
+			$user->appendSolde(-$montantAdhesion);
 
 			$em = $this->getDoctrine()->getManager();
-			$repository = $em->getRepository('LogiCorpoBundle:Rang');
-			$produits = $repository->findAll();
+			$rep = $em->getRepository('LogiCorpoBundle:Rang');
 
-			$user->setRang( );
-			$user->flush();
+			$user->setRang($rep->findOneBySlug('MEMBRE'));
+			$em->flush();
 		}
 		return $this->redirect($this->generateUrl('lc_compte_home'));
 	}
