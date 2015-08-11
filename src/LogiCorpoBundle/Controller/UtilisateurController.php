@@ -21,11 +21,6 @@ class UtilisateurController extends Controller
 		$repository = $em->getRepository('LogiCorpoBundle:Utilisateur');
 		$utilisateurs = $repository->findBy(array(), array('nom'=>'asc'));
 
-		$config = $this->get('logicorpo.settings');
-		
-		dump($config->seuil);
-		dump($config->seuil);
-
 		return $this->render('LogiCorpoBundle:Utilisateur:index.html.twig', ['utilisateurs' => $utilisateurs]);
 	}
 
