@@ -2,7 +2,8 @@
 namespace SettingsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\DBAL\Types\ConversionException;
+use SettingsBundle\Entity\Setting;
+
 /**
  * Setting
  * @ORM\Table(name="setting")
@@ -40,22 +41,11 @@ class Setting
 	}
 
 	public function getValue() {
-		switch (strtolower($this->type)) {
-			case 'date':
-				$this->value = new \DateTime($this->value);
-			break;
-
-			default:
-				if(!settype($this->value,$this->type)) return new ConversionException();
-			break;
-		}
-
 		return $this->value;
 	}
 
 	public function setValue($value) {
 		$this->value = $value;
-		$this->type = gettype($this->value);
 		return $this;
 	}
 

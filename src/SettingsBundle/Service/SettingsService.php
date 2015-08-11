@@ -3,7 +3,7 @@ namespace SettingsBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Exception\InvalidPropertyException;
-use SettingsBundle\Entity\Setting;
+use Doctrine\DBAL\Types\Type;
 
 class SettingsService
 {
@@ -22,7 +22,9 @@ class SettingsService
 			if(!$setting) return null;
 			else $this->settings[$label] = $setting;
 		}
-		return $this->settings[$label]->getValue();
+
+		return Type::getType($this->settings[$label]->getType())
+				   ->convertToPHPValue($this->settings[$label]->getValue(), $this->em->getConnection()->getDatabasePlatform());
 	}
 
 
@@ -32,7 +34,7 @@ class SettingsService
 
 		$setting->setValue($value);
 		$this->em->flush();
-		return $value;
+		return $this;
 	}
 
 	public function __isset($label) {
