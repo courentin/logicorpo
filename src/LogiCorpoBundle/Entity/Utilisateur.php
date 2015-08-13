@@ -310,21 +310,10 @@ class Utilisateur implements UserInterface
 
     }
 
-    public function canPay($prix = false) {
-/*
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('LogiCorpoBundle:Config');
-        $conf = $repository->find(1);
-
-        // si on peut payer le prix indiqué
-        if($prix) {
-            return $prix <= ($this->getSolde() - $conf->getSeuil());
-        } else {
-            return $this->getSolde() > $conf->getSeuil();
-        }
-*/
-        return true;
+    public function canPay($montant, $seuil = 0) {
+        return $this->solde - $seuil >= $montant;
     }
+
     public function appendSolde($montant) {
         $this->solde += $montant;
         return $this;

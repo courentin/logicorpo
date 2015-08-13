@@ -18,7 +18,7 @@ class TransactionRepository extends EntityRepository {
 		$types = [
 			'physique' => "SELECT SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.moyenPaiement = 'espece'" . $dateSelector,
 			'nonDispo' => "SELECT SUM(u.solde) FROM LogiCorpoBundle:Utilisateur u",
-			'ventes'   => "SELECT SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.type = 'achat_commande'" . $dateSelector,
+			'ventes'   => "SELECT SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.type IN ('achat_commande', 'frais_adhesion') " . $dateSelector,
 			'achats'   => "SELECT -SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.type = 'approvisionnement'" . $dateSelector,
 			'errCaisse'=> "SELECT SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.type = 'erreur_caisse'" . $dateSelector
 		];
@@ -48,5 +48,17 @@ class TransactionRepository extends EntityRepository {
 			$result[$current->format("Y-m-d H:i:s")] = $this->getSoldes($current);
 		}
 		return $result;
+	}
+
+	public function getUserHistory(Utilisateur $u, $limit)
+	{
+		$query = $this->createQueryBuilder('t')
+				      ->where('t.utilisateur = :utilisateur')
+				      ->setParameter('utilisateur',$u)
+				      ->andWhere("t.type NOT IN ('mouvement_banque', 'approvisionnement', 'erreur_caisse')")
+				      ->orderBy('t.date', 'DESC')
+				      ->setMaxResults($limit)
+				      ->getQuery();
+		return $query->getResult();
 	}
 }

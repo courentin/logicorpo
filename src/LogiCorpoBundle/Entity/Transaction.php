@@ -32,7 +32,7 @@ class Transaction
      * @ORM\Column(name="type_transaction", type="text", nullable=false)
      * @Assert\NotBlank(message="Le type de transaction doit être renseigné")
      * @Assert\Choice(
-     *     choices = {"approvisionnement","mouvement_carte","achat_commande","mouvement_banque","erreur_caisse","remboursement"},
+     *     choices = {"approvisionnement","mouvement_carte","achat_commande","mouvement_banque","erreur_caisse","remboursement", "frais_adhesion"},
      *     message = "Erreur type incorrect"
      * )
      */
@@ -88,8 +88,25 @@ class Transaction
      */
     private $commande;
 
+
+    private $viewType = [
+        'approvisionnement'=> 'Approvisionnement stock',
+        'mouvement_carte'  => 'Approvisionnement compte',
+        'achat_commande'   => 'Achat/Commande',
+        'mouvement_banque' => 'Mouvement banque',
+        'erreur_caisse'    => 'Erreur de caisse',
+        'remboursement'    => 'Remboursement',
+        'frais_adhesion'   => "Frais d'adhesion"
+    ];
+
     public function __construct() {
         $this->date = new \DateTime();
+    }
+
+    public function isForLogiCorpo()
+    {
+        $types = ['mouvement_banque', 'approvisionnement', 'erreur_caisse'];
+        return in_array($this->type, $types);
     }
 
     /**
@@ -238,20 +255,7 @@ class Transaction
     }
 
     public function getViewType() {
-        switch ($this->getType()) {
-            case 'approvisionnement': return 'Approvisionnement stock';
-            break;
-            case 'mouvement_carte' : return 'Approvisionnement compte';
-            break;
-            case 'achat_commande'  : return 'Achat/Commande';
-            break;
-            case 'mouvement_banque': return 'Mouvement banque';
-            break;
-            case 'erreur_caisse'   : return 'Erreur de caisse';
-            break;
-            case 'remboursement'   : return 'Remboursement';
-            break;
-        }
+        return $this->viewType[$this->type];
     }
 
     public function __toString() {

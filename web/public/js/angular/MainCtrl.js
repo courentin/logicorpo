@@ -7,7 +7,7 @@ logicorpo.config(function($interpolateProvider){
 logicorpo.controller('MainCtrl', function ($scope, $http) {
 	$scope.flash=true;
 
-$http.get('/app_dev.php/caisse/soldes/2015-07-26/T30M').
+$http.get('/app_dev.php/caisse/soldes/2015-07-26/T30Ma').
   success(function(data, status, headers, config) {
     
   	
