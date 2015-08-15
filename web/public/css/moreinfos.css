@@ -1,21 +1,21 @@
 /*
 Error: Undefined variable: "$bleu".
-        on line 67 of front-end/sass/moreinfos.scss
+        on line 73 of front-end/sass/moreinfos.scss
 
-62: 			border-top:1px solid rgb(230,230,230);
-63: 		}
-64: 	}
-65: 
-66: 	.popup-actions {
-67: 		color: $bleu;
-68: 		font-weight: normal;
-69: 		text-align: right;
-70: 		text-transform: uppercase;
-71: 		margin-top: .5em;
-72: 		font-size: .9em;
+68: 			border-top:1px solid rgb(230,230,230);
+69: 		}
+70: 	}
+71: 
+72: 	.popup-actions {
+73: 		color: $bleu;
+74: 		font-weight: normal;
+75: 		text-align: right;
+76: 		text-transform: uppercase;
+77: 		margin-top: .5em;
+78: 		font-size: .9em;
 
 Backtrace:
-front-end/sass/moreinfos.scss:67
+front-end/sass/moreinfos.scss:73
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/script/tree/variable.rb:49:in `_perform'
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/script/tree/node.rb:50:in `perform'
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/tree/visitors/perform.rb:394:in `visit_prop'
@@ -78,4 +78,4 @@ front-end/sass/moreinfos.scss:67
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$bleu\".\A         on line 67 of front-end/sass/moreinfos.scss\A \A 62: 			border-top:1px solid rgb(230,230,230);\A 63: 		}\A 64: 	}\A 65: \A 66: 	.popup-actions {\A 67: 		color: $bleu;\A 68: 		font-weight: normal;\A 69: 		text-align: right;\A 70: 		text-transform: uppercase;\A 71: 		margin-top: .5em;\A 72: 		font-size: .9em;"; }
+  content: "Error: Undefined variable: \"$bleu\".\A         on line 73 of front-end/sass/moreinfos.scss\A \A 68: 			border-top:1px solid rgb(230,230,230);\A 69: 		}\A 70: 	}\A 71: \A 72: 	.popup-actions {\A 73: 		color: $bleu;\A 74: 		font-weight: normal;\A 75: 		text-align: right;\A 76: 		text-transform: uppercase;\A 77: 		margin-top: .5em;\A 78: 		font-size: .9em;"; }
