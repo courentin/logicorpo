@@ -59,7 +59,7 @@ class Service
      *
      * @ORM\ManyToOne(targetEntity="Utilisateur")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="caissier", referencedColumnName="id_utilisateur")
+     *   @ORM\JoinColumn(name="caissier", referencedColumnName="id_utilisateur", nullable=false)
      * })
      */
     private $caissier;

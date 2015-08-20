@@ -26,6 +26,9 @@ lc_caisse:
     resource: "@LogiCorpoBundle/Resources/config/routing_caisse.yml"
     prefix:   /caisse
 
+lc_parametre:
+    resource: "@LogiCorpoBundle/Resources/config/routing_parametre.yml"
+    prefix:   /parametre
 
 login:
     path:   /login

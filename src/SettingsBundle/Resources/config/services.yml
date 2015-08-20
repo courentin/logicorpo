@@ -1,4 +1,0 @@
-services:
-    settings:
-        class: SettingsBundle\Settings\Settings
-        arguments: ['@doctrine.orm.entity_manager']

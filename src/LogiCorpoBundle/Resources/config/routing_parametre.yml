@@ -1,0 +1,3 @@
+lc_parametre_home:
+    resource: "@DmishhSettingsBundle/Resources/config/routing.yml"
+    prefix: /

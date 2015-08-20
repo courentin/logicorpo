@@ -77,3 +77,38 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+dmishh_settings:
+    security:
+        users_can_manage_own_settings: false
+    layout: LogiCorpoBundle:Parametre:index.html.twig
+    settings:
+        seuil:
+            validation:
+                type: money
+
+        montantAdhesion:
+            validation:
+                type: money
+
+        interdictionCommandeSeuil:
+            validation:
+                type: checkbox
+                options:
+                    required: false
+
+        debutService:
+            validation:
+                type: time
+
+        finService:
+            validation:
+                type: time
+
+        debutCommande:
+            validation:
+                type: time
+
+        finCommande:
+            validation:
+                type: time

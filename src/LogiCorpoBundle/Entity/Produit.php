@@ -309,6 +309,11 @@ class Produit
         return $this->supplementDisponible;
     }
 
+    public function addStock($number) {
+        if($this->solde !=null) $this->stock += $number;
+        return $this;
+    }
+
     public function __toString() {
         return $this->getLibelle();
     }
