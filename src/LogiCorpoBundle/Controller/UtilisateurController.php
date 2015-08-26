@@ -55,19 +55,10 @@ class UtilisateurController extends Controller
 		$form->handleRequest($req);
 
 		if($form->isValid()) {
+			$this->saveUser($user);
 			$em = $this->getDoctrine()->getManager();
-
-			$factory = $this->get('security.encoder_factory');
-			$encoder = $factory->getEncoder($user);
-			$mdp = $encoder->encodePassword(
-				$user->getPassword(),
-				$user->getSalt()
-			);
-
-			$user->setPassword($mdp);
-
-			$em->persist($user);
 			$em->flush();
+
 			$req->getSession()->getFlashBag()->add('success','L\'utilisateur "'.$user.'" a été crée');
 			
 			return $this->redirect($this->generateUrl('lc_utilisateur_home'));
@@ -76,6 +67,33 @@ class UtilisateurController extends Controller
 		return $this->render('LogiCorpoBundle:Utilisateur:nouveau.html.twig', ['form' => $form->createView()]);
 	}
 
+	/*
+	 * Sauvegarde un nouvel utilisateur valide
+	 *
+	 */
+	private function saveUser(Utilisateur $user) {
+
+		$em = $this->getDoctrine()->getManager();
+
+		$encoder = $this->get('security.encoder_factory')->getEncoder($user);
+		$mdp = $encoder->encodePassword(
+			$user->getPassword(),
+			$user->getSalt()
+		);
+
+		$user->setPassword($mdp);
+
+		if($user->getSolde() > 0) {
+			$transaction = new Transaction();
+			$transaction->setType('mouvement_carte')
+						->setMontant($user->getSolde())
+						->setUtilisateur($user)
+						->setMoyenPaiement('compte');
+			$em->persist($transaction);
+		}
+
+		$em->persist($user);
+	}
 
 	public function nouveauListeAction(Request $req) {
 		$max_size = 10; //Mo

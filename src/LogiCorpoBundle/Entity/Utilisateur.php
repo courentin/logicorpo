@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="utilisateur_login_key", columns={"login"})})
  * @ORM\Entity
  * @UniqueEntity("username")
+ * @UniqueEntity("mail")
  */
 
 class Utilisateur implements UserInterface
