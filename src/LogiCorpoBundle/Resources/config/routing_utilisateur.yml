@@ -35,3 +35,9 @@ lc_utilisateur_solde:
     defaults: { _controller: LogiCorpoBundle:Utilisateur:solde }
     requirements:
         id: \d+
+
+lc_utilisateur_upgrade:
+    path: /upgrade/{moyenPaiement}/{id}
+    defaults: { _controller: LogiCorpoBundle:Utilisateur:upgrade, redirection: lc_utilisateur_home, moyenPaiement: compte }
+    requirements:
+        id: \d+

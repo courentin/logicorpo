@@ -8,4 +8,4 @@ lc_compte_mdp:
 
 lc_compte_upgrade:
     path:     /upgrade
-    defaults: { _controller: LogiCorpoBundle:Compte:upgrade }
+    defaults: { _controller: LogiCorpoBundle:Utilisateur:upgrade, redirection: lc_compte_home, moyenPaiement: compte, user: null }

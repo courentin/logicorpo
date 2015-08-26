@@ -319,6 +319,16 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+    public function addSolde($montant) {
+        $this->solde += $montant;
+        return $this;
+    }
+
+    public function subSolde($montant) {
+        $this->solde -= $montant;
+        return $this;
+    }
+
     /**
      * Set salt
      *

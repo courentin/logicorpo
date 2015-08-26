@@ -351,4 +351,45 @@ class UtilisateurController extends Controller
 
 		return $this->render('LogiCorpoBundle:Utilisateur:solde.html.twig', ['form' => $form->createView(), 'user' => $user]);
 	}
+
+	/**
+	 * Permet de passer un utilisateur du rang non membre au rang membre
+	 * @Security("has_role('ROLE_NON_MEMBRE')")
+	 */
+	public function upgradeAction(Utilisateur $user = null, $redirection, $moyenPaiement, Request $req) {
+		// Vérification des autorisations
+		if ($user == null) {
+			if(!$this->get('security.authorization_checker')->isGranted('ROLE_MEMBRE')) {
+				$user = $this->getUser();
+			} else {
+				throw new AccessDeniedException();
+			}
+		} else if(!$this->get('security.authorization_checker')->isGranted('ROLE_PARTICIPANT')) {
+			throw new AccessDeniedException();
+		}
+
+		// Passer au rang membre
+		$config = $this->get('settings_manager');
+		$montantAdhesion = $config->get('montantAdhesion');
+		$em = $this->getDoctrine()->getManager();
+
+		if($user->canPay($montantAdhesion, $config->get('seuil')) && $user->getRang()->getSlug() == 'NON_MEMBRE') {
+			$user->subSolde($montantAdhesion)
+				 ->setRang($em->getReference('LogiCorpoBundle:Rang','MEMBRE'));
+
+			$transaction = new Transaction();
+			$transaction->setType('frais_adhesion')
+						->setMoyenPaiement($moyenPaiement)
+						->setMontant($montantAdhesion)
+						->setUtilisateur($user);
+			$em->persist($transaction);
+			$em->flush();
+		
+			$req->getSession()->getFlashBag()->add('success', "L'utilisateur $user est maintenant un membre.");
+		} else {
+			$req->getSession()->getFlashBag()->add('err', "Impossible de passer l'utilisateur $user au rang membre.");
+		}
+		
+		return $this->redirectToRoute($redirection);
+	}
 }
