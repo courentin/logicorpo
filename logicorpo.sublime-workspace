@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"se",
+				"settings_form"
+			],
+			[
 				"Twig_F",
 				"Twig_Filter_Method〔class〕"
 			],
@@ -26,10 +30,6 @@
 			[
 				"Set",
 				"SettingsBundle\\Entity\\Setting〔class〕"
-			],
-			[
-				"se",
-				"seuil"
 			],
 			[
 				"log",
@@ -520,21 +520,45 @@
 	"buffers":
 	[
 		{
-			"contents": "<?php\nnamespace LogiCorpoBundle\\Controller;\n\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller;\n\nclass ParametreController extends Controller\n{\n	public function indexAction() {\n		$this->get('logicorpo.settings')->createForm('form')\n			 ->add('montantAdhesion', 'money')\n			 ->getForm();\n\n		return $this->render('LogiCorpoBundle:Parametre:index.html.twig');\n	}\n}",
-			"file": "src/LogiCorpoBundle/Controller/ParametreController.php",
-			"file_size": 257,
-			"file_write_time": 130841262351269151,
+			"file": "src/LogiCorpoBundle/Controller/DefaultController.php",
 			"settings":
 			{
-				"buffer_size": 368,
+				"buffer_size": 325,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "composer.json",
+			"contents": "<?php\n\nnamespace LogiCorpoBundle\\Controller;\n\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller;\nuse Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException;\nuse Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Security;\nuse LogiCorpoBundle\\Entity\\Utilisateur;\nuse LogiCorpoBundle\\Entity\\Transaction;\nuse Symfony\\Component\\HttpFoundation\\Request;\nuse Symfony\\Component\\HttpFoundation\\JsonResponse;\n\n/**\n * @Security(\"has_role('ROLE_PARTICIPANT')\")\n */\nclass UtilisateurController extends Controller\n{\n	public function indexAction()\n	{\n		$em = $this->getDoctrine()->getManager();\n		$repository = $em->getRepository('LogiCorpoBundle:Utilisateur');\n		$utilisateurs = $repository->findBy(array(), array('nom'=>'asc'));\n\n		return $this->render('LogiCorpoBundle:Utilisateur:index.html.twig', ['utilisateurs' => $utilisateurs]);\n	}\n\n	public function jsonListAction()\n	{\n		$em = $this->getDoctrine()->getManager();\n		$repository = $em->getRepository('LogiCorpoBundle:Utilisateur');\n		$utilisateurs = $repository->findAll();\n		$response = new JsonResponse();\n		$response->setData($utilisateurs);\n\n		return $response;\n	}\n\n	public function nouveauAction(Request $req) {\n		$user = new Utilisateur();\n		$form = $this->get('form.factory')->createBuilder('form', $user)\n			->add('nom', 'text')\n			->add('prenom', 'text', ['label' => 'Prénom'])\n			->add('username', 'text', ['label' => 'Login'])\n			->add('mail', 'email')\n			->add('solde', 'money', [\n				'label' => 'Solde initial',\n				'data'  => 0LogiCorpoB\n			])\n			->add('password', 'password', ['label' => 'Mot de passe'])\n			->add('rang', 'entity', [\n				'class' => 'LogiCorpoBundle:Rang'])\n			->add('Ajouter', 'submit')\n			->getForm();\n\n		$form->handleRequest($req);\n\n		if($form->isValid()) {\n			$em = $this->getDoctrine()->getManager();\n\n			$factory = $this->get('security.encoder_factory');\n			$encoder = $factory->getEncoder($user);\n			$mdp = $encoder->encodePassword(\n				$user->getPassword(),\n				$user->getSalt()\n			);\n\n			$user->setPassword($mdp);\n\n			$em->persist($user);\n			$em->flush();\n			$req->getSession()->getFlashBag()->add('success','L\\'utilisateur \"'.$user.'\" a été crée');\n			\n			return $this->redirect($this->generateUrl('lc_utilisateur_home'));\n		}\n\n		return $this->render('LogiCorpoBundle:Utilisateur:nouveau.html.twig', ['form' => $form->createView()]);\n	}\n\n\n	public function nouveauListeAction(Request $req) {\n		$max_size = 10; //Mo\n		$form = $this->createFormBuilder()\n			->add('fichier', 'file', [\n				'label' => 'Fichier *.csv',\n				'attr' => [\n					'accept' => '.csv'\n				]\n			])\n			->add('Ajouter', 'submit')\n			->getForm();\n		\n		$form->handleRequest($req);\n\n		if($form->isSubmitted()) {\n			$fichier = $form->get('fichier')->getNormData();\n			\n			if($fichier->isValid()) {\n\n				$point  = fopen($fichier->getPathName(),\"r\");\n				$utilisateurs = $this->csv_to_array($point);\n				/*\n				* Vérifie que les champs nom, prenom et membre sont présent\n				*/\n				if(array_key_exists('nom',$utilisateurs[0]) && array_key_exists('prenom',$utilisateurs[0]) && array_key_exists('membre',$utilisateurs[0])) {\n					/*\n					* Recupère les rangs\n					*/\n					$em = $this->getDoctrine()->getManager();\n					$repository = $em->getRepository('LogiCorpoBundle:Rang');\n					$rang = [\n						0 => $repository->findOneBySlug('NON_MEMBRE'),\n						1 => $repository->findOneBySlug('MEMBRE')\n					];\n\n					$users = [];\n					$i=0;\n					foreach ($utilisateurs as $utilisateur) {\n						$u = $users[$i++] = new Utilisateur();\n						$u->setNom($utilisateur['nom']);\n						$u->setPrenom($utilisateur['prenom']);\n						$u->setRang($rang[$utilisateur['membre']]);\n\n						/**\n						* Si le solde initial est spécifié, on le renseigne, sinon on l'initialise à 0\n						*/\n						if(isset($utilisateur['solde']))\n							$u->setSolde(floatval($utilisateur['solde']));\n						else\n							$u->setSolde(0);\n\n						/**\n						* Si le login est spécifié, on le renseigne, sinon on l'initialise à :\n						* première lettre du prenom + 6 premières lettres du nom + \"_\"\n						*/\n						if(isset($utilisateur['login']))\n							$login = $utilisateur['login'];\n						else\n							$login = preg_replace(\"/[^A-Z]+/\", \"\",substr($u->getPrenom(),0,1))\n								   . preg_replace(\"/[^A-Z]+/\", \"\", substr($u->getNom(),0,6))\n								   . \"_\";\n						$u->setUsername(strtolower($login));\n\n						/**\n						* Si le mdp est spécifié, on le renseigne, sinon on l'initialise par une valeur aléatoire\n						*/\n						if(isset($utilisateur['mdp']))\n							$u->setPassword($utilisateur['mdp']);\n						else\n							$u->setPassword('12345');//uniqid();\n					}\n					dump($users);\n					// Recapitulatif\n\n				} else {\n					$req->getSession()->getFlashBag()->add('err',\"Les champs nom, prenom et membre, doivent être dans le fichier.\");\n				}\n			} else {\n				$req->getSession()->getFlashBag()->add('err',\"Le fichier n'est pas valide\");\n			}\n\n			/*\n				die();\n\n\n				$fields = array_map('strtolower',fgetcsv($point));\n\n				/*\n				* Vérifie que les champs nom, prenom et membre sont présent\n				*\n				if(in_array('nom', $fields) && in_array('prenom', $fields) && in_array('membre', $fields)) {\n					$fields = array_flip($fields);\n\n					$em = $this->getDoctrine()->getManager();\n\n					$repository = $em->getRepository('LogiCorpoBundle:Rang');\n					$rang = [\n						0 => $repository->findOneBySlug('NON_MEMBRE'),\n						1 => $repository->findOneBySlug('MEMBRE')\n					];\n					$resume = [];\n					// Pour chaque lignes du fichiers\n					while($ligne = fgetcsv($point)) {\n						$user = new Utilisateur();\n\n						$key_rang = intval($ligne[$fields['membre']]);\n						\n						$user->setNom($ligne[$fields['nom']])\n							 ->setPrenom($ligne[$fields['prenom']])\n							 ->setRang($rang[$key_rang]);\n\n						/**\n						* Si le solde initial est spécifié, on le renseigne, sinon on l'initialise à 0\n						*\n						if(isset($fields['solde']))	 $user->setSolde(floatval($ligne[$fields['solde']]));\n						else                         $user->setSolde(0);\n\n						/**\n						* Si le login est spécifié, on le renseigne, sinon on l'initialise à :\n						* première lettre du prenom + 6 premières lettres du nom + \"_\"\n						*\n						if(isset($fields['login']))  $login = $ligne[$fields['login']];\n						else                         $login = substr($user->getPrenom(),0,1) . substr($user->getNom(),0,6) . \"_\";\n						$user->setUsername(strtolower($login));\n\n						/**\n						* Si le mdp est spécifié, on le renseigne, sinon on l'initialise par une valeur aléatoire\n						*\n						if(isset($fields['mdp'])) $mdp = $ligne[$fields['mdp']];\n						else                      $mdp = '12345';//uniqid();\n\n						$factory = $this->get('security.encoder_factory');\n						$encoder = $factory->getEncoder($user);\n						$encodeMdp = $encoder->encodePassword(\n							$mdp,\n							$user->getSalt()\n						);\n\n						$user->setPassword($encodeMdp);\n\n						$resume[]['name'] = $user;\n						$resume[]['login'] = $user->getUsername();\n						$resume[]['mdp'] = $mdp;\n\n						$em->persist($user);\n					}\n					fclose($point);\n					try {\n						dump($em->flush());\n						$req->getSession()->getFlashBag()->add('success',\"62 utilisateurs ont été créés\");\n					} catch (\\Exception $e) {\n						dump($e);\n						if(isset($e->previous)) {\n							dump($e->previous->code);\n						}\n						$req->getSession()->getFlashBag()->add('err',\"Erreur sql\");\n					}\n					\n\n				} else {\n					$req->getSession()->getFlashBag()->add('err',\"Les champs nom, prenom et membre, doivent être dans le fichier.\");\n				}\n\n			} else {\n				$req->getSession()->getFlashBag()->add('err',\"Le fichier n'est pas valide\");\n			}\n			*/\n		}\n		return $this->render('LogiCorpoBundle:Utilisateur:nouveaux.html.twig', ['form' => $form->createView(), 'max_size'=> $max_size]);\n	}\n\n	private function csv_to_array($handle, $delimiter=',')\n	{\n	    $header = NULL;\n	    $data = array();\n\n        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)\n        {\n            if(!$header)\n                $header = $row;\n            else\n                $data[] = array_combine(array_map('strtolower', $header), $row);\n        }\n        fclose($handle);\n\n	    return $data;\n	}\n\n	public function modifierAction($id, Utilisateur $user, Request $req) {\n		$form = $this->get('form.factory')->createBuilder('form', $user)\n			->add('nom', 'text')\n			->add('prenom', 'text', ['label' => 'Prénom'])\n			->add('username', 'text', ['label' => 'Login'])\n			->add('mail', 'email')\n			->add('rang', 'entity', [\n				'class' => 'LogiCorpoBundle:Rang'])\n			->add('Enregistrer', 'submit')\n			->add('Supprimer', 'submit', [\n				'attr' => ['class' => 'btn-rouge']\n			])\n			->getForm();\n\n		$form->handleRequest($req);\n\n		if($form->isValid()) {\n			if($form->get('Supprimer')->isClicked()) {\n				$this->redirect($this->generateUrl('lc_utilisateur_suppr', ['user' => $user->getId()]));\n			}\n\n			$em = $this->getDoctrine()->getManager();\n\n			$factory = $this->get('security.encoder_factory');\n			$encoder = $factory->getEncoder($user);\n			$mdp = $encoder->encodePassword(\n				$user->getPassword(),\n				$user->getSalt()\n			);\n\n			$user->setPassword($mdp);\n\n			$em->persist($user);\n			$em->flush();\n			$req->getSession()->getFlashBag()->add('success','L\\'utilisateur \"'.$user.'\" a été modifié');\n			\n			return $this->redirect($this->generateUrl('lc_utilisateur_home'));\n		}\n\n		return $this->render('LogiCorpoBundle:Utilisateur:editer.html.twig', ['form' => $form->createView()]);\n	}\n\n	public function supprimerAction($id, Utilisateur $user, Request $req) {\n		$em = $this->getDoctrine()->getManager();\n		$em->remove($user);\n		$em->flush();\n		return $this->redirect($this->generateUrl('lc_utilisateur_home'));\n	}\n\n	public function soldeAction($id, Utilisateur $user, Request $req)\n	{\n		$transaction = new Transaction();\n		$transaction->setUtilisateur($user)\n					->setMoyenPaiement('espece');\n		$form = $this->get('form.factory')->createBuilder('form', $transaction)\n			->add('type','choice',[\n				'choices' => [\n					'mouvement_carte' => 'Approvisionement de compte',\n					'remboursement'   => 'Remboursement'\n				],\n				'preferred_choices' => 'mouvement_carte',\n				'label' => 'Motif'\n			])\n			->add('montant','money')\n			->add('submit','submit', [\n				'label' => 'Débiter/Créditer'\n			])\n			->getForm();\n\n		$form->handleRequest($req);\n		\n		if($form->isValid()) {\n\n			$user->appendSolde($transaction->getMontant());\n\n			$em = $this->getDoctrine()->getManager();\n			$em->persist($transaction);\n			$em->persist($user);\n			$em->flush();\n\n			$req->getSession()->getFlashBag()->add('success','La transaction pour \"'.$user.'\" a été enregistrée');\n			return $this->redirect($this->generateUrl('lc_utilisateur_home'));\n		}\n\n		return $this->render('LogiCorpoBundle:Utilisateur:solde.html.twig', ['form' => $form->createView(), 'user' => $user]);\n	}\n}\n",
+			"file": "src/LogiCorpoBundle/Controller/UtilisateurController.php",
+			"file_size": 10740,
+			"file_write_time": 130837691737089974,
 			"settings":
 			{
-				"buffer_size": 2621,
+				"buffer_size": 10704,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Controller/CompteController.php",
+			"settings":
+			{
+				"buffer_size": 1727,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Compte/index.html.twig",
+			"settings":
+			{
+				"buffer_size": 1224,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Parametre/index.html.twig",
+			"settings":
+			{
+				"buffer_size": 589,
 				"line_ending": "Unix"
 			}
 		},
@@ -542,7 +566,23 @@
 			"file": "app/Resources/views/menu.html.twig",
 			"settings":
 			{
-				"buffer_size": 1247,
+				"buffer_size": 1261,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/public/js/angular/MainCtrl.js",
+			"settings":
+			{
+				"buffer_size": 395,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Resources/views/layout.html.twig",
+			"settings":
+			{
+				"buffer_size": 1337,
 				"line_ending": "Unix"
 			}
 		}
@@ -600,36 +640,55 @@
 	"expanded_folders":
 	[
 		"/home/corentin/Dropbox/Projets/logicorpo/site",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/app/Resources",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/app/Resources/views",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Resources",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Resources/config",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Service",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Twig",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Compte",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Parametre",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/js",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/js/angular",
 		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass"
 	],
 	"file_history":
 	[
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Resources/config/services.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/js/angular-cookies.js",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/js/angular/Directives.js",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/README.md",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/CompteController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Controller/SettingsController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/config.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/routing_dev.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_parametre.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/Resources/views/menu.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Parametre/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Produit/nouveau.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Manager/SettingsManager.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/ParametreController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/composer.json",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/AppKernel.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/services.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/routing.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Service.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Commande.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Produit.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Resources/config/services.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Service/SettingsService.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Twig/SettingsExtension.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/ProduitController.php",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/CompteController.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/layout.scss",
 		"/home/corentin/Téléchargements/ng-bs-daterangepicker-master/example/index.html",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/js/angular/MainCtrl.js",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Parametre/index.html.twig",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/Form/SettingsForm.php",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/app/Resources/views/menu.html.twig",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/js/angular/Directives.js",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_parametre.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_commande.yml",
 		"/home/corentin/Téléchargements/ng-bs-daterangepicker-master/package.json",
@@ -662,14 +721,11 @@
 		"/home/corentin/Dropbox/Projets/logicorpo/site/app/console",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/DependencyInjection/LogiCorpoExtension.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/DependencyInjection/SettingsExtension.php",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/services.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/DependencyInjection/Configuration.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/DependencyInjection/Configuration.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/SettingsBundle/SettingsBundle.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Settings/Settings.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/form.scss",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Produit/nouveau.html.twig",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/app/AppKernel.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Config.php",
 		"/home/corentin/Bureau/Nouveau document",
 		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/base.scss",
@@ -677,8 +733,6 @@
 		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/commande.scss",
 		"/home/corentin/Dropbox/Projets/logicorpo/front-end/img/icons/outcoming1.svg",
 		"/home/corentin/Dropbox/Projets/logicorpo/front-end/img/icons/close-red.svg",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/config.yml",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/routing.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_service.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_produit.yml",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/config/routing_caisse.yml",
@@ -693,7 +747,6 @@
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/SecurityController.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default/form.html.twig",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Caisse/chercher.html.twig",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/composer.json",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default/transactionTable.html.twig",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Produit/index.html.twig",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/editer.html.twig",
@@ -708,7 +761,6 @@
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/ServiceRepository.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/nouveau.html.twig",
-		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Commande.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/ProduitRepository.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Login/login.html.twig",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/UtilisateurRepository.php",
@@ -735,15 +787,7 @@
 		"/home/corentin/Dropbox/Projets/ebip/site/class/MoreValidation.php",
 		"/home/corentin/Dropbox/Projets/ebip/site/view/index.html",
 		"/home/corentin/Dropbox/Projets/ebip/site/view/industrie.html",
-		"/home/corentin/Dropbox/Projets/ebip/site/view/contact.html",
-		"/home/corentin/Dropbox/Projets/ebip/site/view/layout.html",
-		"/home/corentin/Dropbox/Projets/ebip/site/public/js/app.js",
-		"/home/corentin/Dropbox/Projets/ebip/site/view/large-screen.html",
-		"/home/corentin/Dropbox/Projets/ebip/site/view/menu.html",
-		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/index/index.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/vendor/simple-validator/simple-validator/src/SimpleValidator/Validator.php",
-		"/home/corentin/Dropbox/Projets/ebip/Maj site/local/view/contact/index.php",
-		"/home/corentin/Dropbox/Projets/ebip/site/vendor/simple-validator/simple-validator/src/SimpleValidator/SimpleValidatorException.php"
+		"/home/corentin/Dropbox/Projets/ebip/site/view/contact.html"
 	],
 	"find":
 	{
@@ -762,6 +806,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"logicorpo.set",
+			"<?",
+			"than",
+			"great",
 			")",
 			").*\\n.{",
 			"_platform",
@@ -855,24 +903,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/LogiCorpoBundle/Controller/ParametreController.php",
+					"file": "src/LogiCorpoBundle/Controller/DefaultController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 368,
+						"buffer_size": 325,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								368,
-								368
+								0,
+								0
 							]
 						],
 						"settings":
@@ -884,32 +932,180 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "composer.json",
+					"file": "src/LogiCorpoBundle/Controller/UtilisateurController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2621,
+						"buffer_size": 10704,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								900,
-								900
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/LogiCorpoBundle/Controller/CompteController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1727,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								765,
+								765
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/LogiCorpoBundle/Resources/views/Compte/index.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1224,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								278,
+								278
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/LogiCorpoBundle/Resources/views/Parametre/index.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 589,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								589,
+								589
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/Resources/views/menu.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1261,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								350,
+								350
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "web/public/js/angular/MainCtrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 395,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								395,
+								395
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -919,20 +1115,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "app/Resources/views/menu.html.twig",
+					"buffer": 7,
+					"file": "app/Resources/views/layout.html.twig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1247,
+						"buffer_size": 1337,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								885,
-								885
+								674,
+								674
 							]
 						],
 						"settings":

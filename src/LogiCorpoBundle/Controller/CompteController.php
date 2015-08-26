@@ -16,15 +16,14 @@ class CompteController extends Controller
 		$transactionRep = $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Transaction');
 		$transactions = $transactionRep->getUserHistory($this->getUser(),$limite);
 
-		$config = $this->get('logicorpo.settings');
+		$config = $this->get('settings_manager');
 
 		$canUpgrade = !$this->get('security.authorization_checker')->isGranted('ROLE_MEMBRE')
-					&& $this->getUser()->canPay($config->montantAdhesion, $config->seuil);
+					&& $this->getUser()->canPay($config->get('montantAdhesion'), $config->get('seuil'));
 
 		return $this->render('LogiCorpoBundle:Compte:index.html.twig', [
 			'transactions'    => $transactions,
-			'canUpgrade'      => $canUpgrade,
-			'montantAdhesion' => $config->montantAdhesion
+			'canUpgrade'      => $canUpgrade
 		]);
 	}
 
@@ -33,10 +32,10 @@ class CompteController extends Controller
 	 */
 	public function upgradeAction()
 	{
-		$montantAdhesion = $this->get('logicorpo.settings')->montantAdhesion;
+		$montantAdhesion = $this->get('settings_manager')->get('montantAdhesion');
 		$user = $this->getUser();
 
-		if($user->canPay($montantAdhesion, $this->get('logicorpo.settings')->seuil)) {
+		if($user->canPay($montantAdhesion, $this->get('settings_manager')->get('seuil'))) {
 			$em = $this->getDoctrine()->getManager();
 			$membre = $em->getRepository('LogiCorpoBundle:Rang')->findOneBySlug('MEMBRE');
 

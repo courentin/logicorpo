@@ -1,9 +1,10 @@
-<section class="menu" ng-class="{hidden:menu}" ng-init="menu=false">
+<section class="menu" ng-class="{hidden:!menu}" ng-controller="MenuCtrl">
+	[[menu]]
 	<div class="tools">
 		<button id="tools-logout" onclick="location.href='{{ path('logout') }}';" title="Déconnexion"></button>
 		<!--
 		<button ng-init="badge=false" ng-click="badge=!badge" id="tools-badge"><i>1</i></button>-->
-		<button id="tools-toogle-menu" ng-click="menu=!menu"></button>
+		<button id="tools-toogle-menu" ng-click="menu = !menu"></button>
 	</div>
 	<header class="user-infos">
 		<p class="user-name">{{app.user.nom | upper}} {{ app.user.prenom |title }}</p>

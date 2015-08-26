@@ -6,7 +6,7 @@
 <a href="{{path('lc_compte_mdp')}}" class="btn">Changer de mot de passe</a>
 					
 	{% if canUpgrade %}
-	<a href="{{path('lc_compte_upgrade')}}" class="btn">Devenir membre ([[ {{montantAdhesion}} | currency ]])</a>
+	<a href="{{path('lc_compte_upgrade')}}" class="btn">Devenir membre ([[ {{ get_setting('montantAdhesion') }} | currency ]])</a>
 	{% endif %}
 {% endblock%}
 {% block content %}

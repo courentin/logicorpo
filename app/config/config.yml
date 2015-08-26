@@ -96,7 +96,7 @@ dmishh_settings:
                 type: checkbox
                 options:
                     required: false
-
+                    label: Autoriser la commande en dessous du seuil
         debutService:
             validation:
                 type: time

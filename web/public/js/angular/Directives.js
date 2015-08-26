@@ -21,7 +21,6 @@ logicorpo.directive('solde', function() {
 
 logicorpo.directive('popup', function() {
 	return {
-		restrict:'E',
-		template:
+		restrict:'E'
 	};
 });
