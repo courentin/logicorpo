@@ -2,6 +2,7 @@
 namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use LogiCorpoBundle\Entity\Transaction;
 
 class TransactionRepository extends EntityRepository {
 
@@ -16,11 +17,11 @@ class TransactionRepository extends EntityRepository {
 		else $dateSelector = "";
 
 		$types = [
-			'physique' => "SELECT SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.moyenPaiement = 'espece'" . $dateSelector,
+			'physique' => "SELECT SUM(t.montant) FROM LogiCorpoBundle\Entity\Transaction\Transaction t WHERE t.moyenPaiement = 'espece'" . $dateSelector,
 			'nonDispo' => "SELECT SUM(u.solde) FROM LogiCorpoBundle:Utilisateur u",
-			'ventes'   => "SELECT SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.type IN ('achat_commande', 'frais_adhesion') " . $dateSelector,
-			'achats'   => "SELECT -SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.type = 'approvisionnement'" . $dateSelector,
-			'errCaisse'=> "SELECT SUM(t.montant) FROM LogiCorpoBundle:Transaction t WHERE t.type = 'erreur_caisse'" . $dateSelector
+			'ventes'   => "SELECT SUM(t.montant) FROM LogiCorpoBundle\Entity\Transaction\Transaction t WHERE t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionCommande OR t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionFraisAdhesion " . $dateSelector,
+			'achats'   => "SELECT -SUM(t.montant) FROM LogiCorpoBundle\Entity\Transaction\Transaction t WHERE t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionApprovisionnement " . $dateSelector,
+			'errCaisse'=> "SELECT SUM(t.montant) FROM LogiCorpoBundle\Entity\Transaction\Transaction t WHERE t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionErreurCaisse " . $dateSelector
 		];
 
 		foreach ($types as $type => $dql) {
@@ -55,7 +56,10 @@ class TransactionRepository extends EntityRepository {
 		$query = $this->createQueryBuilder('t')
 				      ->where('t.utilisateur = :utilisateur')
 				      ->setParameter('utilisateur',$u)
-				      ->andWhere("t.type NOT IN ('mouvement_banque', 'approvisionnement', 'erreur_caisse')")
+				      ->andWhere("t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionCommande
+				      		   OR t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionCompte
+				    		   OR t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionRemboursement
+				    		   OR t INSTANCE OF LogiCorpoBundle\Entity\Transaction\TransactionFraisAdhesion")
 				      ->orderBy('t.date', 'DESC')
 				      ->setMaxResults($limit)
 				      ->getQuery();

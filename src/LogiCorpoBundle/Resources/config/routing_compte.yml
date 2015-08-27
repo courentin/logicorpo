@@ -1,6 +1,6 @@
 lc_compte_home:
     path:     /
-    defaults: { _controller: LogiCorpoBundle:Compte:index }
+    defaults: { _controller: LogiCorpoBundle:Compte:index, limite: 25 }
 
 lc_compte_mdp:
     path:     /edit-mdp

@@ -60,9 +60,9 @@ class Commande
     private $utilisateur;
 
     /**
-     * @var \Transactionn
+     * @var LogiCorpoBundle\Entity\Transaction\TransactionCommande
      *
-     * @ORM\ManyToOne(targetEntity="Transaction")
+     * @ORM\ManyToOne(targetEntity="LogiCorpoBundle\Entity\Transaction\TransactionCommande")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_transaction", referencedColumnName="id_transaction")
      * })

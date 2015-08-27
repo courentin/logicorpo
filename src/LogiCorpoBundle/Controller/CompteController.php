@@ -10,10 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CompteController extends Controller
 {
-	public function indexAction()
+	public function indexAction($limite = 25)
 	{
-		$limite = 25;
-		$transactionRep = $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Transaction');
+		$transactionRep = $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Transaction\Transaction');
 		$transactions = $transactionRep->getUserHistory($this->getUser(),$limite);
 
 		$config = $this->get('settings_manager');
@@ -42,9 +41,8 @@ class CompteController extends Controller
 			$user->appendSolde(-$montantAdhesion);
 			$user->setRang($membre);
 
-			$transaction = new Transaction();
-			$transaction->setType('frais_adhesion')
-						->setUtilisateur($user)
+			$transaction = new TransactionFraisAdhesion();
+			$transaction->setUtilisateur($user)
 						->setMontant($montantAdhesion)
 						->setMoyenPaiement('compte');
 			$em->persist($transaction);

@@ -17,7 +17,7 @@
 			<td>{{transaction.id}}</td>
 			<td>{{transaction.date | date('d/m à H\\hi')}}</td>
 			<td>{{transaction.utilisateur}}</td>
-			<td>{{transaction.viewType}}</td>
+			<td>{{transaction.type}}</td>
 			<td align="right">[[ {{transaction.montant}} | currency ]]</td>
 			{% if is_granted('ROLE_PRESIDENT') %}
 			<td align="center"><a href="{{path('lc_caisse_transaction_corriger',{'id': transaction.id})}}"><img title="Corriger" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>

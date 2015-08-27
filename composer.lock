@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmishh/SettingsBundle.git",
-                "reference": "44d60cfb7d8222fbb3317c0944485ed49d9bd181"
+                "reference": "dd8e9f54561b5e3f2d5c853e5455134b3e98a236"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmishh/SettingsBundle/zipball/44d60cfb7d8222fbb3317c0944485ed49d9bd181",
-                "reference": "44d60cfb7d8222fbb3317c0944485ed49d9bd181",
+                "url": "https://api.github.com/repos/dmishh/SettingsBundle/zipball/dd8e9f54561b5e3f2d5c853e5455134b3e98a236",
+                "reference": "dd8e9f54561b5e3f2d5c853e5455134b3e98a236",
                 "shasum": ""
             },
             "require": {
@@ -30,6 +30,7 @@
                 "symfony/validator": "~2.1,!=2.5.0"
             },
             "require-dev": {
+                "doctrine/orm": "<2.5",
                 "mockery/mockery": "0.9.*",
                 "phpunit/phpunit": "~4.6"
             },
@@ -74,7 +75,7 @@
                 "config",
                 "configuration"
             ],
-            "time": "2015-06-14 13:24:56"
+            "time": "2015-08-24 04:11:53"
         },
         {
             "name": "doctrine/annotations",
@@ -1578,25 +1579,29 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.20.0",
+            "version": "v1.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844"
+                "reference": "ca8d3aa90b6a01c82e07909fe815d6b443e75a23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
-                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ca8d3aa90b6a01c82e07909fe815d6b443e75a23",
+                "reference": "ca8d3aa90b6a01c82e07909fe815d6b443e75a23",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.7"
             },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.20-dev"
+                    "dev-master": "1.21-dev"
                 }
             },
             "autoload": {
@@ -1631,7 +1636,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-08-12 15:56:39"
+            "time": "2015-08-26 08:58:31"
         }
     ],
     "packages-dev": [

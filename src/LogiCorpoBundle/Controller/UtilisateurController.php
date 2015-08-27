@@ -67,32 +67,6 @@ class UtilisateurController extends Controller
 		return $this->render('LogiCorpoBundle:Utilisateur:nouveau.html.twig', ['form' => $form->createView()]);
 	}
 
-	/*
-	 * Sauvegarde un nouvel utilisateur valide en bdd
-	 */
-	private function saveUser(Utilisateur $user) {
-
-		$em = $this->getDoctrine()->getManager();
-
-		$encoder = $this->get('security.encoder_factory')->getEncoder($user);
-		$mdp = $encoder->encodePassword(
-			$user->getPassword(),
-			$user->getSalt()
-		);
-
-		$user->setPassword($mdp);
-
-		if($user->getSolde() > 0) {
-			$transaction = new Transaction();
-			$transaction->setType('mouvement_carte')
-						->setMontant($user->getSolde())
-						->setUtilisateur($user)
-						->setMoyenPaiement('compte');
-			$em->persist($transaction);
-		}
-
-		$em->persist($user);
-	}
 
 	public function nouveauListeAction(Request $req, $max_size = 10) {
 		/*
@@ -187,6 +161,32 @@ class UtilisateurController extends Controller
 	}
 
 	/*
+	 * Sauvegarde un nouvel utilisateur valide en bdd
+	 */
+	private function saveUser(Utilisateur $user) {
+
+		$em = $this->getDoctrine()->getManager();
+
+		$encoder = $this->get('security.encoder_factory')->getEncoder($user);
+		$mdp = $encoder->encodePassword(
+			$user->getPassword(),
+			$user->getSalt()
+		);
+
+		$user->setPassword($mdp);
+
+		if($user->getSolde() > 0) {
+			$transaction = new TransactionCompte();
+			$transaction->setUtilisateur($user)
+						->setMontant($user->getSolde());
+
+			$em->persist($transaction);
+		}
+
+		$em->persist($user);
+	}
+
+	/*
 	 * Permet de convertir un fichier csv en tableau
 	 */
 	private function csv_to_array($handle, $delimiter=',')
@@ -257,10 +257,7 @@ class UtilisateurController extends Controller
 
 	public function soldeAction($id, Utilisateur $user, Request $req)
 	{
-		$transaction = new Transaction();
-		$transaction->setUtilisateur($user)
-					->setMoyenPaiement('espece');
-		$form = $this->get('form.factory')->createBuilder('form', $transaction)
+		$form = $this->get('form.factory')->createBuilder('form')
 			->add('type','choice',[
 				'choices' => [
 					'mouvement_carte' => 'Approvisionement de compte',
@@ -278,8 +275,18 @@ class UtilisateurController extends Controller
 		$form->handleRequest($req);
 		
 		if($form->isValid()) {
+			$type = $form->get('type');
+			if($type == "mouvement_carte") {
+				$transaction = new Transaction\TransactionCompte();
+				$transaction->setMontant($form->get('montant')->getData());
+			}
+			else {
+				$transaction = new Transaction\TransactionRemboursement();
+				$transaction->setMontant($form->get('montant')->getData());
+			}
+			$transaction->setUtilisateur($user);
 
-			$user->appendSolde($transaction->getMontant());
+			$user->addSolde($transaction->getMontant());
 
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($transaction);
@@ -318,9 +325,8 @@ class UtilisateurController extends Controller
 			$user->subSolde($montantAdhesion)
 				 ->setRang($em->getReference('LogiCorpoBundle:Rang','MEMBRE'));
 
-			$transaction = new Transaction();
-			$transaction->setType('frais_adhesion')
-						->setMoyenPaiement($moyenPaiement)
+			$transaction = new Transaction\TransactionFraisAdhesion();
+			$transaction->setMoyenPaiement($moyenPaiement)
 						->setMontant($montantAdhesion)
 						->setUtilisateur($user);
 			$em->persist($transaction);

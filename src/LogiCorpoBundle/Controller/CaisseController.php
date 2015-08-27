@@ -16,7 +16,7 @@ class CaisseController extends Controller
 {
 	public function indexAction($max = 25)
 	{
-		$rep = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction');
+		$rep = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction\Transaction');
 		$query = $rep->createQueryBuilder('t')
 					 ->orderBy('t.date','DESC')
 					 ->setMaxResults($max)
@@ -32,7 +32,7 @@ class CaisseController extends Controller
 	}
 
 	public function jsonSoldesPeriodAction($from, $step) {
-		$rep = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction');
+		$rep = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction\Transaction');
 		$result = $rep->getSoldesPeriod(new \DateInterval('P' . $step), new \DateTime($from), new \DateTime());
 
 		$response = new JsonResponse();
@@ -47,7 +47,7 @@ class CaisseController extends Controller
 		$transaction->setUtilisateur($this->getUser())
 					->setMoyenPaiement('espece');
 		$form = $this->get('form.factory')->createBuilder('form', $transaction)
-			->add('type', 'choice', [
+			->add('type_transaction', 'choice', [
 				'choices' => [
 					'mouvement_banque' => 'Mouvement banque',
 					'erreur_caisse'    => 'Erreur de caisse'
@@ -112,7 +112,7 @@ class CaisseController extends Controller
 		$form->handleRequest($req);
 
 		if($form->isValid()) {
-			$repository = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction');
+			$repository = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction\Transaction');
 			$query = $repository->createQueryBuilder('t')
 								->orderBy('t.date');
 			
@@ -132,7 +132,7 @@ class CaisseController extends Controller
 						  ->setParameter('user',$user);
 				}
 				if($type = $form->get('type')->getData()) {
-					$query->andWhere('t.type = :type')
+					$query->andWhere('t INSTANCE OF :type')
 						  ->setParameter('type',$type);
 				}
 			}
@@ -145,7 +145,7 @@ class CaisseController extends Controller
 		return $this->render('LogiCorpoBundle:Caisse:chercher.html.twig', ['form' => $form->createView()]);
 	}
 
-	public function corrigerAction($id, Transaction $transaction, Request $req) {
+	public function corrigerAction($id, Transaction\Transaction $transaction, Request $req) {
 		$form = $this->createFormBuilder($transaction)
 					 ->add('utilisateur', 'text', [
 					 	'data' => $transaction->getUtilisateur(),
@@ -160,7 +160,8 @@ class CaisseController extends Controller
 							'achat_commande'   => 'Achat/Commande',
 							'remboursement'    => 'Remboursement'
 						],
-						'data' => $transaction->getType()
+						'data' => $transaction->getType(),
+						'disabled' => true
 					])
 					 ->add('montant', 'money')
 					 ->add('corriger', 'submit')

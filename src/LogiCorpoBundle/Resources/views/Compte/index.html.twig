@@ -35,8 +35,8 @@
 			{% for transaction in transactions %}
 			<tr>
 				<td>{{transaction.date | date('d/m à H\\hi')}}</td>
-				<td>{{transaction.viewType}}</td>
-				<td>[[ {{transaction.montant}} | currency ]]</td>
+				<td>{{transaction.type}}</td>
+				<td>[[ {{transaction.userMontant}} | currency ]]</td>
 			</tr>
 			{% endfor %}
 		</tbody>
