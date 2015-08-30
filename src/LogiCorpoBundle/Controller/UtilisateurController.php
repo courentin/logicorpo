@@ -121,20 +121,12 @@ class UtilisateurController extends Controller
 						*/
 						if(isset($utilisateur['solde']))
 							$u->setSolde(floatval($utilisateur['solde']));
-						else
-							$u->setSolde(0);
 
 						/**
-						* Si le login est spécifié, on le renseigne, sinon on l'initialise à :
-						* première lettre du prenom + 6 premières lettres du nom + "_"
+						* Si le login est spécifié, on le renseigne
 						*/
 						if(isset($utilisateur['login']))
-							$login = $utilisateur['login'];
-						else
-							$login = preg_replace("/[^A-Z]+/", "",substr($u->getPrenom(),0,1))
-								   . preg_replace("/[^A-Z]+/", "", substr($u->getNom(),0,6))
-								   . "_";
-						$u->setUsername(strtolower($login));
+							$u->setUsername(strtolower($utilisateur['login']));
 
 						/**
 						* Si le mdp est spécifié, on le renseigne, sinon on l'initialise par une valeur aléatoire

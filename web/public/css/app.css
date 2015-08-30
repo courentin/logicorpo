@@ -556,13 +556,11 @@ CONTENU DE LA PAGE
     .commande .commande-infos:before {
       content: '';
       position: absolute;
-      left: 17px;
-      top: 50%;
-      transform: translateY(-50%);
+      left: 0;
+      top: 0;
       background: #27ae60;
-      width: 5px;
-      height: 70%;
-      border-radius: 15px;
+      width: 6px;
+      height: 100%;
       display: block; }
     .commande .commande-infos .commande-user, .commande .commande-infos .commande-tools, .commande .commande-infos .commande-price {
       display: inline-block; }

@@ -70,6 +70,12 @@ class Commande
     private $transaction;
 
     /**
+     * @var ProduitsCommande
+     * @ORM\OneToMany(targetEntity="ProduitsCommande", mappedBy="commande")
+     */
+    private $produits;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -77,6 +83,10 @@ class Commande
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getProduits() {
+        return $this->produits;
     }
 
     /**
@@ -154,7 +164,7 @@ class Commande
      * @param \LogiCorpoBundle\Entity\Transaction $transaction
      * @return Commande
      */
-    public function setTransaction(\LogiCorpoBundle\Entity\Transaction $transaction = null)
+    public function setTransaction(\LogiCorpoBundle\Entity\Transaction\Transaction $transaction = null)
     {
         $this->transaction = $transaction;
 
@@ -172,14 +182,14 @@ class Commande
     }
 
 
-    public function addTransaction(Transaction $transaction)
+    public function addTransaction(\LogiCorpoBundle\Entity\Transaction\Transaction $transaction)
     {
         $this->transactions[] = $transaction;
 
         return $this;
     }
 
-    public function removeTransaction(Transaction $transaction)
+    public function removeTransaction(\LogiCorpoBundle\Entity\Transaction\Transaction $transaction)
     {
         $this->transaction->removeElement($transaction);
     }

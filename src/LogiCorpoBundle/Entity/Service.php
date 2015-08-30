@@ -59,10 +59,10 @@ class Service
      *
      * @ORM\ManyToOne(targetEntity="Utilisateur")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="caissier", referencedColumnName="id_utilisateur", nullable=false)
+     *   @ORM\JoinColumn(name="caissier", referencedColumnName="id_utilisateur")
      * })
      */
-    private $caissier;
+    private $caissier = null;
 
     /**
      * @var \Commande

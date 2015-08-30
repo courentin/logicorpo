@@ -7,11 +7,21 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ProduitsCommande
  *
- * @ORM\Table(name="produits_commande",  uniqueConstraints={@ORM\UniqueConstraint(name="produits_commande_id_commande_id_produit_id_supplement_key", columns={"id_commande", "id_produit", "id_supplement"})}, indexes={@ORM\Index(name="IDX_91DC5EAFA4D0F31E", columns={"id_supplement"}), @ORM\Index(name="IDX_91DC5EAF3E314AE8", columns={"id_commande"}), @ORM\Index(name="IDX_91DC5EAFF7384557", columns={"id_produit"})})
  * @ORM\Entity
+ * @ORM\Table(name="produits_commande", 
+ *   uniqueConstraints = {
+ *    @ORM\UniqueConstraint(name="produits_commande_id_commande_id_produit_id_supplement_key",
+ *                          columns={"id_commande", "id_produit", "id_supplement"})
+ *   },
+ *   indexes = {
+ *    @ORM\Index(name="IDX_91DC5EAF3E314AE8", columns={"id_commande"}),
+ *    @ORM\Index(name="IDX_91DC5EAFF7384557", columns={"id_produit"})
+ *   }
+ * )
  */
-class ProduitsCommande
+class ProduitsCommande extends Produit
 {
+
     /**
      * @var integer
      *
@@ -31,28 +41,9 @@ class ProduitsCommande
 
     /**
      * @var \Commande
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Commande")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_commande", referencedColumnName="id_commande")
-     * })
+     * @ORM\ManyToOne(targetEntity="Commande", inversedBy="produits")
      */
     private $commande;
-
-    /**
-     * @var \Produit
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Produit")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="id_produit")
-     * })
-     */
-    private $produit;
-
 
     /**
      * Set quantite
@@ -63,7 +54,6 @@ class ProduitsCommande
     public function setQuantite($quantite)
     {
         $this->quantite = $quantite;
-
         return $this;
     }
 
@@ -86,7 +76,6 @@ class ProduitsCommande
     public function setSupplement(\LogiCorpoBundle\Entity\Supplement $supplement)
     {
         $this->supplement = $supplement;
-
         return $this;
     }
 
@@ -109,7 +98,6 @@ class ProduitsCommande
     public function setCommande(\LogiCorpoBundle\Entity\Commande $commande)
     {
         $this->commande = $commande;
-
         return $this;
     }
 
@@ -132,7 +120,6 @@ class ProduitsCommande
     public function setProduit(\LogiCorpoBundle\Entity\Produit $produit)
     {
         $this->produit = $produit;
-
         return $this;
     }
 

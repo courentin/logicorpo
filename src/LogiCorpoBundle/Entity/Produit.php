@@ -12,16 +12,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(
  *  repositoryClass="LogiCorpoBundle\Entity\ProduitRepository"
  * )
+ * @ORM\InheritanceType("JOINED")
  */
 class Produit
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_produit", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="produit_id_produit_seq", allocationSize=1, initialValue=1)
+     * @ORM\Column(name="id_produit", type="integer", nullable=false)
      */
     private $id;
 

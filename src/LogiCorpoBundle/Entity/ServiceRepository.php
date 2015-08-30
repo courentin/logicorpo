@@ -11,4 +11,10 @@ class ServiceRepository extends EntityRepository {
 		$query->setParameter('end', date_format($date,"Y-m-d")." 23:59:59");
 		return $query->getResult();
 	}
+
+	public function getNextServices(Utilisateur $user, $marge = 30) {
+		$query = $this->getEntityManager()->createQuery("SELECT s FROM LogiCorpoBundle:Service s WHERE CURRENT_TIMESTAMP() BETWEEN s.debutCommande AND s.fin AND (s.caissier IS NULL OR s.caissier = :caissier)");
+		$query->setParameter('caissier', $user);
+		return $query->getResult();
+	}
 }

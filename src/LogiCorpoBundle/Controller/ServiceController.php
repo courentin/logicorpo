@@ -18,17 +18,23 @@ class ServiceController extends Controller
 	{
 		//lister tout les services d'ajd
 		$em = $this->getDoctrine()->getManager();
-		$repository = $em->getRepository('LogiCorpoBundle:Service');
+		$serviceRep = $em->getRepository('LogiCorpoBundle:Service');
 
-		$services = $repository->atDay();
+		$services = $serviceRep->getNextServices($this->getUser());
 
 		return $this->render('LogiCorpoBundle:Service:effectuerChoice.html.twig', ['services' => $services]);
 	}
 
 	public function effectuerAction($id, Service $service)
 	{
-
-		return $this->render('LogiCorpoBundle:Service:effectuer.html.twig',['service' => $service]);
+		$em = $this->getDoctrine()->getManager();
+		$query = $em->createQuery("SELECT c FROM LogiCorpoBundle:Commande c JOIN LogiCorpoBundle:ProduitsCommande p WHERE c.service = :service")
+			->setParameter('service', $service);
+			dump($query->getResult());
+		return $this->render('LogiCorpoBundle:Service:effectuer.html.twig',[
+			'service'   => $service,
+			'commandes' => $query->getResult()
+		]);
 	}
 
 	public function effectuerApiAction($id, Service $service) {

@@ -1,5 +1,5 @@
 {% extends '::layout.html.twig' %}
-{% set subtitle = 'Service de ' ~ (service.debut | date("h\\hi")) %}
+{% set subtitle = 'Service de ' ~ (service.debut | date("H\\hi")) %}
 {% block head %}
 {{parent()}}
 <h2></h2>
@@ -7,39 +7,31 @@
 {% block content %}
 
 {% for commande in service.commandes %}
-<div class="commande">
-	<div class="user-infos">
-		<p class="user-name">{{ commande.utilisateur.nom | upper }} {{ commande.utilisateur.prenom | title}}</p>
-		<a href="#" class="solde:{{commande.utilisateur.solde}}"></a>
-		<p class="commande-options">
-			<a href="#">modifier</a>
-			<a href="#">supprimer</a>
-		</p>
-	</div>
 
-	<div class="commande-produits">
-		<div class="commande-produit">
-			<i></i>
-			<div class="commande-produit-nom">
-				<span></span>
-				<ul>
-					<li ng-repeat="supplement in produit.supplements">[[supplement]]</li>
-				</ul>
+
+	<div class="commande">
+		<div class="commande-infos">
+			<div class="commande-user">
+				{{ commande.utilisateur }}
+				<a href="#" class="user-solde "{{ commande.utilisateur.solde }}</a>
 			</div>
+			<div class="commande-tools">
+				<a><img src="img/icons/modifier.svg"></a>
+				<a><img src="img/icons/money.svg"></a>
+			</div>
+			<div class="commande-price">3,00 €</div>
 		</div>
+		<div class="commande-products">
+			<ul>
+				{% for produit in commande.produits %}
+				<li><span>{{ produit.quantite }}</span>{{ produit.produit.libelle }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+			<button class="commande-toggle">
+				<img src="img/icons/down.svg">
+			</button>
 	</div>
-
-	<div class="commande-actions">
-		<!-- ✓ -->
-		<button ng-click="commande.changeState('P')" title="Prête">P</button>
-		<button ng-click="commande.changeState('S')" title="Servie">S</button>
-	</div>
-
-	<div class="commande-prix">
-		<span>[[commande.prix | number:2]]€</span>
-		<button>Régler</button>
-	</div>
-</div>
 {% endfor %}
 
 {% endblock %}

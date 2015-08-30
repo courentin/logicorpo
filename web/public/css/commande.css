@@ -1,21 +1,21 @@
 /*
 Error: Undefined variable: "$vert".
-        on line 22 of front-end/sass/commande.scss
+        on line 21 of front-end/sass/commande.scss
 
+16: 		&:before {
 17: 			content:'';
 18: 			position: absolute;
-19: 			left: 17px;
-20: 			top:50%;
-21: 			transform:translateY(-50%);
-22: 			background: $vert;
-23: 			width: 5px;
-24: 			height: 70%;
-25: 			border-radius: 15px;
-26: 			display: block;
-27: 		}
+19: 			left: 0;
+20: 			top:0;
+21: 			background: $vert;
+22: 			width: 6px;
+23: 			height: 100%;
+24: 			display: block;
+25: 		}
+26: 
 
 Backtrace:
-front-end/sass/commande.scss:22
+front-end/sass/commande.scss:21
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/script/tree/variable.rb:49:in `_perform'
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/script/tree/node.rb:50:in `perform'
 /var/lib/gems/1.9.1/gems/sass-3.4.14/lib/sass/tree/visitors/perform.rb:394:in `visit_prop'
@@ -89,4 +89,4 @@ front-end/sass/commande.scss:22
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$vert\".\A         on line 22 of front-end/sass/commande.scss\A \A 17: 			content:'';\A 18: 			position: absolute;\A 19: 			left: 17px;\A 20: 			top:50%;\A 21: 			transform:translateY(-50%);\A 22: 			background: $vert;\A 23: 			width: 5px;\A 24: 			height: 70%;\A 25: 			border-radius: 15px;\A 26: 			display: block;\A 27: 		}"; }
+  content: "Error: Undefined variable: \"$vert\".\A         on line 21 of front-end/sass/commande.scss\A \A 16: 		&:before {\A 17: 			content:'';\A 18: 			position: absolute;\A 19: 			left: 0;\A 20: 			top:0;\A 21: 			background: $vert;\A 22: 			width: 6px;\A 23: 			height: 100%;\A 24: 			display: block;\A 25: 		}\A 26: "; }
