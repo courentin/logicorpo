@@ -61,7 +61,7 @@ class UtilisateurController extends Controller
 
 			$req->getSession()->getFlashBag()->add('success','L\'utilisateur "'.$user.'" a été crée');
 			
-			return $this->redirect($this->generateUrl('lc_utilisateur_home'));
+			return $this->redirectToRoute('lc_utilisateur_home');
 		}
 
 		return $this->render('LogiCorpoBundle:Utilisateur:nouveau.html.twig', ['form' => $form->createView()]);
@@ -216,7 +216,7 @@ class UtilisateurController extends Controller
 
 		if($form->isValid()) {
 			if($form->get('Supprimer')->isClicked()) {
-				$this->redirect($this->generateUrl('lc_utilisateur_suppr', ['user' => $user->getId()]));
+				$this->redirectToRoute('lc_utilisateur_suppr', ['user' => $user->getId()]);
 			}
 
 			$em = $this->getDoctrine()->getManager();
@@ -244,7 +244,7 @@ class UtilisateurController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$em->remove($user);
 		$em->flush();
-		return $this->redirect($this->generateUrl('lc_utilisateur_home'));
+		return $this->redirectToRoute('lc_utilisateur_home');
 	}
 
 	public function soldeAction($id, Utilisateur $user, Request $req)
@@ -286,7 +286,7 @@ class UtilisateurController extends Controller
 			$em->flush();
 
 			$req->getSession()->getFlashBag()->add('success','La transaction pour "'.$user.'" a été enregistrée');
-			return $this->redirect($this->generateUrl('lc_utilisateur_home'));
+			return $this->redirectToRoute('lc_utilisateur_home');
 		}
 
 		return $this->render('LogiCorpoBundle:Utilisateur:solde.html.twig', ['form' => $form->createView(), 'user' => $user]);

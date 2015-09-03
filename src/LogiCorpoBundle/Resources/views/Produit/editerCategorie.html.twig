@@ -1,0 +1,7 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Editer une catégorie' %}
+
+{% block content %}
+	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+	{{ form(form, { 'attr': {'class': 'form'} }) }}
+{% endblock %}

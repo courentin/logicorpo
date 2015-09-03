@@ -64,9 +64,7 @@ class Categorie
 
 
 	public function getLibellePluriel() {
-		if(isset($this->libellePluriel) && !empty($this->libellePluriel))
-			return $this->libellePluriel;
-		return $this->libelle . 's';
+		return $this->libellePluriel;
 	}
 
 	public function setLibellePluriel($libellePluriel) {

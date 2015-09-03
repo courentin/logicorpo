@@ -4,6 +4,7 @@
 {{parent()}}
 <a href="{{path('lc_produit_new')}}" class="btn">Nouveau produit</a>
 <a href="#" class="btn">Nouveau supplément</a>
+<a href="{{ path('lc_produit_new_categorie') }}" class="btn">Nouvelle catégorie</a>
 <a href="#" class="btn">Réapprovisionnement</a>
 {% endblock%}
 {% block content %}
@@ -13,16 +14,27 @@
 			<tr>
 				<td>Libellé</td>
 				<td>Prix de vente</td>
+				
+				{% if is_granted('ROLE_PRESIDENT') %}
 				<td>Taux de marge</td>
+				{% endif %}
+
 				<td>Stock</td>
+				
+				{% if is_granted('ROLE_SECRETAIRE') %}
 				<td width="30px">Action</td>
+				{% endif %}
+
 			</tr>
 		</thead>
 
 		{% for categorie in categories %}
 		<thead>
 			<tr>
-				<td colspan="4">{{categorie.libellePluriel}}</td>
+				<td>{{categorie.libellePluriel}}
+				{% if is_granted('ROLE_SECRETAIRE') %}
+				<a href="{{ path('lc_produit_edit_categorie', { id: categorie.id }) }}"><img title="Editer" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>
+				{% endif %}
 			</tr>
 		</thead>
 		<tbody>
@@ -30,8 +42,11 @@
 				<tr>
 					<td>{{ produit.libelle }}</td>
 					<td>[[ {{produit.prixVente}} | currency ]]</td>
+				
+				{% if is_granted('ROLE_PRESIDENT') %}
 					<td>{{ (produit.tauxMarge is not null) ? produit.tauxMarge ~ ' %' }}</td>
-					
+				{% endif %}
+
 					<td>{% if produit.dispo %}
 						{% if produit.stock!=null %}
 							{{produit.stock}}
@@ -42,7 +57,11 @@
 							Non
 						{% endif %}
 					</td>
+					
+					{% if is_granted('ROLE_SECRETAIRE') %}
 					<td align="center"><a href="#"><img title="Editer" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>
+					{% endif %}
+				
 				</tr>
 			{% endfor %}
 
@@ -51,7 +70,7 @@
 		{% endfor %}
 		<thead>
 			<tr>
-				<td colspan="4">Suppléments</td>
+				<td>Suppléments</td>
 			</tr>
 		</thead>
 			<tbody>

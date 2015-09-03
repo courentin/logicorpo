@@ -3,9 +3,19 @@ lc_produit_home:
     defaults: { _controller: LogiCorpoBundle:Produit:index }
 
 lc_produit_new:
-    path:     /nouveau
+    path:     /new
     defaults: { _controller: LogiCorpoBundle:Produit:nouveau }
 
 lc_produit_list:
     path:     /list
     defaults: { _controller: LogiCorpoBundle:Produit:jsonList }
+
+lc_produit_new_categorie:
+    path:     /categorie/new
+    defaults: { _controller: LogiCorpoBundle:Produit:nouvelleCategorie }
+
+lc_produit_edit_categorie:
+    path:     /categorie/edit/{id}
+    defaults: { _controller: LogiCorpoBundle:Produit:editerCategorie }
+    requirements:
+        id: \d+

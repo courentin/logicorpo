@@ -3,17 +3,17 @@ lc_caisse_home:
     defaults: { _controller: LogiCorpoBundle:Caisse:index, max: 20 }
 
 lc_caisse_transaction_nouvelle:
-    path:     /transaction/nouvelle
+    path:     /transaction/new
     defaults: { _controller: LogiCorpoBundle:Caisse:nouvelleTransaction}
 
 lc_caisse_transaction_corriger:
-    path:     /transaction/corriger/{id}
+    path:     /transaction/correct/{id}
     defaults: { _controller: LogiCorpoBundle:Caisse:corriger}
     requirements:
         id: \d+
 
 lc_caisse_transaction_chercher:
-    path:     /transaction/rechercher
+    path:     /transaction/search
     defaults: { _controller: LogiCorpoBundle:Caisse:chercher}
 
 lc_caisse_soldes_period:
