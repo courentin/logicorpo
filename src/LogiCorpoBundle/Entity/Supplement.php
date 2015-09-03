@@ -40,9 +40,9 @@ class Supplement
     private $dispo = true;
 
     /**
-     * @var decimal
+     * @var float
      *
-     * @ORM\Column(name="prix", type="decimal", precision=8, scale=2, nullable=false)
+     * @ORM\Column(name="prix", type="float", precision=8, scale=2, nullable=false)
      * @Assert\NotBlank(message="Il est nécessaire de rentrer le prix")
      * @Assert\Type(type="numeric",message = "Le prix doit être une valeur décimale.")
      */
@@ -126,6 +126,17 @@ class Supplement
     public function getPrix()
     {
         return $this->prix;
+    }
+
+    public function getDispo()
+    {
+        return $this->dispo;
+    }
+
+    public function setDispo($dispo)
+    {
+        $this->dispo = $dispo;
+        return $this;
     }
 
     public function __toString() {

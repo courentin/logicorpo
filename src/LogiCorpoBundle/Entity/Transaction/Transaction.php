@@ -18,7 +18,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *                        "erreur_caisse"     = "TransactionErreurCaisse",
  *                        "remboursement"     = "TransactionRemboursement",
  *                        "frais_adhesion"    = "TransactionFraisAdhesion"})
- * @ORM\Table(name="transactionn", indexes={@ORM\Index(name="IDX_89AE769550EAE44", columns={"id_utilisateur"}), @ORM\Index(name="IDX_89AE76953E314AE8", columns={"id_commande"})})
+ * @ORM\Table(name="transactionn", indexes={
+ *               @ORM\Index(name="transactionn_id_utilisateur_fkey",  columns={"id_utilisateur"}),
+ *               @ORM\Index(name="transactionn_id_commande_fkey", columns={"id_commande"}),
+ *               @ORM\Index(name="transactionn_id_caissier_fkey", columns={"id_caissier"})
+ * })
  *
  * @ORM\Entity(
  *  repositoryClass="LogiCorpoBundle\Entity\TransactionRepository"
@@ -70,14 +74,30 @@ class Transaction
      *
      * @ORM\ManyToOne(targetEntity="LogiCorpoBundle\Entity\Utilisateur")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id_utilisateur", nullable=false)
+     *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id_utilisateur")
      * })
-     * @Assert\NotBlank(message="L'id de l'utilisateur doit être renseigné")
      */
-    protected $utilisateur;
+    protected $utilisateur = null;
+
+    /**
+     * @var \Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="LogiCorpoBundle\Entity\Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_caissier", referencedColumnName="id_utilisateur")
+     * })
+     */
+    private $caissier = null;
 
     public function __construct() {
         $this->date = new \DateTime();
+    }
+
+    /*
+     * @Assert\True(message="La transaction doit avoir un utilisateur ou un caissier")
+     */
+    public function hasUser() {
+        return $this->utilisateur !== null || $this->caissier !== null;
     }
 
     /**

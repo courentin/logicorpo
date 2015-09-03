@@ -9,10 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Produit
  *
  * @ORM\Table(name="produit")
- * @ORM\Entity(
- *  repositoryClass="LogiCorpoBundle\Entity\ProduitRepository"
- * )
- * @ORM\InheritanceType("JOINED")
+ * @ORM\Entity
  */
 class Produit
 {
@@ -20,6 +17,7 @@ class Produit
      * @var integer
      *
      * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(name="id_produit", type="integer", nullable=false)
      */
     private $id;
@@ -41,18 +39,18 @@ class Produit
     private $stock=null;
 
     /**
-     * @var decimal
+     * @var float
      *
-     * @ORM\Column(name="prix_vente", type="decimal", precision=8, scale=2, nullable=false)
+     * @ORM\Column(name="prix_vente", type="float", precision=8, scale=2, nullable=false)
      * @Assert\Type(type="numeric", message = "Le prix de vente doit être de type numérique")
      * @Assert\NotBlank(message="Le prix de vente doit être renseigné")
      */
     private $prixVente;
 
     /**
-     * @var decimal
+     * @var float
      *
-     * @ORM\Column(name="prix_achat", type="decimal", precision=8, scale=2, nullable=true)
+     * @ORM\Column(name="prix_achat", type="float", precision=8, scale=2, nullable=true)
      * @Assert\Type(type="numeric", message = "Le prix d'achat doit être de type numérique")
      */
     private $prixAchat;
@@ -74,12 +72,10 @@ class Produit
     private $dispo = true;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="categorie", type="text", nullable=false)
-     * @Assert\NotBlank(message="Il est nécessaire de renseigner la catégorie du produit.")
+     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="produits")
+     * @ORM\JoinColumn(name="categorie", referencedColumnName="id_categorie")
      */
-    private $categorie;
+    protected $categorie;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -94,14 +90,14 @@ class Produit
      *   }
      * )
      */
-    private $supplementDisponible;
+    private $supplementsDisponible;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->supplementDisponible = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->supplementsDisponible = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -261,7 +257,6 @@ class Produit
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
-
         return $this;
     }
 
@@ -276,36 +271,22 @@ class Produit
     }
 
     /**
-     * Add supplementDisponible
-     *
-     * @param \LogiCorpoBundle\Entity\Supplement $supplementDisponible
-     * @return Produit
-     */
-    public function addSupplementDisponible(\LogiCorpoBundle\Entity\Supplement $supplementDisponible)
-    {
-        $this->supplementDisponible[] = $supplementDisponible;
-
-        return $this;
-    }
-
-    /**
-     * Remove supplementDisponible
-     *
-     * @param \LogiCorpoBundle\Entity\Supplement $supplementDisponible
-     */
-    public function removeSupplementDisponible(\LogiCorpoBundle\Entity\Supplement $supplementDisponible)
-    {
-        $this->supplementDisponible->removeElement($supplementDisponible);
-    }
-
-    /**
      * Get supplementDisponible
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getSupplementDisponible()
+    public function getSupplementsDisponible()
     {
-        return $this->supplementDisponible;
+        return $this->supplementsDisponible;
+    }
+
+    /**
+     * Retourne le taux de marge du produit, en %
+     */
+    public function getTauxMarge() {
+        if($this->prixAchat !== null)
+            return ($this->prixVente-$this->prixAchat)/($this->prixAchat*100)*100;
+        return null;
     }
 
     public function addStock($number) {

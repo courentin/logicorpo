@@ -30,9 +30,9 @@ class Rang
     private $nom;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="reduction", type="decimal", precision=8, scale=2, nullable=true)
+     * @ORM\Column(name="reduction", type="float", precision=8, scale=2, nullable=true)
      */
     private $reduction;
 

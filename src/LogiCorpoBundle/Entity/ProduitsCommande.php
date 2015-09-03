@@ -3,45 +3,58 @@
 namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProduitsCommande
- *
+ *  
  * @ORM\Entity
  * @ORM\Table(name="produits_commande", 
  *   uniqueConstraints = {
- *    @ORM\UniqueConstraint(name="produits_commande_id_commande_id_produit_id_supplement_key",
- *                          columns={"id_commande", "id_produit", "id_supplement"})
+ *    @ORM\UniqueConstraint(columns={"id_commande", "id_produit"})
  *   },
  *   indexes = {
- *    @ORM\Index(name="IDX_91DC5EAF3E314AE8", columns={"id_commande"}),
- *    @ORM\Index(name="IDX_91DC5EAFF7384557", columns={"id_produit"})
+ *    @ORM\Index(name="produits_commande_id_commande_fkey", columns={"id_commande"}),
+ *    @ORM\Index(name="produits_commande_id_produit_fkey", columns={"id_produit"})
  *   }
  * )
  */
-class ProduitsCommande extends Produit
+class ProduitsCommande
 {
+    /**
+     * @var integer
+     *
+     * @ORM\Id
+     * @ORM\Column(name="id_produit", type="integer", nullable=false)
+     */
+    private $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
+     * @Assert\GreaterThanOrEqual(value = 1)
      */
-    private $quantite;
+    private $quantite = 1;
 
-    /**
-     * @var \Supplement
-     *
-     * @ORM\OneToOne(targetEntity="Supplement")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_supplement", referencedColumnName="id_supplement")
-     * })
+    /*
+     * @ORM\ManyToMany(targetEntity="Supplement")
+     * @ORM\JoinTable(name="supplements_produits_commande",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_produit", referencedColumnName="id_produit")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_supplement", referencedColumnName="id_supplement")
+     *   }
+     * )
      */
-    private $supplement;
+    private $supplements;
 
     /**
      * @var \Commande
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Commande", inversedBy="produits")
+     * @ORM\JoinColumn(name="id_commande", referencedColumnName="id_commande", nullable=false)
      */
     private $commande;
 
@@ -67,26 +80,15 @@ class ProduitsCommande extends Produit
         return $this->quantite;
     }
 
-    /**
-     * Set supplement
-     *
-     * @param \LogiCorpoBundle\Entity\Supplement $supplement
-     * @return ProduitsCommande
-     */
-    public function setSupplement(\LogiCorpoBundle\Entity\Supplement $supplement)
-    {
-        $this->supplement = $supplement;
-        return $this;
-    }
 
     /**
      * Get supplement
      *
      * @return \LogiCorpoBundle\Entity\Supplement 
      */
-    public function getSupplement()
+    public function getSupplements()
     {
-        return $this->supplement;
+        return $this->supplements;
     }
 
     /**

@@ -1,6 +1,6 @@
 lc_homepage:
     path:     /
-    defaults: { _controller: LogiCorpoBundle:Default:index }
+    defaults: { _controller: LogiCorpoBundle:Compte:index }
 
 lc_utilisateur:
     resource: "@LogiCorpoBundle/Resources/config/routing_utilisateur.yml"

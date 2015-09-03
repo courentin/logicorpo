@@ -3,6 +3,7 @@
 {% block head %}
 {{parent()}}
 <a href="{{path('lc_produit_new')}}" class="btn">Nouveau produit</a>
+<a href="#" class="btn">Nouveau supplément</a>
 <a href="#" class="btn">Réapprovisionnement</a>
 {% endblock%}
 {% block content %}
@@ -12,22 +13,25 @@
 			<tr>
 				<td>Libellé</td>
 				<td>Prix de vente</td>
+				<td>Taux de marge</td>
 				<td>Stock</td>
 				<td width="30px">Action</td>
 			</tr>
 		</thead>
 
-		{% for categorie, lesProduits in produits %}
+		{% for categorie in categories %}
 		<thead>
 			<tr>
-				<td colspan="4">{{categorie}}</td>
+				<td colspan="4">{{categorie.libellePluriel}}</td>
 			</tr>
 		</thead>
 		<tbody>
-			{% for produit in lesProduits %}
+			{% for produit in categorie.produits %}
 				<tr>
-					<td>{{produit.libelle}}</td>
+					<td>{{ produit.libelle }}</td>
 					<td>[[ {{produit.prixVente}} | currency ]]</td>
+					<td>{{ (produit.tauxMarge is not null) ? produit.tauxMarge ~ ' %' }}</td>
+					
 					<td>{% if produit.dispo %}
 						{% if produit.stock!=null %}
 							{{produit.stock}}
@@ -42,9 +46,28 @@
 				</tr>
 			{% endfor %}
 
+
 		</tbody>
 		{% endfor %}
+		<thead>
+			<tr>
+				<td colspan="4">Suppléments</td>
+			</tr>
+		</thead>
+			<tbody>
+			{% for supplement in supplements %}
+				<tr>
+					<td>{{supplement.libelle}}</td>
+					<td>{{ (supplement.prix > 0) ?  '+ [[ ' ~ supplement.prix ~ ' | currency ]]' : 'Gratuit' }}
 
+
+						</td>
+						<td></td>
+					<td>{{ supplement.dispo ? 'Oui' : 'Non' }}</td>
+					<td align="center"><a href="#"><img title="Editer" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
 	</table>
 
 {% endblock %}

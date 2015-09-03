@@ -8,10 +8,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Service
  *
- * @ORM\Table(name="service", indexes={@ORM\Index(name="IDX_E19D9AD21F038BC2", columns={"caissier"})})
- * @ORM\Entity(
- *  repositoryClass="LogiCorpoBundle\Entity\ServiceRepository"
- * )
+ * @ORM\Table(name="service")
+ * @ORM\Entity( repositoryClass="LogiCorpoBundle\Entity\ServiceRepository")
  */
 class Service
 {
@@ -53,16 +51,6 @@ class Service
      * @ORM\Column(name="fin_commande", type="datetime", nullable=true)
      */
     private $finCommande;
-
-    /**
-     * @var \Utilisateur
-     *
-     * @ORM\ManyToOne(targetEntity="Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="caissier", referencedColumnName="id_utilisateur")
-     * })
-     */
-    private $caissier = null;
 
     /**
      * @var \Commande

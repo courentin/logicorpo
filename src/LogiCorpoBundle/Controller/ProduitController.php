@@ -13,10 +13,16 @@ class ProduitController extends Controller
 	public function indexAction()
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repository = $em->getRepository('LogiCorpoBundle:Produit');
-		$produits = $repository->getProductsByCategory();
+		$categorieRep = $em->getRepository('LogiCorpoBundle:Categorie');
+		$categories = $categorieRep->findAll();
 
-		return $this->render('LogiCorpoBundle:Produit:index.html.twig', ['produits' => $produits]);
+		$supplementRep = $em->getRepository('LogiCorpoBundle:Supplement');
+		$supplements   = $supplementRep->findAll();
+
+		return $this->render('LogiCorpoBundle:Produit:index.html.twig', [
+			'categories'    => $categories,
+			'supplements' => $supplements
+		]);
 	}
 
 	public function jsonListAction()
@@ -35,20 +41,20 @@ class ProduitController extends Controller
 	{
 		$produit = new Produit();
 		$form = $this->get('form.factory')->createBuilder('form', $produit)
-			->add('categorie', 'choice', [
-				'choices' => $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Produit')->getAllCategories(),
+			->add('categorie', 'entity', [
+				'class' => 'LogiCorpoBundle:Categorie',
 				'empty_value' => 'Choisir une catégorie'
 			])
 			->add('libelle', 'text',['label' => 'Libellé'])
 			->add('dispo', 'checkbox', ['label' => 'Disponible'])
-			->add('stock', 'number')
+			->add('stock', 'number', ['required' => false])
 			->add('prixVente','money', ['label' => 'Prix de vente'])
 			->add('prixAchat', 'money', ['label' => 'Prix d\'achat'])
 			->add('reduction', 'checkbox', ['label' => 'Appliquer les réductions'])
-			->add('supplementDisponible', 'entity', [
-				'class' => 'LogiCorpoBundle:Supplement',
+			->add('supplementsDisponible', 'entity', [
+				'class'    => 'LogiCorpoBundle:Supplement',
 				'multiple' => true,
-				'label' => 'Suppléments disponibles'
+				'label'    => 'Suppléments disponibles'
 			])
 			->add('Ajouter', 'submit')
 			->getForm();

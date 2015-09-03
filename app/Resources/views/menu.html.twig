@@ -17,7 +17,7 @@
 		<a href="{{path('lc_produit_home')}}">Produits</a>
 		{% if is_granted('ROLE_PARTICIPANT') %}
 		<a href="{{path('lc_service_do_choice')}}">Effectuer un service</a>
-		<hr/>
+		<br/>
 		<a href="{{path('lc_utilisateur_home')}}">Gestion utilisateurs</a>
 		{% endif %}
 		{% if is_granted('ROLE_SECRETAIRE') %}

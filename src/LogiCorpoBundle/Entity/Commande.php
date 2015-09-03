@@ -3,11 +3,16 @@
 namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Commande
  *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="IDX_6EEAA67D50EAE44", columns={"id_utilisateur"}), @ORM\Index(name="IDX_6EEAA67D6A25C826", columns={"id_transaction"})})
+ * @ORM\Table(name="commande", indexes={
+ *       @ORM\Index(name="commande_id_utilisateur_fkey", columns={"id_utilisateur"}),
+ *       @ORM\Index(name="commande_id_transaction_fkey", columns={"id_transaction"}),
+ *       @ORM\Index(name="commande_id_service_fkey", columns={"id_service"})
+ * })
  * @ORM\Entity
  */
 class Commande
@@ -74,6 +79,10 @@ class Commande
      * @ORM\OneToMany(targetEntity="ProduitsCommande", mappedBy="commande")
      */
     private $produits;
+
+    public function __construct() {
+        $this->produits = new ArrayCollection();
+    }
 
     /**
      * Get id
