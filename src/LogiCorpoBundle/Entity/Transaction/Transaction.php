@@ -200,6 +200,15 @@ class Transaction
         return $this->utilisateur;
     }
 
+    public function setCaissier(\LogiCorpoBundle\Entity\Utilisateur $caissier = null) {
+        $this->caissier = $caissier;
+        return $this;
+    }
+
+    public function getCaissier() {
+        return $this->caissier;
+    }
+
     public function __toString() {
         return '#'.$this->getId().' - [['.$this->getMontant().' | currency ]]';
     }

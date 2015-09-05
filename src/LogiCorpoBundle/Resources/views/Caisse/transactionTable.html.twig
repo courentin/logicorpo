@@ -2,8 +2,9 @@
 	<thead>
 		<tr>
 			<td width="20px">Ref.</td>
-			<td>Date</td>
+			<td width="165px">Date</td>
 			<td>Utilisateur</td>
+			<td>Caissier</td>
 			<td>Type</td>
 			<td>Montant</td>
 			{% if is_granted('ROLE_PRESIDENT') %}
@@ -17,6 +18,7 @@
 			<td>{{transaction.id}}</td>
 			<td>{{transaction.date | date('d/m à H\\hi')}}</td>
 			<td>{{transaction.utilisateur}}</td>
+			<td>{{transaction.caissier}}</td>
 			<td>{{transaction.type}}</td>
 			<td align="right">[[ {{transaction.montant}} | currency ]]</td>
 			{% if is_granted('ROLE_PRESIDENT') %}

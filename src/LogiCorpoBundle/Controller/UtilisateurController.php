@@ -276,7 +276,8 @@ class UtilisateurController extends Controller
 				$transaction = new Transaction\TransactionRemboursement();
 				$transaction->setMontant($form->get('montant')->getData());
 			}
-			$transaction->setUtilisateur($user);
+			$transaction->setUtilisateur($user)
+						->setCaissier($this->getUser());
 
 			$user->addSolde($transaction->getMontant());
 
@@ -320,7 +321,8 @@ class UtilisateurController extends Controller
 			$transaction = new Transaction\TransactionFraisAdhesion();
 			$transaction->setMoyenPaiement($moyenPaiement)
 						->setMontant($montantAdhesion)
-						->setUtilisateur($user);
+						->setUtilisateur($user)
+						->setCaissier($this->getUser());
 			$em->persist($transaction);
 			$em->flush();
 		

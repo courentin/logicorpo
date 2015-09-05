@@ -43,7 +43,7 @@ class CaisseController extends Controller
 
 	public function nouvelleTransactionAction(Request $req)
 	{
-		$transaction = new Transaction();
+		$transaction = new Transaction\Transaction();
 		$transaction->setUtilisateur($this->getUser())
 					->setMoyenPaiement('espece');
 		$form = $this->get('form.factory')->createBuilder('form', $transaction)

@@ -36,6 +36,8 @@
 {% if transactions is not empty %}
 <h2 class="content-title">{{max}} dernières transactions</h2>
 {{ include('LogiCorpoBundle:Caisse:transactionTable.html.twig', {'transactions':transactions}) }}
+<br/>
+<a href="{{path('lc_caisse_home', {max : max+10} )}}" class="btn">Plus ...</a>
 {% else %}
 <h2 class="content-title">Aucune transactions</h2>
 {% endif %}

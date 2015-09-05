@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LogiCorpoBundle\Entity\Produit;
 use LogiCorpoBundle\Entity\Categorie;
 use LogiCorpoBundle\Form\CategorieType;
+use LogiCorpoBundle\Form\ProduitType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +18,7 @@ class ProduitController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$categorieRep = $em->getRepository('LogiCorpoBundle:Categorie');
-		$categories = $categorieRep->findAll();
+		$categories = $categorieRep->findBy([], ["ordre" => "ASC"]);
 
 		$supplementRep = $em->getRepository('LogiCorpoBundle:Supplement');
 		$supplements   = $supplementRep->findAll();
@@ -45,24 +46,8 @@ class ProduitController extends Controller
 	*/
 	public function nouveauAction(Request $req) {
 		$produit = new Produit();
-		$form = $this->get('form.factory')->createBuilder('form', $produit)
-			->add('categorie', 'entity', [
-				'class' => 'LogiCorpoBundle:Categorie',
-				'empty_value' => 'Choisir une catégorie'
-			])
-			->add('libelle', 'text',['label' => 'Libellé'])
-			->add('dispo', 'checkbox', ['label' => 'Disponible'])
-			->add('stock', 'number', ['required' => false])
-			->add('prixVente','money', ['label' => 'Prix de vente'])
-			->add('prixAchat', 'money', ['label' => 'Prix d\'achat'])
-			->add('reduction', 'checkbox', ['label' => 'Appliquer les réductions'])
-			->add('supplementsDisponible', 'entity', [
-				'class'    => 'LogiCorpoBundle:Supplement',
-				'multiple' => true,
-				'label'    => 'Suppléments disponibles'
-			])
-			->add('Ajouter', 'submit')
-			->getForm();
+
+		$form = $this->createForm(new ProduitType($produit), $produit, ['submit' => 'Ajouter']);
 
 		$form->handleRequest($req);
 
@@ -71,7 +56,7 @@ class ProduitController extends Controller
 			$em->persist($produit);
 			$em->flush();
 
-			$req->getSession()->getFlashBag()->add('succes', 'Le produit "'.$produit.'" a bien été ajouté');
+			$req->getSession()->getFlashBag()->add('succes', "Le produit $produit a bien été ajouté");
 			return $this->redirectToRoute('lc_produit_home');
 		}
 

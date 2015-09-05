@@ -285,7 +285,7 @@ class Produit
      */
     public function getTauxMarge() {
         if($this->prixAchat !== null)
-            return ($this->prixVente-$this->prixAchat)/($this->prixAchat*100)*100;
+            return round(($this->prixVente-$this->prixAchat)/($this->prixAchat*100)*100,2);
         return null;
     }
 
