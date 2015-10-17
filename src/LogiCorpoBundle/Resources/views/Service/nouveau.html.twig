@@ -1,0 +1,6 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Nouveau service' %}
+
+{% block content %}
+{{ include('LogiCorpoBundle:Service:formService.html.twig', {'form' : form}) }}
+{% endblock %}

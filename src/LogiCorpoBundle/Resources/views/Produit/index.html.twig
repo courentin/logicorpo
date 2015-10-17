@@ -8,6 +8,7 @@
 <a href="#" class="btn">Réapprovisionnement</a>
 {% endblock%}
 {% block content %}
+<h2 class="content-title">Liste des produits</h2>
 
 	<table class="table" width="100%">
 		<thead>
@@ -59,7 +60,7 @@
 					</td>
 					
 					{% if is_granted('ROLE_SECRETAIRE') %}
-					<td align="center"><a href="#"><img title="Editer" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>
+					<td align="center"><a href="{{ path('lc_produit_edit', {id: produit.id}) }}"><img title="Editer" src="{{asset('/public/img/icons/modifier.svg')}}"></a></td>
 					{% endif %}
 				
 				</tr>

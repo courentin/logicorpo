@@ -4,6 +4,7 @@ namespace LogiCorpoBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 
 class ServiceRepository extends EntityRepository {
+
 	public function atDay($date = false) {
 		if(!$date) $date = new \DateTime("now");
 		$query = $this->getEntityManager()->createQuery('SELECT s FROM LogiCorpoBundle:Service s WHERE s.debut BETWEEN :start AND :end ');
@@ -12,9 +13,8 @@ class ServiceRepository extends EntityRepository {
 		return $query->getResult();
 	}
 
-	public function getNextServices(Utilisateur $user, $marge = 30) {
-		$query = $this->getEntityManager()->createQuery("SELECT s FROM LogiCorpoBundle:Service s WHERE CURRENT_TIMESTAMP() BETWEEN s.debutCommande AND s.fin AND (s.caissier IS NULL OR s.caissier = :caissier)");
-		$query->setParameter('caissier', $user);
+	public function getNextServices($marge = 30) {
+		$query = $this->getEntityManager()->createQuery("SELECT s FROM LogiCorpoBundle:Service s WHERE s.fin > CURRENT_TIMESTAMP()");
 		return $query->getResult();
 	}
 }

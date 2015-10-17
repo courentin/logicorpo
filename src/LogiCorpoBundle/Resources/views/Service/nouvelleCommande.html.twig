@@ -1,0 +1,60 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Passer commande' %}
+
+{% block content %}
+	<div class="two">
+		<h2 class="content-title">Recement commandé</h2>
+		<table class="table">
+			<tbody>
+				{% for produit in lastProductsCommande %}
+					<tr>
+						<td>{{ produit.libelle }}</td>
+						<td>[[ {{ produit.prixVente }} | currency ]]</td>
+						<td><button>+</button></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br/>
+		<h2 class="content-title">Produits</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<td colspan="2">Categorie</td>
+					<td>></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Sandwich jambon fromage</td>
+					<td>3,00 €</td>
+					<td><button>+</button></td>
+				</tr>
+				<tr>
+					<td>Oasis</td>
+					<td>3,00 €</td>
+					<td><button>+</button></td>
+				</tr>
+
+			</tbody>
+			<thead>
+				<tr>
+					<td colspan="2">Categorie</td>
+					<td>></td>
+				</tr>
+			</thead>
+			<thead>
+				<tr>
+					<td colspan="2">Categorie</td>
+					<td>></td>
+				</tr>
+			</thead>
+		</table>		
+	</div>
+	<div class="two">
+		<h2 class="content-title">Récapitulatif</h2>
+
+		<h2 class="content-title">Total 6,00 €</h2>
+		<a class="btn">Commander</a>
+	</div>
+{% endblock %}

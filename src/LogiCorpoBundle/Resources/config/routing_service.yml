@@ -26,5 +26,6 @@ lc_service_new:
     path:     /nouveau/
     defaults: { _controller: LogiCorpoBundle:Service:nouveau }
 
-
-
+lc_service_commande_new:
+    path:     /commande/nouvelle
+    defaults: { _controller: LogiCorpoBundle:Service:nouvelleCommande }

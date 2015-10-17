@@ -59,6 +59,14 @@ class ProduitsCommande
     private $commande;
 
     /**
+     * @var \Produit
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumn(name="id_produit", referencedColumnName="id_produit", nullable=false)
+     */
+    private $produit;
+
+    /**
      * Set quantite
      *
      * @param integer $quantite
@@ -133,5 +141,15 @@ class ProduitsCommande
     public function getProduit()
     {
         return $this->produit;
+    }
+
+    public function getMontant() {
+        $montant = $this->getProduit()->getPrixVente()*$this->getQuantite();
+        if(sizeof($this->getSupplements()) > 0) {
+            foreach ($this->getSupplements() as $supplement) {
+                $montant += $supplements->getPrix();
+            }
+        }
+        return $montant;
     }
 }

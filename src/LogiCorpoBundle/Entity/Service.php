@@ -62,6 +62,13 @@ class Service
      */
     private $commandes;
 
+    /**
+     * @Assert\True
+     */
+    public function datesAreCorrect() {
+        return $debutCommande <= $finCommande && $debut <= $fin && $finCommande <= $fin;
+    }
+
     public function getCommandes() {
         return $this->commandes;
     }
@@ -166,28 +173,5 @@ class Service
     public function getFinCommande()
     {
         return $this->finCommande;
-    }
-
-    /**
-     * Set caissier
-     *
-     * @param \LogiCorpoBundle\Entity\Utilisateur $caissier
-     * @return Service
-     */
-    public function setCaissier(\LogiCorpoBundle\Entity\Utilisateur $caissier = null)
-    {
-        $this->caissier = $caissier;
-
-        return $this;
-    }
-
-    /**
-     * Get caissier
-     *
-     * @return \LogiCorpoBundle\Entity\Utilisateur 
-     */
-    public function getCaissier()
-    {
-        return $this->caissier;
     }
 }

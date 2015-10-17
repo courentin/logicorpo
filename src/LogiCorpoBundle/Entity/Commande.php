@@ -45,7 +45,7 @@ class Commande
      *
      * @ORM\Column(name="date_commande", type="datetime", nullable=false)
      */
-    private $dateCommande;
+    private $date;
 
     /**
      * @var string
@@ -207,4 +207,15 @@ class Commande
         return $this->service;
     }
 
+    /**
+     * Retourne le montant total de la commande
+     * @return double
+     */
+    public function getMontant() {
+        $montant = 0;
+        foreach ($this->produits as $produit) {
+            $montant += $produit->getMontant();
+        }
+        return $montant;
+    }
 }

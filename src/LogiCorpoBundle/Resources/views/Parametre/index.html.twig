@@ -11,10 +11,16 @@
 		{{ form_row(settings_form.montantAdhesion) }}
 	</div>
 	<div class="two">
-	
 		<h2 class="content-title">Configuration par défaut des services</h2>
-		{{ form_rest(settings_form) }}
-		
+		<p>Les heures peuvent être personalisée pour chaque services.</p>
+		{{ form_row(settings_form.debutService) }}
+		{{ form_row(settings_form.finService) }}
+		{{ form_row(settings_form.debutCommande) }}
+		{{ form_row(settings_form.finCommande) }}
+		{{ form_row(settings_form.interdictionCommandeSeuil) }}
+
 	</div>
+	{{ form_row(settings_form.submit) }}
+	{{ form_rest(settings_form) }}
 	{{form_end(settings_form)}}
 {% endblock %}

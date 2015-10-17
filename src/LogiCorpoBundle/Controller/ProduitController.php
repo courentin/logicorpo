@@ -66,6 +66,25 @@ class ProduitController extends Controller
 	/**
 	* @Security("has_role('ROLE_SECRETAIRE')")
 	*/
+	public function editAction(Request $req, $id, Produit $produit) {
+		$form = $this->createForm(new ProduitType($produit), $produit, ['submit' => 'Modifier']);
+
+		$form->handleRequest($req);
+
+		if($form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			$em->flush();
+
+			$req->getSession()->getFlashBag()->add('succes', "Le produit $produit a bien été modifié");
+			return $this->redirectToRoute('lc_produit_home');
+		}
+
+		return $this->render('LogiCorpoBundle:Produit:editer.html.twig', ['form' => $form->createView()]);
+	}
+
+	/**
+	* @Security("has_role('ROLE_SECRETAIRE')")
+	*/
 	public function nouvelleCategorieAction(Request $req) {
 		$categorie = new Categorie();
 		$form = $this->createForm(new CategorieType($categorie), $categorie,['submit' => 'Ajouter']);

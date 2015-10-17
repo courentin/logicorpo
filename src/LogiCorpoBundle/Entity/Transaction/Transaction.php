@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  repositoryClass="LogiCorpoBundle\Entity\TransactionRepository"
  * )
  */
-class Transaction
+abstract class Transaction
 {
     /**
      * @var integer

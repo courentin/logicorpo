@@ -1,0 +1,30 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Gestion des services' %}
+{% block head %}
+{{parent()}}
+<a href="{{ path('lc_service_new') }}" class="btn">Nouveau service</a>
+<a href="" class="btn">Recherche de service</a>
+{% endblock %}
+{% block content %}
+<table class="table" width="100%">
+	<thead>
+		<tr>
+			<td width="20px">Date</td>
+			<td>Début</td>
+			<td>Fin</td>
+			<td>Nombre de commandes</td>
+		</tr>
+	</thead>
+	<tbody>
+{% for service in services %}
+		<tr>
+			<td>{{service.debut | date('d/m') }}</td>
+			<td>{{service.debut | date('H\\hi')}}</td>
+			<td>{{service.fin | date('H\\hi')}}</td>
+			<td>{{service.commandes | length }}</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

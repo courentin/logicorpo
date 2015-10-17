@@ -331,15 +331,6 @@ CONTENU DE LA PAGE
       display: block;
       padding: .4em;
       border-top: 1px solid #e6e6e6; }
-  .popup .popup-actions {
-    color: #2980b9;
-    font-weight: normal;
-    text-align: right;
-    text-transform: uppercase;
-    margin-top: .5em;
-    font-size: .9em; }
-    .popup .popup-actions * {
-      margin: 0 .5em; }
 
 .table {
   font-size: 24px;
@@ -540,12 +531,27 @@ CONTENU DE LA PAGE
 .menu.hidden + .content {
   margin-left: 0; }
 
+.card, .commande, .service {
+  box-shadow: 0 1px 2px #AAA;
+  border-radius: 3px; }
+
+.card-style, .service {
+  font-size: 1rem;
+  padding: 1rem; }
+  .card-style .card-actions, .service .card-actions, .card-style .popup .popup-actions, .popup .card-style .popup-actions, .service .popup .popup-actions, .popup .service .popup-actions {
+    color: #2980b9;
+    font-weight: normal;
+    text-align: right;
+    text-transform: uppercase;
+    margin-top: .5em;
+    font-size: 1.2em; }
+    .card-style .card-actions *, .service .card-actions *, .card-style .popup .popup-actions *, .popup .card-style .popup-actions *, .service .popup .popup-actions *, .popup .service .popup-actions * {
+      margin: 0 .5em; }
+
 .commande {
   width: 100%;
   font-size: 1.4rem;
   display: block;
-  box-shadow: 0 1px 2px #AAA;
-  border-radius: 3px;
   position: relative;
   margin-bottom: 50px;
   box-sizing: border-box; }
@@ -738,6 +744,23 @@ a img {
 	background: $vert;
 }
 */
+.service {
+  width: 330px;
+  font-size: 1rem;
+  display: inline-block;
+  vertical-align: top;
+  margin: 1em; }
+  .service .service-title {
+    font-size: 2.7em;
+    margin: .3em 0; }
+  .service .two {
+    margin-bottom: 1em; }
+  .service .service-infos, .service .service-label, .service .service-info {
+    display: block; }
+  .service .service-info {
+    font-size: 2.4em;
+    line-height: 1; }
+
 /* Tablette */
 @media screen and (max-width: 1000px) {
   .content {

@@ -1,19 +1,50 @@
 {% extends '::layout.html.twig' %}
 {% set subtitle = 'Effectuer un service' %}
-{% block head %}
-{{parent()}}
-<a href="{{path('lc_service_new_now')}}" class="btn">Lancer un service</a>
-{% endblock %}
+
 {% block content %}
+
 
 	{% if services is empty %}
 	<h2 class="content-title">Aucun service programmé ajourd'hui</h2>
 	{% elseif services | length == 1 %}
-	<h2 class="content-title">Prochain service programmé</h2>
+	<h2 class="content-title">Prochain service</h2>
 	{% else %}
-	<h2 class="content-title">Prochains services programmés</h2>
+	<h2 class="content-title">Prochains services</h2>
 	{% endif %}
 	{% for service in services %}
-		<p>Service de {{service.debut | date('H\\hi')}} : <a href="{{path('lc_service_do', {'id': service.id})}}" class="btn">Effectuer le service</a></p>
+		<div class="service">
+			<p class="service-title">Service programmé</p>
+			<hr/>
+			<div class="two">
+				<span class="service-label">Début</span>
+				<span class="service-info">{{service.debut | date('H\\hi')}}</span>
+			</div>
+			<div class="two">
+				<span class="service-label">Fin</span>
+				<span class="service-info">{{service.fin | date('H\\hi')}}</span>
+			</div>
+			<div class="two">
+				<span class="service-label">Début de commande</span>
+				<span class="service-info">{{service.debutCommande | date('H\\hi')}}</span>
+			</div>
+			<div class="two">
+				<span class="service-label">Fin de commande</span>
+				<span class="service-info">{{service.finCommande | date('H\\hi')}}</span>
+			</div>
+				<span class="service-label">Nombre de commandes</span>
+				<span class="service-info">{{ service.commandes | length }}</span>
+			<div class="card-actions">	
+				<a href="{{path('lc_service_do', {'id': service.id})}}">Accéder au service</a>
+			</div>
+		</div>
 	{% endfor %}
+		<div class="service">
+			<p class="service-title">Service non commandable</p>
+			<hr/>
+			<p>Lancer un nouveau service permet d'accéder à l'interface de "caisse"</p>
+			<p>Aucune commande ne peut être reservée par avance lors d'un nouveau service.</p>
+			<div class="card-actions">	
+				<a href="{{path('lc_service_new_now')}}">Lancer un service</a>
+			</div>
+		</div>
 {% endblock %}

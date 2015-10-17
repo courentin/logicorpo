@@ -6,6 +6,12 @@ lc_produit_new:
     path:     /new
     defaults: { _controller: LogiCorpoBundle:Produit:nouveau }
 
+lc_produit_edit:
+    path:     /edit/{id}
+    defaults: { _controller: LogiCorpoBundle:Produit:edit }
+    requirements:
+        id: \d+
+
 lc_produit_list:
     path:     /list
     defaults: { _controller: LogiCorpoBundle:Produit:jsonList }

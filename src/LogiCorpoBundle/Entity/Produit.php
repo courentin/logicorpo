@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="produit")
  * @ORM\Entity
+ * @ORM\Entity(
+ *  repositoryClass="LogiCorpoBundle\Entity\ProduitRepository"
+ * )
  */
 class Produit
 {
