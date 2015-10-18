@@ -1,14 +1,21 @@
 {% extends '::layout.html.twig' %}
 {% set subtitle = 'Nouvel utilisateur' %}
 
-
-{% block head %}
-{{parent()}}
-<a href="{{path('lc_utilisateur_newlist')}}" class="btn">Ajouter liste d'utilisateur</a>
-{% endblock %}
-
 {% block content %}
 	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
 	{{ form_errors(form) }}
-	{{ form(form, { 'attr': {'class': 'form'} }) }}
+
+	{{ form_start(form, { 'attr': {'class': 'form'} }) }}
+	<div class="two">
+		{{form_row(form.nom, { 'attr': {'ng-model': 'nom'} })}}
+		{{form_row(form.prenom, { 'attr': {'ng-model': 'prenom'} })}}
+		{{form_row(form.username, { 'attr': {'ng-init': '((nom | limitTo : 1) + (prenom | limitTo : 6 )+"_") | lowercase'} } )}}
+	</div>
+	<div class="two">
+		{{form_row(form.mail)}}
+		{{form_row(form.solde)}}
+		{{form_row(form.rang)}}
+	</div>
+	<p>Un email avec un mot de passe et le login de l'utilisateur lui sera envoyé.</p>
+	{{ form_rest(form) }}
 {% endblock %}

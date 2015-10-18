@@ -109,6 +109,7 @@ class Utilisateur implements UserInterface
 
 	public function __construct() {
 		$this->salt = md5(uniqid(rand(),true));
+		$this->password = substr(uniqid(),0,8);
 	}
 
 	/**

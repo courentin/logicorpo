@@ -2,15 +2,17 @@
 
 namespace LogiCorpoBundle\Entity\Transaction;
 use Doctrine\ORM\Mapping as ORM;
+use LogiCorpoBundle\Entity\MoyenPaiement;
 
 /**
  * @ORM\Entity
  */
 class TransactionCompte extends Transaction
 {
+
 	public function __construct() {
 		parent::__construct();
-		$this->moyenPaiement = "espece";
+		$this->moyenPaiement = MoyenPaiement::ESPECE;
 	}
 
 	public function getType() {
@@ -18,6 +20,6 @@ class TransactionCompte extends Transaction
 	}
 
 	public function getUserMontant() {
-		return $this->getMontant();
+		return -$this->getMontant();
 	}
 }

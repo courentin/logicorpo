@@ -4,11 +4,12 @@ namespace LogiCorpoBundle\Entity\Transaction;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 /**
  * Transaction
  *
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type_transaction", type="text")
  * @ORM\DiscriminatorMap({"approvisionnement" = "TransactionApprovisionnement",
@@ -212,4 +213,26 @@ abstract class Transaction
     public function __toString() {
         return '#'.$this->getId().' - [['.$this->getMontant().' | currency ]]';
     }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        if($this->getUtilisateur() !== null)
+            $this->getUtilisateur()->addSolde($this->getUserMontant());
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate(PreUpdateEventArgs $event) {
+        if($this->getUtilisateur() !== null) {
+            $new = $event->getNewValue('montant');
+            $old = floatval($event->getOldValue('montant'));
+            dump($this->getUtilisateur());
+            $this->getUtilisateur()->addSolde($new-$old);
+            dump($this->getUtilisateur());
+        }
+    }
+    
 }

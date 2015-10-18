@@ -38,7 +38,6 @@ class CompteController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$membre = $em->getRepository('LogiCorpoBundle:Rang')->findOneBySlug('MEMBRE');
 
-			$user->appendSolde(-$montantAdhesion);
 			$user->setRang($membre);
 
 			$transaction = new TransactionFraisAdhesion();

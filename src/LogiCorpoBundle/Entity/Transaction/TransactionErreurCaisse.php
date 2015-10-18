@@ -2,6 +2,7 @@
 
 namespace LogiCorpoBundle\Entity\Transaction;
 use Doctrine\ORM\Mapping as ORM;
+use LogiCorpoBundle\Entity\MoyenPaiement;
 
 /**
  * TransactionCompte
@@ -11,7 +12,7 @@ class TransactionErreurCaisse extends Transaction
 {
 	public function __construct() {
 		parent::__construct();
-		$this->moyenPaiement  = "espece";
+		$this->moyenPaiement = ESPECE;
 	}
 
 	public function getType() {

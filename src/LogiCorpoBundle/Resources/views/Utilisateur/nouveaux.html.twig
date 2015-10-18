@@ -1,34 +1,36 @@
 {% extends '::layout.html.twig' %}
-{% set subtitle = 'Nouveaux utilisateurs' %}
+{% set subtitle = 'Importer des utilisateurs' %}
 
 
 {% block head %}
 {{parent()}}
-<p>Ajouter une liste d'utilisateurs à partir d'un fichier csv.</p>
+<p>Importer une liste d'utilisateurs à partir d'un fichier csv.</p>
 {% endblock %}
 
 {% block content %}
 <div class="two">
 	<h2 class="content-title">Instructions</h2>
-	<p>Le fichier ne doit pas éxcéder {{max_size}} Mo.</p>
-	<p>Le délimiteur doit être une virgule ' , ' et le séparateur de texte des guillemets doubles ' " '.</p>
-	<p>Les colonnes possibles du fichiers csv sont spécifiés dans le tableau suivant, les champs marqués d'une étoile sont obliatoires.</p>
+	<ul>
+		<li>Le fichier ne doit pas éxcéder {{max_size}} Mo.</li>
+		<li>Le délimiteur doit être une virgule ' , ' et le séparateur de texte des guillemets doubles ' " '.</li>
+		<li>Les colonnes possibles du fichiers csv sont spécifiés dans le tableau suivant, les champs marqués d'une étoile sont obliatoires.</li>
+	</ul>
 	<dl>
 		<dt>prenom *</dt>
 		<dd>Prénom de l'utilisateur</dd>
 		<dt>nom *</dt>
 		<dd>Nom de l'utilisateur</dd>
+		<dt>email *</dt>
+		<dd>Email de l'utilisateur</dd>
 		<dt>membre *</dt>
 		<dd>1 si l'utilisateur a sa carte à la corpo, 0 sinon.</dd>
 		<dt>solde</dt>
 		<dd>Solde initial de l'utilisateur, si non spécifié, le solde sera de 0 €</dd>
 		<dt>login</dt>
 		<dd>Login de l'utilisateur, si non spécifié, le login sera un assemblage unique du prénom et du nom.</dd>
-		<dt>mdp</dt>
-		<dd>Mot de passe de l'utilisateur, si non spécifié, le mot de passe sera aléatoire.</dd>
 	</dl>
-	<p>Un récapitulatif des mot de passe et login sera disponible à la page suivante.</p>
-	<p>L'utilisateur sera invité à changer sont mot de passe à la première connexion.</p>
+	<p>Un récapitulatif des utilisateurs sera disponible à la page suivante.</p>
+	<p>Un mot de passe sera generé aleatoirement, à la première connexion, il sera invité à la changer à la première connexion.</p>
 </div>
 <div class="two">
 	<h2 class="content-title">Ajouter le fichier</h2>

@@ -3,6 +3,7 @@
 {% block head %}
 {{parent()}}
 <a href="{{path('lc_utilisateur_new')}}" class="btn">Nouvel utilisateur</a>
+<a href="{{path('lc_utilisateur_newlist')}}" class="btn">Importer des utilisateurs</a>
 {% endblock %}
 {% block content %}
 <popup id="upgrade">
@@ -26,8 +27,15 @@
 					<td>{{utilisateur.rang.nom | title}}</td>
 					<td><span class="solde:{{utilisateur.solde}}"></span></td>
 					<td>
-						<a href="{{path('lc_utilisateur_solde', {'id': utilisateur.id}) }}"><img title="Créditer/Débiter" src="{{asset('/public/img/icons/money.svg')}}"></a><!--
-					 --><a href="{{ path('lc_utilisateur_editer', {'id': utilisateur.id}) }}"><img title="Modifier" src="{{asset('/public/img/icons/modifier.svg')}}"></a>{% if utilisateur.rang.slug == 'NON_MEMBRE' and utilisateur.canPay(get_setting('montantAdhesion'),get_setting('seuil')) %}<a href="{{path('lc_utilisateur_upgrade', {'id': utilisateur.id, 'moyenPaiement' : 'compte'}) }}"><img title="Passer membre" src="{{asset('/public/img/icons/member.svg')}}"></a>
+						<a href="{{ path('lc_utilisateur_editer', {'id': utilisateur.id}) }}"><img title="Modifier" src="{{asset('/public/img/icons/modifier.svg')}}"></a><!--
+					 -->{% if utilisateur.rang.slug == 'NON_MEMBRE' %}{% if utilisateur.canPay(get_setting('montantAdhesion'),get_setting('seuil')) %}<!--
+						 --><a href="{{path('lc_utilisateur_upgrade', {'id': utilisateur.id, 'moyenPaiement' : 'compte'}) }}"><img title="Passer membre" src="{{asset('/public/img/icons/member.svg')}}"></a>{% endif %}<!--
+							}
+					 -->{% else %}<!--
+						 --><a href="{{path('lc_utilisateur_solde', {'id': utilisateur.id}) }}"><img title="Créditer/Débiter" src="{{asset('/public/img/icons/money.svg')}}"></a><!--
+					 -->{% endif %}<!--
+					 -->{% if utilisateur.lastLog is null  %}<!--
+						 --><a href="{{path('lc_utilisateur_solde', {'id': utilisateur.id}) }}"><img title="Renvoyer un mail avec les identifiants" src="{{asset('/public/img/icons/mail.svg')}}"></a>
 						{% endif %}
 					</td>
 				</tr>

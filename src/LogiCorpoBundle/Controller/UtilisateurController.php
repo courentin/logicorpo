@@ -46,7 +46,6 @@ class UtilisateurController extends Controller
 				'label' => 'Solde initial',
 				'data'  => 0
 			])
-			->add('password', 'password', ['label' => 'Mot de passe'])
 			->add('rang', 'entity', [
 				'class' => 'LogiCorpoBundle:Rang'])
 			->add('Ajouter', 'submit')
@@ -79,7 +78,7 @@ class UtilisateurController extends Controller
 					'accept' => '.csv'
 				]
 			])
-			->add('Ajouter', 'submit')
+			->add('Importer', 'submit')
 			->getForm();
 		
 		$form->handleRequest($req);
@@ -91,15 +90,20 @@ class UtilisateurController extends Controller
 
 				$point  = fopen($fichier->getPathName(),"r");
 				$utilisateurs = $this->csv_to_array($point);
+				
+				$requiredFields = ['nom', 'prenom', 'membre', 'email'];
+				
 				/*
 				* Vérifie que les champs nom, prenom et membre sont présent
 				*/
-				if(    array_key_exists('nom',   $utilisateurs[0])
-					&& array_key_exists('prenom',$utilisateurs[0])
-					&& array_key_exists('membre',$utilisateurs[0]))
-				{
+				$hasRequiredFields = true;
+				foreach ($requiredFields as $field) {
+					if(!array_key_exists($field, $utilisateurs[0])) ;
+				}
+
+				if($hasRequiredFields) {
 					$em = $this->getDoctrine()->getManager();
-					
+
 					/*
 					* Recupère les rangs
 					*/
@@ -109,32 +113,22 @@ class UtilisateurController extends Controller
 					];
 
 					$users = [];
-					$i=0;
 					foreach ($utilisateurs as $utilisateur) {
-						$u = $users[$i++] = new Utilisateur();
+						$u = $users[] = new Utilisateur();
 						$u->setNom($utilisateur['nom'])
 						  ->setPrenom($utilisateur['prenom'])
+						  ->setMail($utilisateur['email'])
 						  ->setRang($rang[$utilisateur['membre']]);
 
-						/**
-						* Si le solde initial est spécifié, on le renseigne, sinon on l'initialise à 0
-						*/
+						// Si le solde initial est spécifié, on le renseigne, sinon on l'initialise à 0
 						if(isset($utilisateur['solde']))
 							$u->setSolde(floatval($utilisateur['solde']));
 
-						/**
-						* Si le login est spécifié, on le renseigne
-						*/
+						// Si le login est spécifié, on le renseigne
 						if(isset($utilisateur['login']))
 							$u->setUsername(strtolower($utilisateur['login']));
 
-						/**
-						* Si le mdp est spécifié, on le renseigne, sinon on l'initialise par une valeur aléatoire
-						*/
-						if(isset($utilisateur['mdp']))
-							$u->setPassword($utilisateur['mdp']);
-						else
-							$u->setPassword('12345');//uniqid();
+						// envoyer mail
 
 						$this->saveUser($u);
 					}
@@ -143,8 +137,9 @@ class UtilisateurController extends Controller
 					// Recapitulatif
 
 				} else {
-					$req->getSession()->getFlashBag()->add('err',"Les champs nom, prenom et membre, doivent être dans le fichier.");
+					$req->getSession()->getFlashBag()->add('err',"Les champs ".implode(', ', $requiredFields).", doivent être dans le fichier.");
 				}
+
 			} else {
 				$req->getSession()->getFlashBag()->add('err',"Le fichier n'est pas valide");
 			}
@@ -153,9 +148,11 @@ class UtilisateurController extends Controller
 	}
 
 	/*
-	 * Sauvegarde un nouvel utilisateur valide en bdd
+	 * Persiste un nouvel utilisateur valide dans l'entity manager
 	 */
 	private function saveUser(Utilisateur $user) {
+
+		$this->sendInscriptionMail($user);
 
 		$em = $this->getDoctrine()->getManager();
 
@@ -167,15 +164,31 @@ class UtilisateurController extends Controller
 
 		$user->setPassword($mdp);
 
-		if($user->getSolde() > 0) {
-			$transaction = new TransactionCompte();
+		if($user->getSolde() !== 0) {
+			$transaction = new Transaction\TransactionCompte();
 			$transaction->setUtilisateur($user)
-						->setMontant($user->getSolde());
+						->setMontant(-$user->getSolde())
+						->setCaissier($this->getUser());
 
 			$em->persist($transaction);
 		}
 
 		$em->persist($user);
+	}
+
+	private function sendInscriptionMail(Utilisateur $user) {
+		if($user->getLastLog() == null) {		
+			$message = \Swift_Message::newInstance()
+				->setSubject("Bienvenu sur logiCorpo")
+				->setFrom("noreply@logiCorpo.fr")
+				->setTo($user->getMail())
+				->setBody(
+					$this->renderView('LogiCorpoBundle:Mail:inscription.twig.html', ['utilisateur' => $user]),
+					'text/html'
+				);
+
+			$this->get('mailer')->send($message);
+		}
 	}
 
 	/*
@@ -267,23 +280,19 @@ class UtilisateurController extends Controller
 		$form->handleRequest($req);
 		
 		if($form->isValid()) {
-			$type = $form->get('type');
-			if($type == "mouvement_carte") {
-				$transaction = new Transaction\TransactionCompte();
-				$transaction->setMontant($form->get('montant')->getData());
-			}
-			else {
-				$transaction = new Transaction\TransactionRemboursement();
-				$transaction->setMontant($form->get('montant')->getData());
-			}
-			$transaction->setUtilisateur($user)
-						->setCaissier($this->getUser());
+			$type = $form->get('type')->getNormData();
 
-			$user->addSolde($transaction->getMontant());
+			if($type == "mouvement_carte")
+				$transaction = new Transaction\TransactionCompte();
+			else
+				$transaction = new Transaction\TransactionRemboursement();
+
+			$transaction->setUtilisateur($user)
+						->setCaissier($this->getUser())
+						->setMontant(-$form->get('montant')->getData());
 
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($transaction);
-			$em->persist($user);
 			$em->flush();
 
 			$req->getSession()->getFlashBag()->add('success','La transaction pour "'.$user.'" a été enregistrée');

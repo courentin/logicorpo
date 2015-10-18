@@ -1,0 +1,19 @@
+{% extends '::layoutMail.html.twig' %}
+
+{% block content %}
+	<h1>Bienvenue sur logiCorpo !</h1>
+	<br/>
+	<p>Bonjour {{ utilisateur }}, un compte sur logiCorpo vient d'être créer pour vous !<br/>
+		Vous pouvez vous y connecter depuis l'université via l'adresse <a style="color:#404040" href="http://logiCorpo"><span style="color:#404040">http://logiCorpo</span></a> avec les identifiants suivants :</p>
+	
+	<table>
+		<tr>
+			<td width="130px"><b>Identifiant</b></td>
+			<td>{{ utilisateur.username }}</td>
+		</tr>
+		<tr>
+			<td width="130px"><b>Mot de passe</b></td>
+			<td>{{ utilisateur.password }}</td>
+		</tr>
+	</table>
+{% endblock %}

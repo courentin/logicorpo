@@ -16,6 +16,16 @@ class CaisseController extends Controller
 {
 	public function indexAction($max = 25)
 	{
+/*
+		$trans = new Transaction\TransactionRemboursement();
+		$trans->setMontant(5)
+		      ->setUtilisateur($this->getUser());
+
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($trans);
+		$em->flush();
+*/
+
 		$rep = $this->getDoctrine()->getRepository('LogiCorpoBundle:Transaction\Transaction');
 		$query = $rep->createQueryBuilder('t')
 					 ->orderBy('t.date','DESC')
@@ -170,7 +180,7 @@ class CaisseController extends Controller
 		$form->handleRequest($req);
 		if($form->isValid()) {
 			$em = $this->getDoctrine()->getManager();
-			$em->flush($transaction);
+			$em->flush();
 
 			$req->getSession()->getFlashBag()->add('succes', "La transaction ($transaction) a bien été corrigée");
 			return $this->redirect($this->generateUrl('lc_caisse_home'));
