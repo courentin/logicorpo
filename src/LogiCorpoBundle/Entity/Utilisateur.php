@@ -87,7 +87,7 @@ class Utilisateur implements UserInterface
 	 *
 	 * @ORM\Column(name="last_log", type="datetime", nullable=true)
 	 */
-	private $lastLog;
+	private $lastLog = null;
 
 	/**
 	 * @var \Rang

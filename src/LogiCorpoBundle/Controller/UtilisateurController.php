@@ -176,7 +176,7 @@ class UtilisateurController extends Controller
 		$em->persist($user);
 	}
 
-	private function sendInscriptionMail(Utilisateur $user) {
+	private function sendInscriptionMail(Utilisateur $user){
 		if($user->getLastLog() == null) {		
 			$message = \Swift_Message::newInstance()
 				->setSubject($this->get('settings_manager')->get('mail_inscription_objet'))

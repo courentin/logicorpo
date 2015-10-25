@@ -9,6 +9,7 @@
 		<h2 class="content-title">Configuration des comptes</h2>
 		{{ form_row(settings_form.seuil) }}
 		{{ form_row(settings_form.montantAdhesion) }}
+		{{ form_row(settings_form.interdictionCommandeSeuil) }}
 	</div>
 	<div class="two">
 		<h2 class="content-title">Configuration par défaut des services</h2>
@@ -21,7 +22,6 @@
 			{{ form_row(settings_form.finService) }}
 			{{ form_row(settings_form.finCommande) }}
 		</div>
-		{{ form_row(settings_form.interdictionCommandeSeuil) }}
 	</div>
 	<div class="cb"></div>
 	<hr/>
