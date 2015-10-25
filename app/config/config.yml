@@ -96,7 +96,6 @@ dmishh_settings:
                 type: checkbox
                 options:
                     required: false
-                    label: Autoriser la commande en dessous du seuil
         debutService:
             validation:
                 type: time
@@ -112,6 +111,13 @@ dmishh_settings:
         finCommande:
             validation:
                 type: time
+
+        mail_inscription_objet:
+            validation:
+                type: text
+        mail_inscription_content:
+            validation:
+                type: textarea
 
         submit:
             validation:

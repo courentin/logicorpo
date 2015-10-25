@@ -6,21 +6,49 @@
 	{% form_theme settings_form 'LogiCorpoBundle:Default:form.html.twig' %}
 	{{ form_start(settings_form, { 'attr': {'class': 'form'} }) }}
 	<div class="two">
-		<h2 class="content-title">Configuration génarale</h2>
+		<h2 class="content-title">Configuration des comptes</h2>
 		{{ form_row(settings_form.seuil) }}
 		{{ form_row(settings_form.montantAdhesion) }}
 	</div>
 	<div class="two">
 		<h2 class="content-title">Configuration par défaut des services</h2>
 		<p>Les heures peuvent être personalisée pour chaque services.</p>
-		{{ form_row(settings_form.debutService) }}
-		{{ form_row(settings_form.finService) }}
-		{{ form_row(settings_form.debutCommande) }}
-		{{ form_row(settings_form.finCommande) }}
+		<div class="two">
+			{{ form_row(settings_form.debutService) }}
+			{{ form_row(settings_form.debutCommande) }}
+		</div>
+		<div class="two">
+			{{ form_row(settings_form.finService) }}
+			{{ form_row(settings_form.finCommande) }}
+		</div>
 		{{ form_row(settings_form.interdictionCommandeSeuil) }}
-
 	</div>
-	{{ form_row(settings_form.submit) }}
+	<div class="cb"></div>
+	<hr/>
+	<h2 class="content-title">Configuration du message d'inscription</h2>
+	<div class="two">
+		{{ form_row(settings_form.mail_inscription_objet) }}
+		{{ form_row(settings_form.mail_inscription_content) }}	
+		{{ form_row(settings_form.submit) }}
+	</div>
+	<div class="two">
+		<p>Vous pouvez inclure les variables suivantes dans le contenu du message :</p>
+		<dl>
+			<dt>utilisateur</dt>
+			<dd>NOM Prénom</dd>
+			<dt>utilisateur.prenom</dt>
+			<dd>prenom de l'utilisateur</dd>
+			<dt>utilisateur.nom</dt>
+			<dd>nom de l'utilisateur</dd>
+			<dt>utilisateur.mail</dt>
+			<dd>mail de l'utilisateur</dd>
+			<dt>utilisateur.username</dt>
+			<dd>login de l'utilisateur</dd>
+			<dt>utilisateur.password</dt>
+			<dd>mot de passe de premiere connexion de l'utilisateur</dd>
+		</dl>
+		Pour afficher des variables, utilisez la syntaxe suivante : "{{ '{{ nom_de_la_variable }}' }}"		
+	</div>
 	{{ form_rest(settings_form) }}
 	{{form_end(settings_form)}}
 {% endblock %}

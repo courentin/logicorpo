@@ -1,6 +1,6 @@
 services:
-    logicorpo.security.authentication_event_listener:
-        class: LogiCorpoBundle\Listeners\AuthenticationListener
+    security.authentication.success:
+        class:  LogiCorpoBundle\Listeners\LoginSuccessHandler
+        arguments: ['@doctrine.orm.entity_manager', '@router']
         tags:
-            - { name: kernel.event_subscriber }
-        arguments: ['@security.authorization_checker','@doctrine.orm.entity_manager']
+            - { name: 'monolog.logger', channel: 'security' }

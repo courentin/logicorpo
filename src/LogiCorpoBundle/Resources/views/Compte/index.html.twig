@@ -15,7 +15,13 @@
 		<dt>Type de compte</dt>
 		<dd>{{app.user.rang}}</dd>
 		<dt>Réduction</dt>
-		<dd>{{ app.user.rang.reduction ~ ' ' ~ app.user.rang.typeReduc}} sur certain produit</dd>
+		<dd>
+			{% if app.user.rang.reduction != 0 %}
+			{{ app.user.rang.reduction ~ ' ' ~ app.user.rang.typeReduc}} sur certain produit
+			{% else %}
+			Aucune réduction
+			{% endif %}
+		</dd>
 		<dt>Login</dt>
 		<dd>{{app.user.username}}</dd>
 	</dl>

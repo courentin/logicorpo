@@ -35,6 +35,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login_check
+                success_handler: security.authentication.success
             logout:
                 path: logout
                 target: login

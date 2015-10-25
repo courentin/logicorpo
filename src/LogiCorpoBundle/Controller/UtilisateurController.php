@@ -179,7 +179,7 @@ class UtilisateurController extends Controller
 	private function sendInscriptionMail(Utilisateur $user) {
 		if($user->getLastLog() == null) {		
 			$message = \Swift_Message::newInstance()
-				->setSubject("Bienvenu sur logiCorpo")
+				->setSubject($this->get('settings_manager')->get('mail_inscription_objet'))
 				->setFrom("noreply@logiCorpo.fr")
 				->setTo($user->getMail())
 				->setBody(

@@ -4,8 +4,120 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getUtilisateur〔function〕"
+			],
+			[
+				"var",
+				"var_dump〔function〕"
+			],
+			[
 				"Log",
-				"LogiCorpoBundle:Produit"
+				"LogiCorpoBundle"
+			],
+			[
+				"us",
+				"users"
+			],
+			[
+				"set",
+				"setBody〔function〕"
+			],
+			[
+				"ut",
+				"utilisateur"
+			],
+			[
+				"he",
+				"heigth"
+			],
+			[
+				"border",
+				"border-collapse: 〔property〕"
+			],
+			[
+				"fon",
+				"font-family: 〔property〕"
+			],
+			[
+				"ty",
+				"$type〔variable〕"
+			],
+			[
+				"flo",
+				"floatval〔function〕"
+			],
+			[
+				"e",
+				"$event〔variable〕"
+			],
+			[
+				"abs",
+				"abstract〔keyword〕"
+			],
+			[
+				"tr",
+				"$trans〔variable〕"
+			],
+			[
+				"pas",
+				"password"
+			],
+			[
+				"subs",
+				"substr〔function〕"
+			],
+			[
+				"impl",
+				"implode〔function〕"
+			],
+			[
+				"fie",
+				"$field〔variable〕"
+			],
+			[
+				"array_ke",
+				"array_key_exists〔function〕"
+			],
+			[
+				"req",
+				"requiredFields"
+			],
+			[
+				"uti",
+				"utilisateurs"
+			],
+			[
+				"prod",
+				"produitCommande"
+			],
+			[
+				"que",
+				"$query〔variable〕"
+			],
+			[
+				"li",
+				"$limitProduit〔variable〕"
+			],
+			[
+				"qu",
+				"$queryCommandes〔variable〕"
+			],
+			[
+				"cre",
+				"createQuery〔function〕"
+			],
+			[
+				"pro",
+				"produit"
+			],
+			[
+				"prd",
+				"produitCommande"
+			],
+			[
+				"com",
+				"commande"
 			],
 			[
 				"p",
@@ -16,24 +128,12 @@
 				"LogiCorpoBundle〔namespace〕"
 			],
 			[
-				"get",
-				"getPrixVente〔function〕"
-			],
-			[
-				"pro",
-				"produits"
-			],
-			[
 				"pr",
 				"$produit〔variable〕"
 			],
 			[
 				"C",
 				"Commande"
-			],
-			[
-				"prod",
-				"$produit〔variable〕"
 			],
 			[
 				"for",
@@ -54,10 +154,6 @@
 			[
 				"end",
 				"end2"
-			],
-			[
-				"com",
-				"compt2"
 			],
 			[
 				"compt",
@@ -84,20 +180,8 @@
 				"LogiCorpoBundle:Produit"
 			],
 			[
-				"qu",
-				"$query〔variable〕"
-			],
-			[
 				"ret",
 				"return〔keyword〕"
-			],
-			[
-				"cre",
-				"createQuery〔function〕"
-			],
-			[
-				"e",
-				"evenement"
 			],
 			[
 				"th",
@@ -148,68 +232,125 @@
 	"buffers":
 	[
 		{
-			"file": "src/LogiCorpoBundle/Entity/ProduitRepository.php",
+			"file": "src/LogiCorpoBundle/Resources/views/Utilisateur/index.html.twig",
 			"settings":
 			{
-				"buffer_size": 1960,
+				"buffer_size": 1861,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<?php\nnamespace LogiCorpoBundle\\Entity;\n\nuse Doctrine\\ORM\\EntityRepository;\n\nclass ServiceRepository extends EntityRepository {\n\n	public function atDay($date = false) {\n		if(!$date) $date = new \\DateTime(\"now\");\n		$query = $this->getEntityManager()->createQuery('SELECT s FROM LogiCorpoBundle:Service s WHERE s.debut BETWEEN :start AND :end ');\n		$query->setParameter('start', date_format($date,\"Y-m-d\").\" 00:00:00\");\n		$query->setParameter('end', date_format($date,\"Y-m-d\").\" 23:59:59\");\n		return $query->getResult();\n	}\n\n	public function getNextServices($marge = 30) {\n		$query = $this->getEntityManager()->createQuery(\"SELECT s FROM LogiCorpoBundle:Service s WHERE s.fin > CURRENT_TIMESTAMP()\");\n		return $query->getResult();\n	}\n}",
-			"file": "src/LogiCorpoBundle/Entity/ServiceRepository.php",
-			"file_size": 733,
-			"file_write_time": 130886290463834401,
+			"file": "src/LogiCorpoBundle/Resources/views/Utilisateur/nouveau.html.twig",
 			"settings":
 			{
-				"buffer_size": 733,
+				"buffer_size": 743,
 				"line_ending": "Unix"
 			}
 		},
 		{
+			"file": "src/LogiCorpoBundle/Entity/Transaction/Transaction.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 6034,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/LogiCorpoBundle/Resources/views/Commande/commandes.twig",
+			"file": "src/LogiCorpoBundle/Controller/CaisseController.php",
 			"settings":
 			{
-				"buffer_size": 110,
+				"buffer_size": 5977,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/LogiCorpoBundle/Resources/views/Service/nouvelleCommande.html.twig",
+			"file": "src/LogiCorpoBundle/Controller/UtilisateurController.php",
 			"settings":
 			{
-				"buffer_size": 1200,
+				"buffer_size": 10093,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/LogiCorpoBundle/Entity/Commande.php",
+			"file": "app/config/parameters.yml",
 			"settings":
 			{
-				"buffer_size": 4817,
+				"buffer_size": 355,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/LogiCorpoBundle/Controller/ProduitController.php",
+			"file": "app/config/config_dev.yml",
 			"settings":
 			{
-				"buffer_size": 3886,
+				"buffer_size": 1294,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/LogiCorpoBundle/Resources/views/Produit/index.html.twig",
+			"file": "vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Manager/SettingsManager.php",
 			"settings":
 			{
-				"buffer_size": 2549,
+				"buffer_size": 9778,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Parametre/index.html.twig",
+			"settings":
+			{
+				"buffer_size": 1859,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n{% block form_row %}\n	<label class=\"form-input\">\n		<p>{{ form_label(form) }}</p>\n		{{ form_widget(form) }}\n		<div class=\"form-input-helper err\">{{ form_errors(form) }}</div>\n	</label>\n{% endblock %}\n\n{% block money_widget %}\n   {% set money_pattern = '{{ widget }} <span>&euro;<span>' %}\n   {{ money_pattern|replace({ '{{ widget }}': block('form_widget_simple') })|raw }}\n{%- endblock money_widget %}\n\n{% block percent_widget %}\n   {% set money_pattern = '{{ widget }} <span>%<span>' %}\n   {{ money_pattern|replace({ '{{ widget }}': block('form_widget_simple') })|raw }}\n{%- endblock percent_widget %}\n\n{% block checkbox_row %}\n	<label class=\"form-check\">\n		<input type=\"checkbox\" {{ block('widget_attributes') }}{% if value is defined %} value=\"{{ value }}\"{% endif %}{% if checked %} checked=\"checked\"{% endif %} />\n		{{label}}\n	</label>\n{% endblock checkbox_row %}\n\n\n\n{#\n{% block date_widget %}\n<div>\n	<select style=\"width:27%\">\n		<option>s</option>\n	</select><!--\n --><select style=\"width:33%\">\n		<option>s</option>\n	</select><!--\n --><select style=\"width:37%\">\n		<option>s</option>\n	</select>\n</div>\n{% endblock %}\n#}",
+			"file": "src/LogiCorpoBundle/Resources/views/Default/form.html.twig",
+			"file_size": 1121,
+			"file_write_time": 130865467394579646,
+			"settings":
+			{
+				"buffer_size": 1123,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Manager/SettingsManagerInterface.php",
+			"settings":
+			{
+				"buffer_size": 2018,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/translations/settings.fr.yml",
+			"settings":
+			{
+				"buffer_size": 370,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Resources/views/layoutMail.html.twig",
+			"settings":
+			{
+				"buffer_size": 6106,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Resources/views/layout.html.twig",
+			"settings":
+			{
+				"buffer_size": 1338,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/LogiCorpoBundle/Resources/views/Utilisateur/nouveaux.html.twig",
+			"settings":
+			{
+				"buffer_size": 1522,
 				"line_ending": "Unix"
 			}
 		}
@@ -221,12 +362,12 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 392.0,
 		"last_filter": "",
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 593.0
 	},
 	"console":
 	{
@@ -246,9 +387,66 @@
 	},
 	"expanded_folders":
 	[
+		"/home/corentin/Dropbox/Projets/logicorpo/site",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/Resources",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/translations",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Compte",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Default",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Mail",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Parametre",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/DependencyInjection",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Form/Type",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Manager",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Resources",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/web/public/img",
+		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass"
 	],
 	"file_history":
 	[
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Mail/inscription.twig.html",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/config.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/DependencyInjection/Configuration.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/index.php",
+		"/home/corentin/Dropbox/Projets/ebip/site/composer.json",
+		"/home/corentin/Dropbox/Projets/ebip/site/class/Conf.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/app/config/config_dev.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Utilisateur.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/front-end/sass/layout.scss",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Utilisateur/nouveau.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/CompteController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Transaction/TransactionCompte.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Transaction/Transaction.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Transaction/TransactionRemboursement.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Transaction/TransactionErreurCaisse.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Transaction/TransactionBanque.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Transaction/TransactionApprovisionnement.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/MoyenPaiement.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/EtatCommande.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/ProduitController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Produit/index.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Service/nouvelleCommande.html.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/ServiceController.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/composer.json",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/ProduitRepository.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/translations/settings.fr.yml",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/ServiceRepository.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Commande/commandes.twig",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/Commande.php",
+		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Controller/CaisseController.php",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/logicorpo.sublime-project",
 		"/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Entity/ProduitsCommande.php",
 		"/home/corentin/Dropbox/DUT/S3/M3101 - Processus/Bureu de poste/Client.java",
@@ -277,7 +475,7 @@
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -291,6 +489,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"setSubject",
+			"uni",
+			"uniq",
+			"color",
+			"querybuilder",
+			"utilisateur",
 			"(*)",
 			"produit",
 			"Event",
@@ -315,24 +519,115 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 9,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/LogiCorpoBundle/Entity/ProduitRepository.php",
+					"file": "src/LogiCorpoBundle/Resources/views/Utilisateur/index.html.twig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1960,
+						"buffer_size": 1861,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1955,
-								1955
+								1716,
+								1716
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/LogiCorpoBundle/Resources/views/Utilisateur/nouveau.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 743,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								743,
+								743
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/LogiCorpoBundle/Entity/Transaction/Transaction.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6034,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6010,
+								6010
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/LogiCorpoBundle/Controller/CaisseController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5977,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5408,
+								5408
 							]
 						],
 						"settings":
@@ -342,48 +637,199 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 432.0,
+						"translation.y": 2592.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/LogiCorpoBundle/Controller/UtilisateurController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10093,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5213,
+								5213
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2862.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/config/parameters.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 355,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								355,
+								355
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/config/config_dev.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1294,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1294,
+								1294
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "src/LogiCorpoBundle/Entity/ServiceRepository.php",
+					"buffer": 7,
+					"file": "vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Manager/SettingsManager.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 733,
+						"buffer_size": 9778,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								733,
-								733
+								1884,
+								1884
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 594.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/LogiCorpoBundle/Resources/views/Parametre/index.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1859,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								873,
+								873
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 54.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 9,
+					"file": "src/LogiCorpoBundle/Resources/views/Default/form.html.twig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1123,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								870,
+								870
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "vendor/dmishh/settings-bundle/src/Dmishh/Bundle/SettingsBundle/Manager/SettingsManagerInterface.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2018,
 						"regions":
 						{
 						},
@@ -396,31 +842,64 @@
 						],
 						"settings":
 						{
-							"default_dir": "/home/corentin/Dropbox/Projets/logicorpo/site/src/LogiCorpoBundle/Resources/views/Service",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 396.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/LogiCorpoBundle/Resources/views/Commande/commandes.twig",
+					"buffer": 11,
+					"file": "src/LogiCorpoBundle/Resources/translations/settings.fr.yml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 110,
+						"buffer_size": 370,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								110,
-								110
+								315,
+								315
+							],
+							[
+								349,
+								349
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/Resources/views/layoutMail.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6106,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6010,
+								6010
 							]
 						],
 						"settings":
@@ -429,130 +908,70 @@
 							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 810.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "src/LogiCorpoBundle/Resources/views/Service/nouvelleCommande.html.twig",
-					"semi_transient": true,
+					"buffer": 13,
+					"file": "app/Resources/views/layout.html.twig",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1200,
+						"buffer_size": 1338,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1185,
-								1185
+								1279,
+								1279
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 864.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "src/LogiCorpoBundle/Entity/Commande.php",
+					"buffer": 14,
+					"file": "src/LogiCorpoBundle/Resources/views/Utilisateur/nouveaux.html.twig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4817,
+						"buffer_size": 1522,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4751,
-								4751
+								603,
+								603
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2979.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/LogiCorpoBundle/Controller/ProduitController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								925,
-								925
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/LogiCorpoBundle/Resources/views/Produit/index.html.twig",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2549,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								106,
-								106
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP-Twig/Syntaxes/HTML (Twig).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
+					"stack_index": 14,
 					"type": "text"
 				}
 			]
@@ -606,6 +1025,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"entityutil",
+				"site/src/LogiCorpoBundle/Entity/Utilisateur.php"
+			],
+			[
+				"entityutili",
+				"site/src/LogiCorpoBundle/Entity/Utilisateur.php"
+			],
+			[
+				"comma",
+				"site/src/LogiCorpoBundle/Entity/Commande.php"
+			]
 		],
 		"width": 0.0
 	},
