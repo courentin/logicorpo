@@ -27,8 +27,8 @@
 	{% for type, message in app.session.flashbag.all %}
 		<flash type="{{ type }}">{{ message[0] }}</flash>
 	{% endfor %}
-	
-	{{ include('menu.html.twig') }}
+
+	{{ render(controller("LogiCorpoBundle:Default:menu")) }}
 
 	<section class="content">
 		<header>

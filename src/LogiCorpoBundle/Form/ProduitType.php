@@ -7,11 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProduitType extends AbstractType
 {
-	private $produit;
-
-	public function __construct(\LogiCorpoBundle\Entity\Produit $produit) {
-		$this->produit = $produit;
-	}
 
     /**
      * {@inheritDoc}
@@ -32,26 +27,7 @@ class ProduitType extends AbstractType
                     'class'    => 'LogiCorpoBundle:Supplement',
                     'multiple' => true,
                     'label'    => 'Suppléments disponibles'
-                ])
-                ->add($options['submit'], 'submit');
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(
-            array(
-                'submit' => 'Valider',
-            )
-        );
-
-        $resolver->addAllowedTypes(
-            array(
-                'submit' => 'string'
-            )
-        );
+                ]);
     }
 
     /**

@@ -7,6 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use LogiCorpoBundle\Entity\Service;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use LogiCorpoBundle\Form\ServiceType;
+use LogiCorpoBundle\Form\CommandeType;
+use LogiCorpoBundle\Entity\Commande;
+use LogiCorpoBundle\Entity\Utilisateur;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\Collection;
 
 class ServiceController extends Controller
 {
@@ -47,10 +52,48 @@ class ServiceController extends Controller
 		return $this->render('LogiCorpoBundle:Service:nouveau.html.twig', ['form' => $form]);
 	}
 
-	public function nouvelleCommandeAction() {
+	public function nouvelleCommandeAction($id, Service $service, Request $req, Utilisateur $user = null) {
+		if($user === null) $user = $this->getUser();
 		$produitRep = $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Produit');
-		$lastProducts = $produitRep->getLastOrder($this->getUser(),5,4);
+		$lastProducts = $produitRep->getLastOrder($user,5,4);
 
-		return $this->render('LogiCorpoBundle:Service:nouvelleCommande.html.twig', ['lastProductsCommande' => $lastProducts]);
+		$commande = new Commande();
+		/*
+		$form = $this->createForm('produits', $commande)
+				->add('Commander', 'submit');
+		*/
+		$form = $this->get('form.factory')->createBuilder('form', $commande)
+		     ->add('produits', 'collection', array(
+		     	'type' => 'produits_commande',
+				'allow_add'          => true,
+				'allow_delete'       => true,
+				'cascade_validation' => true,
+				'by_reference'       => false
+		     ))
+			 ->add('Commander', 'submit')
+			 ->getForm();
+
+		$form->handleRequest($req);
+
+		if($form->isSubmitted()) {
+			$commande
+				->setUtilisateur($user)
+				->setService($service);
+
+			if($form->isValid()) {
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($commande);
+				try {
+					$em->flush();
+					$req->getSession()->getFlashBag()->add('success', "La commande $commande a bien été enregistré.");
+				} catch(\Exception $e) {
+					$req->getSession()->getFlashBag()->add('err', "Erreur, la commande $commande n'a pas été enregistré.");
+				}
+			}
+		}
+		return $this->render('LogiCorpoBundle:Service:nouvelleCommande.html.twig', [
+			'lastProductsCommande' => $lastProducts,
+			'form' => $form->createView()
+		]);
 	}
 }

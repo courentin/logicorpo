@@ -6,6 +6,6 @@ labels:
     finService: Fin de service
     debutCommande: Début des commandes
     finCommande: Fin des commandes
-    submit: Modifier
+    submit: Enregistrer les paramètres
     mail_inscription_objet: Objet
     mail_inscription_content: Contenu

@@ -4,3 +4,22 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@router']
         tags:
             - { name: 'monolog.logger', channel: 'security' }
+    menu_manager:
+        class: LogiCorpoBundle\Manager\MenuManager
+        #arguments: [ '%menu_logicorpo%' ]
+    produits_commande:
+        class: LogiCorpoBundle\Form\ProduitsCommandeType
+        tags:
+            - { name: form.type }
+    produit:
+        class: LogiCorpoBundle\Form\ProduitType
+        tags:
+            - { name: form.type }
+    produit_categorie:
+        class: LogiCorpoBundle\Form\CategorieType
+        tags:
+            - { name: form.type }
+    utilisateur:
+        class: LogiCorpoBundle\Form\UtilisateurType
+        tags:
+            - { name: form.type }

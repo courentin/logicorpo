@@ -11,6 +11,16 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+swiftmailer:
+    transport: smtp
+    port: 587
+    username:  zanproduction@free.fr
+    password:  121623
+    auth_mode: login
+    encryption: tls
+    host: smtp.free.fr
+    delivery_address: ch2kn@free.fr
+
 monolog:
     handlers:
         main:
@@ -43,6 +53,3 @@ monolog:
 
 assetic:
     use_controller: true
-
-#swiftmailer:
-#    delivery_address: me@example.com

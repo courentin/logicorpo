@@ -20,10 +20,33 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('logi_corpo');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
 
+        $treeBuilder = new TreeBuilder();
+        $itemsNode = $treeBuilder->root('menu_logicorpo:');
+/*
+        $rootNode
+            ->children()
+                ->arrayNode('items')
+                    ->addDefaultsIfNotSet()
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('label')->end()
+                            ->scalarNode('route')->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('roles')
+                    ->addDefaultsIfNotSet()
+                    ->prototype('array')
+                        ->children()
+                            
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+
+                ->end()
+            ->end();
+*/
         return $treeBuilder;
     }
 }

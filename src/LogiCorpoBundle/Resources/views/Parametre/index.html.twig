@@ -29,7 +29,6 @@
 	<div class="two">
 		{{ form_row(settings_form.mail_inscription_objet) }}
 		{{ form_row(settings_form.mail_inscription_content) }}	
-		{{ form_row(settings_form.submit) }}
 	</div>
 	<div class="two">
 		<p>Vous pouvez inclure les variables suivantes dans le contenu du message :</p>
@@ -49,6 +48,8 @@
 		</dl>
 		Pour afficher des variables, utilisez la syntaxe suivante : "{{ '{{ nom_de_la_variable }}' }}"		
 	</div>
+	<div class="cb"></div>
+	{{ form_row(settings_form.submit) }}
 	{{ form_rest(settings_form) }}
 	{{form_end(settings_form)}}
 {% endblock %}

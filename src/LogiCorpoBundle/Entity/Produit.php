@@ -285,6 +285,7 @@ class Produit
 
     /**
      * Retourne le taux de marge du produit, en %
+     * @return double
      */
     public function getTauxMarge() {
         if($this->prixAchat !== null)

@@ -47,7 +47,8 @@ class ProduitController extends Controller
 	public function nouveauAction(Request $req) {
 		$produit = new Produit();
 
-		$form = $this->createForm(new ProduitType($produit), $produit, ['submit' => 'Ajouter']);
+		$form = $this->createForm('produit', $produit)
+		             ->add('Ajouter', 'submit');
 
 		$form->handleRequest($req);
 
@@ -67,7 +68,8 @@ class ProduitController extends Controller
 	* @Security("has_role('ROLE_SECRETAIRE')")
 	*/
 	public function editAction(Request $req, $id, Produit $produit) {
-		$form = $this->createForm(new ProduitType($produit), $produit, ['submit' => 'Modifier']);
+		$form = $this->createForm('produit', $produit)
+		             ->add('Modifier', 'submit');
 
 		$form->handleRequest($req);
 
@@ -87,7 +89,8 @@ class ProduitController extends Controller
 	*/
 	public function nouvelleCategorieAction(Request $req) {
 		$categorie = new Categorie();
-		$form = $this->createForm(new CategorieType($categorie), $categorie,['submit' => 'Ajouter']);
+		$form = $this->createForm('produit_categorie', $categorie)
+		             ->add('Ajouter', 'submit');
 		
 		$form->handleRequest($req);
 
@@ -108,7 +111,8 @@ class ProduitController extends Controller
 	*/
 	public function editerCategorieAction(Request $req, Categorie $categorie, $id) {
 
-		$form = $this->createForm(new CategorieType($categorie), $categorie,['submit' => 'Modifier']);
+		$form = $this->createForm('produit_categorie', $categorie)
+		             ->add('Modifier', 'submit');
 
 		$form->handleRequest($req);
 

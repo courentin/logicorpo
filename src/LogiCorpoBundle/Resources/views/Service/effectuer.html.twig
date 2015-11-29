@@ -2,24 +2,23 @@
 {% set subtitle = 'Service de ' ~ (service.debut | date("H\\hi")) %}
 {% block head %}
 {{parent()}}
-<h2></h2>
+<a class="btn" href="#">Nouvelle commande</a>
+<a class="btn" href="#">Prochaine commande ..</a>
 {% endblock %}
 {% block content %}
 
 {% for commande in service.commandes %}
-
-
 	<div class="commande">
 		<div class="commande-infos">
 			<div class="commande-user">
 				{{ commande.utilisateur }}
-				<a href="#" class="user-solde "{{ commande.utilisateur.solde }}</a>
+				<a href="#" class="user-solde solde:{{ commande.utilisateur.solde }}" ></a>
 			</div>
 			<div class="commande-tools">
-				<a><img src="img/icons/modifier.svg"></a>
-				<a><img src="img/icons/money.svg"></a>
+				<a><img src="{{asset('/public/img/icons/modifier.svg')}}"></a>
+				<a><img src="{{asset('/public/img/icons/money.svg')}}"></a>
 			</div>
-			<div class="commande-price">3,00 €</div>
+			<div class="commande-price">[[ {{ commande.montant }} | currency ]]</div>
 		</div>
 		<div class="commande-products">
 			<ul>
@@ -29,7 +28,7 @@
 			</ul>
 		</div>
 			<button class="commande-toggle">
-				<img src="img/icons/down.svg">
+				<img src="{{asset('/public/img/icons/down.svg')}}">
 			</button>
 	</div>
 {% endfor %}

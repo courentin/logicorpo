@@ -48,11 +48,18 @@ class Commande
     private $date;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="etat", type="text", nullable=false)
+     * @ORM\Column(name="paye", type="boolean", nullable=false)
      */
-    private $etat;
+    private $paye = false;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="servie", type="boolean", nullable=false)
+     */
+    private $servie = false;
 
     /**
      * @var \Utilisateur
@@ -76,12 +83,24 @@ class Commande
 
     /**
      * @var ProduitsCommande
-     * @ORM\OneToMany(targetEntity="ProduitsCommande", mappedBy="commande")
+     * @ORM\OneToMany(targetEntity="ProduitsCommande", mappedBy="commande", cascade={"persist"})
      */
     private $produits;
 
     public function __construct() {
         $this->produits = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
+        $this->date = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return "#$this->id";
+    }
+
+    public function getProduits()
+    {
+        return $this->produits;
     }
 
     /**
@@ -92,10 +111,6 @@ class Commande
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getProduits() {
-        return $this->produits;
     }
 
     /**
@@ -119,29 +134,6 @@ class Commande
     public function getDateCommande()
     {
         return $this->dateCommande;
-    }
-
-    /**
-     * Set etat
-     *
-     * @param string $etat
-     * @return Commande
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
-    /**
-     * Get etat
-     *
-     * @return string 
-     */
-    public function getEtat()
-    {
-        return $this->etat;
     }
 
     /**
@@ -203,10 +195,16 @@ class Commande
         $this->transaction->removeElement($transaction);
     }
 
-    public function getService() {
+    public function getService()
+    {
         return $this->service;
     }
 
+    public function setService($service)
+    {
+        $this->service = $service;
+        return $this;
+    }
     /**
      * Retourne le montant total de la commande
      * @return double
@@ -217,5 +215,34 @@ class Commande
             $montant += $produit->getMontant();
         }
         return $montant;
+    }
+
+    public function addProduit(ProduitsCommande $produit)
+    {
+        $produit->setCommande($this);
+        $this->produits->add($produit);
+    }
+
+    public function removeProduit(ProduitsCommande $produit)
+    {
+        $this->produits->remove($produit);
+    }
+
+    /**
+     *  P &&  S : SUCCESS 
+     *  P && !S : WARN
+     * !P &&  S : ERR
+     * !P && !S : OK
+     */
+    public function getEtat()
+    {
+        if($this->paye && $this->servie)
+            return "SUCCES";
+        else if($this->paye && !$this->servie)
+            return "WARN";
+        else if(!$this->paye && $this->servie)
+            return "ERR";
+        else
+            return "OK";
     }
 }

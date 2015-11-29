@@ -37,19 +37,9 @@ class UtilisateurController extends Controller
 
 	public function nouveauAction(Request $req) {
 		$user = new Utilisateur();
-		$form = $this->get('form.factory')->createBuilder('form', $user)
-			->add('nom', 'text')
-			->add('prenom', 'text', ['label' => 'Prénom'])
-			->add('username', 'text', ['label' => 'Login'])
-			->add('mail', 'email')
-			->add('solde', 'money', [
-				'label' => 'Solde initial',
-				'data'  => 0
-			])
-			->add('rang', 'entity', [
-				'class' => 'LogiCorpoBundle:Rang'])
-			->add('Ajouter', 'submit')
-			->getForm();
+
+		$form = $this->createForm('utilisateur', $user)
+		             ->add('Ajouter', 'submit');
 
 		$form->handleRequest($req);
 
@@ -212,18 +202,11 @@ class UtilisateurController extends Controller
 	}
 
 	public function modifierAction($id, Utilisateur $user, Request $req) {
-		$form = $this->get('form.factory')->createBuilder('form', $user)
-			->add('nom', 'text')
-			->add('prenom', 'text', ['label' => 'Prénom'])
-			->add('username', 'text', ['label' => 'Login'])
-			->add('mail', 'email')
-			->add('rang', 'entity', [
-				'class' => 'LogiCorpoBundle:Rang'])
-			->add('Enregistrer', 'submit')
-			->add('Supprimer', 'submit', [
-				'attr' => ['class' => 'btn-rouge']
-			])
-			->getForm();
+		$form = $this->createForm('utilisateur', $user, [ 'solde' => false ])
+					 ->add('Enregistrer', 'submit')
+					 ->add('Supprimer', 'submit', [
+					 	 'attr' => ['class' => 'btn-rouge']
+					 ]);
 
 		$form->handleRequest($req);
 

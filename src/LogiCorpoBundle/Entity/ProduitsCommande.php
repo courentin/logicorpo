@@ -21,13 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProduitsCommande
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Id
-     * @ORM\Column(name="id_produit", type="integer", nullable=false)
-     */
-    private $id;
 
     /**
      * @var integer
@@ -53,7 +46,7 @@ class ProduitsCommande
     /**
      * @var \Commande
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Commande", inversedBy="produits")
+     * @ORM\ManyToOne(targetEntity="Commande", inversedBy="produits", cascade={"persist"})
      * @ORM\JoinColumn(name="id_commande", referencedColumnName="id_commande", nullable=false)
      */
     private $commande;
@@ -151,5 +144,10 @@ class ProduitsCommande
             }
         }
         return $montant;
+    }
+
+    public function __toString()
+    {
+        return $this->produit->__toString();
     }
 }

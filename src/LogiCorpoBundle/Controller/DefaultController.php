@@ -11,4 +11,20 @@ class DefaultController extends Controller
 	{
 		return $this->render('LogiCorpoBundle:Default:index.html.twig');
 	}
+
+	public function menuAction()
+	{
+		$items = [
+			[
+				'label' => 'Passer commande',
+				'route' => 'lc_compte_home'
+			],
+			'|',
+			[
+				'label' => 'akka',
+				'route' => 'lc_compte_home'
+			]
+		];
+		return $this->render('::menu.html.twig', ['items' => $items]);
+	}
 }

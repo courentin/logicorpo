@@ -7,7 +7,7 @@ lc_service_do_choice:
     defaults: { _controller: LogiCorpoBundle:Service:effectuerChoice }
 
 lc_service_do:
-    path:     /effectuer/{id}
+    path:     /{id}/effectuer
     defaults: { _controller: LogiCorpoBundle:Service:effectuer }
     requirements:
         id: \d+
@@ -27,5 +27,7 @@ lc_service_new:
     defaults: { _controller: LogiCorpoBundle:Service:nouveau }
 
 lc_service_commande_new:
-    path:     /commande/nouvelle
+    path:     /{id}/commande/nouvelle
     defaults: { _controller: LogiCorpoBundle:Service:nouvelleCommande }
+    requirements:
+        id: \d+

@@ -1,0 +1,20 @@
+menu_logicorpo:
+    items:
+        passer_commande:
+            label: Passer commande
+            route: lc_service_commande_new
+        compte:
+            label: Mon compte
+            route: lc_compte_home
+
+        produits:
+            label: Produits
+            route: lc_produit_home
+
+    roles:
+        ROLE_PRESIDENT:
+            - passer_commande
+            - compte
+
+        ROLE_MEMBRE:
+            -passer_commande
