@@ -3,7 +3,7 @@
 {% block head %}
 {{parent()}}
 <a class="btn" href="#">Nouvelle commande</a>
-<a class="btn" href="#">Prochaine commande ..</a>
+<a class="btn" ng-href="[[ '#'+getNext().id ]]" href="#">Prochaine commande ..</a>
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
@@ -13,10 +13,10 @@
 <div ng-controller="ServiceCtrl">
 
 	<div class="commande" ng-repeat="commande in commandes">
-		<div class="commande-infos [[ commande.etat ]]">
+		<div ng-click="commande.show=!commande.show" class="commande-infos [[ commande.etat ]]">
 			<div class="commande-user">
 				[[ commande.utilisateur.nom | uppercase ]] [[ commande.utilisateur.prenom | capitalize ]]
-				<a href="#" class="user-solde solde: commande.utilisateur.solde" ></a>
+				<a href="#" class="user-solde [[ 'solde: '+commande.utilisateur.solde ]]" ></a>
 			</div>
 			<!--
 			<div class="commande-tools">
@@ -26,19 +26,22 @@
 		-->
 			<div class="commande-price">[[ commande.montant | price ]]</div>
 			<div class="commande-btn-bottom">
-				<button class="material-btn-float" ng-click="commande.servir()"><img src="{{asset('/public/img/icons/done.svg')}}"></button><!--
-			 --><button class="material-btn-float"><img src="{{asset('/public/img/icons/modifier.svg')}}"></button><!--
-			 --><button class="material-btn-float"><img src="{{asset('/public/img/icons/money.svg')}}"></button>
+				<button title="Servir la commande" class="material-btn-float" ng-click="commande.servir()"><img src="{{asset('/public/img/icons/done.svg')}}"></button><!--
+			 --><button title="Modifier la commande" class="material-btn-float"><img src="{{asset('/public/img/icons/modifier.svg')}}"></button><!--
+			 --><button title="Régler la commande" class="material-btn-float"><img src="{{asset('/public/img/icons/money.svg')}}"></button>
 			</div>
 		</div>
-		<div ng-init="show=true" ng-class="{hide: !show}" class="commande-products">
+		<div ng-init="commande.show=true" ng-class="{hide: !commande.show}" class="commande-products">
 			<ul>
 				<li ng-repeat="produit in commande.produits"><span>[[ produit.quantite ]]</span>[[ produit.produit.libelle ]]</li>
+				<li ng-hide="commande.produits.length"><span></span>Aucun produit</li>
 			</ul>
 		</div>
-			<button ng-click="show=!show" class="commande-toggle">
-				<img src="{{asset('/public/img/icons/down.svg')}}">
-			</button>
+<!--
+		<button ng-show="commande.produits.length > 0" ng-click="show=!show" ng-class="{toggle: !show}" class="commande-toggle">
+			<img src="{{asset('/public/img/icons/down.svg')}}">
+		</button>
+-->
 	</div>
 
 </div>

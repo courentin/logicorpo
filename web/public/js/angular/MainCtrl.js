@@ -75,7 +75,13 @@ logicorpo.controller('ServiceCtrl',function($scope, $http) {
 	$http.get('/app_dev.php/service/1/commande/0').success(function(data, status, headers, config) {
 		$scope.commandes = data.datas;
 
-		console.log($scope.commandes);
+		$scope.commandes.getNext = function() {
+			for (commande in $scope.commandes) {
+				if(commande.etat != "vert")
+					return commande;
+			};
+			$scope.commandes
+		};
 	}).error(function(data, status, headers, config) {
 	    console.log('failed');
   });;

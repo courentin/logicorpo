@@ -596,11 +596,13 @@ CONTENU DE LA PAGE
   display: block;
   position: relative;
   margin-bottom: 50px;
+  z-index: 0;
   box-sizing: border-box; }
   .commande .commande-infos {
     background: #FFF;
     padding: 1.3em;
-    position: relative; }
+    position: relative;
+    cursor: pointer; }
     .commande .commande-infos:before {
       content: '';
       position: absolute;
@@ -655,15 +657,17 @@ CONTENU DE LA PAGE
   .commande .commande-toggle {
     position: absolute;
     left: 50%;
-    bottom: -3em;
+    bottom: -2.4em;
     transform: translateX(-50%);
     background: none;
     border: none;
     cursor: pointer; }
     .commande .commande-toggle img {
       width: 2em;
-      transition: all .3s;
+      transition: all 0.3s;
       transform: scaleY(-1); }
+  .commande .commande-toggle.toggle img {
+    transform: scaleY(1); }
 
 a img {
   width: 22px;

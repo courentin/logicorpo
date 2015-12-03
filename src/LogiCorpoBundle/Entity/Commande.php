@@ -234,7 +234,7 @@ class Commande implements JsonSerializable
         return $this->paye;
     }
 
-    public function setPaye(boolean $paye)
+    public function setPaye( $paye)
     {
         $this->paye = $paye;
         return $this;
