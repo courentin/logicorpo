@@ -4,6 +4,7 @@ namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JsonSerializable;
 
 /**
  * Produit
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  repositoryClass="LogiCorpoBundle\Entity\ProduitRepository"
  * )
  */
-class Produit
+class Produit implements JsonSerializable
 {
     /**
      * @var integer
@@ -101,6 +102,17 @@ class Produit
     public function __construct()
     {
         $this->supplementsDisponible = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function jsonSerialize() {
+        return array(
+            'id'        => $this->getId(),
+            'libelle'   => $this->getLibelle(),
+            'stock'     => $this->getStock(),
+            'prixVente' => $this->getPrixVente(),
+            'prixAchat' => $this->getPrixAchat(),
+            'stock'     => $this->getStock(),
+        );
     }
 
     /**

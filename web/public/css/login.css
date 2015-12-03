@@ -284,6 +284,48 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
 .flash.notice {
   background: #2980b9; }
 
+.material-btn-float {
+  font-size: 3.5rem;
+  width: 1em;
+  z-index: 10;
+  height: 1em;
+  border-radius: 50%;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.38);
+  background: #FFF;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  vertical-align: middle;
+  transition: all 0.3s; }
+  .material-btn-float img {
+    display: block;
+    margin: auto;
+    height: 0.5em;
+    filter: invert(35%); }
+  .material-btn-float.vert {
+    background: #27ae60;
+    color: #FFF; }
+    .material-btn-float.vert img {
+      filter: invert(100%); }
+  .material-btn-float.rouge {
+    background: #bf3737;
+    color: #FFF; }
+    .material-btn-float.rouge img {
+      filter: invert(100%); }
+  .material-btn-float.bleu {
+    color: #FFF;
+    background: #2980b9; }
+    .material-btn-float.bleu img {
+      filter: invert(100%); }
+  .material-btn-float:hover {
+    background: #2980b9; }
+    .material-btn-float:hover img {
+      filter: invert(100%); }
+  .material-btn-float:active {
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.3), inset 1px 1px 2px 0px rgba(0, 0, 0, 0.27); }
+  .material-btn-float.disable {
+    cursor: default; }
+
 .btn, .form input[type="submit"], .form input[type="button"], .form button, .btn-rouge {
   border: 1px solid #595959;
   border-radius: 5px;

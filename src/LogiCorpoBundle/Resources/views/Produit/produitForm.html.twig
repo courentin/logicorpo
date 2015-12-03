@@ -1,7 +1,4 @@
-	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
-	{{ form_errors(form) }}
-
-	{{ form_start(form, { 'attr': {'class': 'form'} }) }}
+{% block produit_widget %}
 		<div class="two">
 			<h2 class="content-title">Informations générales</h2>
 			{{form_row(form.categorie)}}
@@ -25,5 +22,4 @@
 			{{form_row(form.reduction)}}
 		</div>
 		<div class="cb"></div>
-		{{ form_rest(form) }}
-	{{form_end(form)}}
+{% endblock %}

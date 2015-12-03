@@ -12,6 +12,10 @@ use LogiCorpoBundle\Entity\Commande;
 use LogiCorpoBundle\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\Collection;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class ServiceController extends Controller
 {
@@ -43,6 +47,41 @@ class ServiceController extends Controller
 			'service'   => $service,
 			'commandes' => $query->getResult()
 		]);
+	}
+
+	/**
+	 * @ParamConverter("service", class="LogiCorpoBundle:Service", options={"id" = "idService"})
+	 */
+	public function commandeJsonAction(Service $service, $idCommande)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$commandeRep = $em->getRepository('LogiCorpoBundle:Commande');
+
+		if($idCommande == 0) {
+			$results = $commandeRep
+			->findBy(
+				['service' => $service],
+				['date'    => 'ASC']
+			);
+		} else {
+			$results = $commandeRep->find($idCommande);
+			if(!$results) {
+				throw $this->createNotFoundException(
+					"Pas de commande pour l'id $idCommande"
+				);
+			}
+		}
+/*
+		$serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new 
+		JsonEncoder()));
+		$json = $serializer->serialize($results, 'json');
+*/
+		$response = new JsonResponse();
+		$response->setData([
+			'succes' => true,
+			'datas'  => $results
+		]);
+		return $response;
 	}
 
 	public function nouveauAction() {

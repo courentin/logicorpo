@@ -24,3 +24,20 @@ logicorpo.directive('popup', function() {
 		restrict:'E'
 	};
 });
+
+logicorpo.filter('capitalize', function() {
+    return function(input, all) {
+      var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+      return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    }
+});
+
+logicorpo.filter('price',
+	[ '$filter', function(filter) {
+		var currencyFilter = filter('currency');
+		return function(amount, currencySymbol) {
+			if(amount == 0) return "Gratuit";
+			else return currencyFilter(amount, currencySymbol);
+		}
+	}]
+);

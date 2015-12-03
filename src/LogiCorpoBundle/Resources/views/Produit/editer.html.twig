@@ -2,5 +2,11 @@
 {% set subtitle = 'Editer un produit' %}
 
 {% block content %}
-{{ include('LogiCorpoBundle:Produit:formProduit.html.twig', {'form' : form}) }}
+{% form_theme form with [
+	'LogiCorpoBundle:Default:form.html.twig',
+	'LogiCorpoBundle:Produit:produitForm.html.twig'
+] %}
+{{ form_errors(form) }}
+{{ form(form, { 'attr': {'class': 'form'} }) }}
+
 {% endblock %}

@@ -73,7 +73,7 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
   margin: 0;
   padding: 0em .4em;
   border-radius: 3px;
-  background: #2980b9;
+  background: #4183D7;
   color: #FFF; }
 
 .user-solde.negative {
@@ -251,7 +251,49 @@ CONTENU DE LA PAGE
   background: #bf3737; }
 
 .flash.notice {
-  background: #2980b9; }
+  background: #4183D7; }
+
+.material-btn-float {
+  font-size: 3.5rem;
+  width: 1em;
+  z-index: 10;
+  height: 1em;
+  border-radius: 50%;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.38);
+  background: #FFF;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  vertical-align: middle;
+  transition: all 0.3s; }
+  .material-btn-float img {
+    display: block;
+    margin: auto;
+    height: 0.5em;
+    filter: invert(35%); }
+  .material-btn-float.vert {
+    background: #27ae60;
+    color: #FFF; }
+    .material-btn-float.vert img {
+      filter: invert(100%); }
+  .material-btn-float.rouge {
+    background: #bf3737;
+    color: #FFF; }
+    .material-btn-float.rouge img {
+      filter: invert(100%); }
+  .material-btn-float.bleu {
+    color: #FFF;
+    background: #4183D7; }
+    .material-btn-float.bleu img {
+      filter: invert(100%); }
+  .material-btn-float:hover {
+    background: #4183D7; }
+    .material-btn-float:hover img {
+      filter: invert(100%); }
+  .material-btn-float:active {
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.3), inset 1px 1px 2px 0px rgba(0, 0, 0, 0.27); }
+  .material-btn-float.disable {
+    cursor: default; }
 
 .btn, .btn-rouge, .form input[type="submit"], .form input[type="button"], .form button {
   border: 1px solid #595959;
@@ -539,7 +581,7 @@ CONTENU DE LA PAGE
   font-size: 1rem;
   padding: 1rem; }
   .card-style .card-actions, .service .card-actions, .card-style .popup .popup-actions, .popup .card-style .popup-actions, .service .popup .popup-actions, .popup .service .popup-actions {
-    color: #2980b9;
+    color: #4183D7;
     font-weight: normal;
     text-align: right;
     text-transform: uppercase;
@@ -564,7 +606,6 @@ CONTENU DE LA PAGE
       position: absolute;
       left: 0;
       top: 0;
-      background: #27ae60;
       width: 6px;
       height: 100%;
       display: block; }
@@ -576,8 +617,26 @@ CONTENU DE LA PAGE
     .commande .commande-infos .commande-price {
       font-size: 1.6em;
       float: right; }
+    .commande .commande-infos .commande-btn-bottom {
+      position: absolute;
+      right: 3em;
+      bottom: 0;
+      transform: translateY(50%); }
+      .commande .commande-infos .commande-btn-bottom > * {
+        margin: 0 .18em; }
+  .commande .commande-infos.vert:before {
+    background: #27ae60; }
+  .commande .commande-infos.rouge:before {
+    background: #bf3737; }
+  .commande .commande-infos.orange:before {
+    background: #e67e22; }
   .commande .commande-products {
-    background: #FFF; }
+    background: #FFF;
+    max-height: 500px;
+    transition: all 0.3s; }
+  .commande .commande-products.hide {
+    max-height: 0;
+    opacity: 0; }
   .commande .commande-products > ul {
     margin: 0;
     list-style: none;

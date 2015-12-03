@@ -4,6 +4,7 @@ namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JsonSerializable;
 
 /**
  * Commande
@@ -15,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * })
  * @ORM\Entity
  */
-class Commande
+class Commande implements JsonSerializable
 {
     /**
      * @var integer
@@ -119,9 +120,9 @@ class Commande
      * @param \DateTime $dateCommande
      * @return Commande
      */
-    public function setDateCommande($dateCommande)
+    public function setDate($date)
     {
-        $this->dateCommande = $dateCommande;
+        $this->date = $date;
 
         return $this;
     }
@@ -131,9 +132,9 @@ class Commande
      *
      * @return \DateTime 
      */
-    public function getDateCommande()
+    public function getDate()
     {
-        return $this->dateCommande;
+        return $this->date;
     }
 
     /**
@@ -228,6 +229,28 @@ class Commande
         $this->produits->remove($produit);
     }
 
+    public function isPaye()
+    {
+        return $this->paye;
+    }
+
+    public function setPaye(boolean $paye)
+    {
+        $this->paye = $paye;
+        return $this;
+    }
+
+    public function isServie()
+    {
+        return $this->servie;
+    }
+
+    public function setServie($servie)
+    {
+        $this->servie = $servie;
+        return $this;
+    }
+
     /**
      *  P &&  S : SUCCESS 
      *  P && !S : WARN
@@ -237,12 +260,26 @@ class Commande
     public function getEtat()
     {
         if($this->paye && $this->servie)
-            return "SUCCES";
+            return "vert";
         else if($this->paye && !$this->servie)
-            return "WARN";
+            return "orange";
         else if(!$this->paye && $this->servie)
-            return "ERR";
+            return "rouge";
         else
-            return "OK";
+            return "";
+    }
+
+    public function jsonSerialize()
+    {
+        return array(
+            'id'          => $this->getId(),
+            'date'        => $this->getDate(),
+            'paye'        => $this->isPaye(),
+            'servie'      => $this->isServie(),
+            'etat'        => $this->getEtat(),
+            'utilisateur' => $this->getUtilisateur(),
+            'produits'    => $this->getProduits()->toArray(),
+            'montant'     => $this->getMontant()
+        );
     }
 }

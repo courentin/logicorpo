@@ -4,6 +4,7 @@ namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JsonSerializable;
 
 /**
  * ProduitsCommande
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   }
  * )
  */
-class ProduitsCommande
+class ProduitsCommande implements JsonSerializable
 {
 
     /**
@@ -58,6 +59,14 @@ class ProduitsCommande
      * @ORM\JoinColumn(name="id_produit", referencedColumnName="id_produit", nullable=false)
      */
     private $produit;
+
+    public function jsonSerialize()
+    {
+        return array(
+            'produit' => $this->getProduit(),
+            'quantite' => $this->getQuantite(),
+        );
+    }
 
     /**
      * Set quantite

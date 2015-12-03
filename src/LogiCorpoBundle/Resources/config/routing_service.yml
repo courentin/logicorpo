@@ -12,6 +12,14 @@ lc_service_do:
     requirements:
         id: \d+
 
+lc_service_commande_json:
+    path:     /{idService}/commande/{idCommande}
+    defaults: { _controller: LogiCorpoBundle:Service:commandeJson }
+    requirements:
+        idService:  \d+
+        idCommande: \d+
+
+
 lc_service_do_api:
     path:     /effectuer/api/{id}
     defaults: { _controller: LogiCorpoBundle:Service:effectuerApi }

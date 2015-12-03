@@ -38,7 +38,7 @@ logicorpo.controller('MenuCtrl',function($scope, $http, $cookieStore) {
 /*
 */
 	if($cookieStore.get('menu') === undefined) {$scope.menu = true; $cookieStore.put('menu',true); console.log("oui")}
-	else {$scope.menu = $cookieStore.get('menu'); console.log("none")}
+	else {$scope.menu = $cookieStore.get('menu');}
 	
 	$scope.$watch(function() { return $scope.menu; }, function(newValue, oldValue) {
 		$cookieStore.put('menu', newValue);
@@ -54,8 +54,8 @@ logicorpo.controller('CommandeCtrl',function($scope) {
 				quantite: 1,
 				delete: function() {
 					if(this.produit !=0) {
-						delete this;
-						//$scope.commande.produits.splice($scope.commande.produits.indexOf(this), 1);
+						//delete this;
+						$scope.commande.produits.splice($scope.commande.produits.indexOf(this), 1);
 					}
 				}
 			}
@@ -69,23 +69,14 @@ logicorpo.controller('CommandeCtrl',function($scope) {
 			}
 		}
 	};
-/*
-	$scope.addProduit = function(id, qtt) {
-		if(lastInsert().produit != 0 && lastInsert().quantite > 0) {	
-			$scope.commande.produits.push({
-				produit: id,
-				quantite: qtt
-			});
-		}
-	}
+});
 
-	$scope.delProduit = function(id) {
-		if($scope.commande.produits[id].produit !=0)
-		$scope.commande.produits.splice(id, 1);
-	}
+logicorpo.controller('ServiceCtrl',function($scope, $http) {
+	$http.get('/app_dev.php/service/1/commande/0').success(function(data, status, headers, config) {
+		$scope.commandes = data.datas;
 
-	lastInsert = function() {
-		return $scope.commande.produits[$scope.commande.produits.length-1];
-	}
-	*/
+		console.log($scope.commandes);
+	}).error(function(data, status, headers, config) {
+	    console.log('failed');
+  });;
 });

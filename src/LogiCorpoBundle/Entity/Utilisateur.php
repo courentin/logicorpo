@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JsonSerializable;
 
 /**
  * Utilisateur
@@ -17,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\HasLifecycleCallbacks
  */
 
-class Utilisateur implements UserInterface
+class Utilisateur implements UserInterface, JsonSerializable
 {
 	/**
 	 * @var integer
@@ -110,6 +111,20 @@ class Utilisateur implements UserInterface
 	public function __construct() {
 		$this->salt = md5(uniqid(rand(),true));
 		$this->password = substr(uniqid(),0,8);
+	}
+
+	public function jsonSerialize()
+	{
+		return array(
+			'id'       => $this->getId(),
+			'username' => $this->getUsername(),
+			'nom'      => $this->getNom(),
+			'prenom'   => $this->getPrenom(),
+			'mail'     => $this->getMail(),
+			'lastLog'  => $this->getLastLog(),
+			'solde'    => $this->getSolde(),
+			'rang'     => $this->getRang()->__toString(),
+		);
 	}
 
 	/**
