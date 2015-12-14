@@ -1,0 +1,146 @@
+/*
+Structure du site
+*/
+
+.tools {
+	position: absolute;
+	top:0;
+	right: 0;
+	line-height: 0;
+	z-index: 100;
+	padding: 12px 20px;
+	display: flex;
+	transition:all $anim-duration;
+
+	button {
+		border:none;
+		background: none;
+		height: 2.5rem;
+		width: 2.5rem;
+		padding: 0;
+		margin: 0 .3em;
+		cursor: pointer;
+		background-repeat: no-repeat;
+		background-position: center;
+		border-radius: 50%;
+		transition: all $anim-duration;
+		&:hover {
+			background:rgba(255,255,255,.2);
+			background-repeat: no-repeat;
+			background-position: center;
+		
+		}
+	}
+
+	#tools-logout {
+		background-image: url(../img/icons/close-red.svg);
+		background-size: 45%;		
+	}
+
+	#tools-toogle-menu {
+		background-image: url(../img/icons/left.svg);
+		background-size: 55%;
+	}
+
+	#tools-badge {
+		background-image: url(../img/icons/credit.svg);
+		background-size: 55%;
+		position: relative;
+		i {
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+			color: #FFF;
+			background: $rouge;
+			font-style: normal;
+			height: 15px;
+			width: 15px;
+			border-radius: 50%;
+			font-size: 12px;
+			line-height: 15px;
+			text-align: center;
+		}
+	}
+}
+
+/*
+MENU de gauche
+*/
+.menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: $left-size;
+	background: $gris;
+	color: #FFF;
+	transition: all $anim-duration;
+	.user-infos {
+		font-size: 2.2rem;
+		padding: 0 1.5rem;
+	}
+
+	header {
+		height: $header-height;
+		padding-top: 55px !important;
+	}
+	nav a {
+		display: block;
+		font-size: 1.63rem;
+		padding: .85rem 1.5rem;
+		transition: all $anim-duration;
+		&:hover {
+			background: rgba(255,255,255,.2);
+		}
+	}
+	hr {
+		border-color: rgba(255,255,255,.3);
+		margin: .2rem 1.5rem;
+	}
+}
+
+/*
+CONTENU DE LA PAGE
+*/
+.content {
+	margin-left: $left-size;
+	padding: 0 69px 30px 69px;
+	transition: all $anim-duration;
+	header {
+		height: $header-height;
+		padding-top: 55px;
+	}
+
+	h1.content-title {
+		font-size: 2.8rem;
+		margin: 0;
+		margin-bottom: 1rem;
+		line-height: 1;
+	}
+	h2.content-title {
+		font-size: 2.2rem;
+		color: $gris;
+		margin: 0
+	}
+	h3.content-title {
+		font-size: 1.8rem;
+		color: $gris;
+		margin: 0
+	}
+}
+
+.two {
+	width: 50%;
+	float: left;
+	box-sizing:border-box;
+	&:first-child {
+		padding-right:30px;
+	}
+	&:last-child {
+		padding-left:30px;
+	}
+}
+.three {
+	width: 33.32%;
+	float: left;
+}

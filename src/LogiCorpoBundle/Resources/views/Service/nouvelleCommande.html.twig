@@ -2,125 +2,68 @@
 {% set subtitle = 'Passer commande' %}
 
 {% block content %}
+<div ng-controller="CommandeCtrl">
 	<div class="two">
+		{% if lastProductsCommande is not empty %}
 		<h2 class="content-title">Recement commandé</h2>
-		<table class="table">
-			<tbody>
-				{% for produit in lastProductsCommande %}
-					<tr>
-						<td>{{ produit.libelle }}</td>
-						<td>[[ {{ produit.prixVente }} | currency ]]</td>
-						<td><button>+</button></td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		<div class="list">
+			<div class="item">
+				<ul class="item-list">
+					{% for produit in lastProductsCommande %}
+					{% set dispo = produit.dispo ? 'true' : 'false' %}
+					<li
+					ng-class="{disable: !{{ dispo }} }"
+					title="[[ {{ dispo }} ? 'Ajouter à ma commande' : 'Produit épuisé' ]]"
+					ng-click="{{ dispo }} && produits.add({{ produit.id }})">
+						<span class="list-produit-title">{{ produit.libelle }}</span>
+						<span class="list-produit-price">[[ {{ produit.prixVente }} | currency ]]</span>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
 		<br/>
+		{% endif %}
 		<h2 class="content-title">Produits</h2>
-		<table class="table">
-			<thead>
-				<tr>
-					<td colspan="2">Categorie</td>
-					<td>></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Sandwich jambon fromage</td>
-					<td>3,00 €</td>
-					<td><button>+</button></td>
-				</tr>
-				<tr>
-					<td>Oasis</td>
-					<td>3,00 €</td>
-					<td><button>+</button></td>
-				</tr>
+		<div class="list">
+			<div class="item" ng-init="showcateg=false" ng-repeat="categorie in categories">
+				<div class="item-title" ng-click="showcateg=!showcateg;console.log('ok')">[[ categorie.libellePluriel ]]</div>
+				<ul ng-show="showcateg" class="item-list">
+					<li
+					ng-class="{disable: !produit.dispo }"
+					title="[[ produit.dispo ? 'Ajouter à ma commande' : 'Produit épuisé' ]]"
+					ng-click="produit.dispo && produits.add(produit.id)"
+					ng-repeat="produit in categorie.produits">
+						<span class="list-produit-title">[[ produit.libelle ]]</span>
+						<span class="list-produit-price">[[ produit.prixVente | price ]]</span>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-			</tbody>
-			<thead>
-				<tr>
-					<td colspan="2">Categorie</td>
-					<td>></td>
-				</tr>
-			</thead>
-			<thead>
-				<tr>
-					<td colspan="2">Categorie</td>
-					<td>></td>
-				</tr>
-			</thead>
-		</table>		
+
 	</div>
-	<div class="two">
-		<h2 class="content-title">Récapitulatif</h2>
+	<div class="two" >
+		{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+		{{ form_start(form, { 'attr': {'class': 'form', 'style' : 'position:fixed'} }) }}
+		<h2 class="content-title">Ma commande</h2>
+		<div ng-repeat="produit in produits.list track by $index">
+			{{form_widget(form.produits.vars.prototype)}}
+		</div>
+		<br/>
+		<div ng-show="produits.isEmpty()">
+			<h3 class="content-title">Aucun produit :(</h3>
+			<h3 class="content-title">Ajoutez des produits</h3>
+		</div>
+		<div ng-hide="produits.isEmpty()">
+			<h3 class="content-title" ng-show="produits.getTotal() > 0">Total [[ produits.getTotal() | price ]]</h3>
+			{{ form_errors(form) }}
+			{{ form_rest(form) }}
+		</div>
 
-		<h2 class="content-title">Total 6,00 €</h2>
-		<a class="btn">Commander</a>
+		{{form_end(form)}}
+		
 	</div>
 	<div class="cb"></div>
-	{% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
-	
-	{{ form_start(form, { 'attr': {'class': 'form', 'ng-controller': 'CommandeCtrl'} }) }}
-
-	<label ng-repeat="produit in commande.produits" class="form-input">
-		<div id="form_produits_[[ $index ]]">
-			<label class="form-input two">
-				<p><label for="form_produits_[[ $index ]]_produit" class="required">Produit</label></p>
-				<select ng-model="produit.produit" id="form_produits_[[ $index ]]_produit" name="form[produits][[ '[' + $index + ']' ]][produit]">
-					<option value="0" >Selectionner un produit</option>
-					<option value="2" >Croque poulet-fromage</option>
-					<option value="3" >Croque thon-mayo</option>
-					<option value="4" >Croque poulet-curry</option>
-					<option value="5" >Panini</option>
-					<option value="6" >Croque poulet-mayo</option>
-					<option value="7" >Croque major</option>
-					<option value="8" >Croque jambon-mimolette</option>
-					<option value="9" >Croque jambon-beurre</option>
-					<option value="10" >Oasis</option>
-					<option value="11" >Coca</option>
-					<option value="12" >Coca cherry</option>
-					<option value="13" >Fanta orange</option>
-					<option value="14" >Fanta citron</option>
-					<option value="16" >7up cherry</option>
-					<option value="17" >Ice tea</option>
-					<option value="18" >Tropico</option>
-					<option value="19" >Eau 50cl</option>
-					<option value="20" >Lion</option>
-					<option value="21" >Mars</option>
-					<option value="22" >Twix</option>
-					<option value="23" >Bueno</option>
-					<option value="24" >Kit-kat</option>
-					<option value="25" >Dragibus</option>
-					<option value="26" >Snickers</option>
-					<option value="27" >Kinder maxi</option>
-					<option value="28" >Bueno white</option>
-					<option value="29" >Pitch</option>
-					<option value="30" >Pain au chocolat</option>
-					<option value="31" >Twix glacé</option>
-					<option value="32" >Mars glacé</option>
-					<option value="33" >Mars caramel glacé</option>
-					<option value="34" >Snickers glacé</option>
-					<option value="35" >Sorbet Oasis tropical</option>
-					<option value="36" >Sorbet Oasis multi-fruits</option>
-					<option value="43" >produit de test</option>
-					<option value="15" >7up</option>
-					<option value="44" >test produit</option>
-					<option value="1" >Croque jambon-fromage</option>
-				</select>
-				<div class="form-input-helper err"></div>
-			</label>
-			<label class="form-input two">
-				<p><label for="form_produits_[[ $index ]]_quantite" class="required">Quantite</label></p>
-				<input ng-model="produit.quantite" type="number" id="form_produits_[[ $index ]]_quantite" name="form[produits][[ '[' + $index + ']' ]][quantite]" required="required" />
-				<div class="form-input-helper err"></div>
-			</label>
-		</div>
-		<div class="cb"></div>
-		<div class="form-input-helper err"></div>
-		<button type="button" ng-click="produit.delete()" class="btn-classic">Supprimer</button>
-	</label>
-	<button type="button" ng-click="commande.addProduit(0,1)" class="btn-classic">Ajouter</button>
-		{{ form_rest(form) }}
-	{{form_end(form)}}
-
+</div>
 {% endblock %}

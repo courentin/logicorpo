@@ -5,6 +5,7 @@ namespace LogiCorpoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JsonSerializable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commande
@@ -85,6 +86,7 @@ class Commande implements JsonSerializable
     /**
      * @var ProduitsCommande
      * @ORM\OneToMany(targetEntity="ProduitsCommande", mappedBy="commande", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $produits;
 

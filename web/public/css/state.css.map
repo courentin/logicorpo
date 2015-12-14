@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,YAAa;EACZ,SAAS,EAAC,iBAAiB;EAC3B,mBAAO;IACN,SAAS,EAAC,gBAAgB;IAC1B,0BAAO;MACN,gBAAgB,EAAE,kBAAc;MAChC,gCAAQ;QACP,gBAAgB,EAAE,kBAAc;IAGlC,sCAAmB;MAClB,gBAAgB,EAAE,0BAA0B;;AAK/C,uBAAwB;EACvB,WAAW,EAAE,CAAC",
-"sources": ["../sass/state.scss"],
-"names": [],
-"file": "state.css"
-}

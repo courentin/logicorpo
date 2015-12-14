@@ -1,0 +1,75 @@
+.moreinfos {
+	box-shadow: 0 0 2px 0px rgba(0,0,0,.3);
+	display: table;
+	border-radius: 3px;
+	min-width: 150px;
+	max-width: 600px;
+	padding: .7rem 1rem;
+	position: absolute;
+	bottom: -20px;
+	right: 50%;
+	transform:translateX(50%) translateY(100%);
+	background: #FFF;
+	z-index: 1000;
+	color: initial;
+	line-height: initial;
+
+	&:before {
+		content:'';
+		position: absolute;
+		top:-24px;
+		right: 50%;
+		transform:translateX(50%);
+		width: 25px;
+		height: 25px;
+		background-image: url(../img/icons/triangle.png);
+		background-repeat:no-repeat;
+	}
+}
+
+.moreinfos-parent {
+	position: relative;
+	display: inline-block;
+}
+
+.popup-parent {
+	position: absolute;
+	background: rgba(0,0,0,.4);
+	height: 100%;
+	width:100%;
+	top:0;
+	left: 0; 
+}
+.popup {
+	min-width: 14rem;
+	max-width: 35rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform:translateX(-50%) translateY(-50%);
+	font-size: 1.2rem;
+	padding: 1em;
+	background: #FFF;
+	border-radius: 3px;
+	box-shadow: 0 10px 15px rgba(0,0,0,.4);
+	
+	.popup-title {
+		font-size: 1.5em;
+		margin-bottom: .9em;
+	}
+
+	.popup-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		> * {
+			display: block;
+			padding: .4em;
+			border-top:1px solid rgb(230,230,230);
+		}
+	}
+
+	.popup-actions {
+		@extend .card-actions;
+	}
+}

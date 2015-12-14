@@ -3,6 +3,7 @@
 namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
 
@@ -10,7 +11,8 @@ use JsonSerializable;
  * ProduitsCommande
  *  
  * @ORM\Entity
- * @ORM\Table(name="produits_commande", 
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="produits_commande",
  *   uniqueConstraints = {
  *    @ORM\UniqueConstraint(columns={"id_commande", "id_produit"})
  *   },
@@ -66,6 +68,32 @@ class ProduitsCommande implements JsonSerializable
             'produit' => $this->getProduit(),
             'quantite' => $this->getQuantite(),
         );
+    }
+
+    /**
+     * @Assert\True(message="La quantité de produit n'est plus disponible")
+     */
+    public function isQuantiteDisponible()
+    {
+        dump('je passe là');
+        return $this->getProduit()->getStock() === null || $this->quantite <= $this->getProduit()->getStock();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        $this->produit->removeStock($this->getQuantite());
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function prePUpdate(PreUpdateEventArgs $eventArgs) {
+        if($eventArgs->hasChangedField('quantite')) {
+            $remove = $eventArgs->getOldValue('quantite') - $eventArgs->getNewValue('quantite');
+            $this->produit->addStock($remove);
+        }
     }
 
     /**

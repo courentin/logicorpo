@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,SAAU;EACT,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,KAAK;EACd,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,cAAc;EAC1B,aAAa,EAAE,GAAG;EAClB,OAAO,EAAE,KAAK",
-"sources": ["../../../../front-end/sass/commande.scss"],
-"names": [],
-"file": "commande.css"
-}

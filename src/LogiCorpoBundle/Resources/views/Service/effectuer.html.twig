@@ -4,6 +4,12 @@
 {{parent()}}
 <a class="btn" href="#">Nouvelle commande</a>
 <a class="btn" ng-href="[[ '#'+getNext().id ]]" href="#">Prochaine commande ..</a>
+<div class="form">
+	<label class="form-input">
+		<p>Rechercher</p>
+		<input type="text" ng-model="search" placeholder="Nom, prénom, produit" />
+	</label>
+</div>
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
@@ -11,24 +17,35 @@
 {% endblock %}
 {% block content %}
 <div ng-controller="ServiceCtrl">
-
-	<div class="commande" ng-repeat="commande in commandes">
+	<div class="commande-sep">
+		<span>2 commandes servies</span>
+		<hr id="sep" class="line-sep"/>
+		<span>10 commandes restantes</span>
+	</div>
+	<div class="commande" ng-repeat="commande in commandes | filter: search">
 		<div ng-click="commande.show=!commande.show" class="commande-infos [[ commande.etat ]]">
 			<div class="commande-user">
 				[[ commande.utilisateur.nom | uppercase ]] [[ commande.utilisateur.prenom | capitalize ]]
 				<a href="#" class="user-solde [[ 'solde: '+commande.utilisateur.solde ]]" ></a>
 			</div>
-			<!--
-			<div class="commande-tools">
-				<a><img src="[[asset('/public/img/icons/modifier.svg')]]"></a>
-				<a><img src="[[asset('/public/img/icons/money.svg')]]"></a>
-			</div>
-		-->
 			<div class="commande-price">[[ commande.montant | price ]]</div>
 			<div class="commande-btn-bottom">
-				<button title="Servir la commande" class="material-btn-float" ng-click="commande.servir()"><img src="{{asset('/public/img/icons/done.svg')}}"></button><!--
-			 --><button title="Modifier la commande" class="material-btn-float"><img src="{{asset('/public/img/icons/modifier.svg')}}"></button><!--
-			 --><button title="Régler la commande" class="material-btn-float"><img src="{{asset('/public/img/icons/money.svg')}}"></button>
+				<button
+					title="Modifier la commande"
+					ng-class="{disable: commande.servie || commande.paye}"
+					class="material-btn-float"
+				><img src="{{asset('/public/img/icons/modifier.svg')}}"></button><!--
+			 --><button
+			 		title="Servir la commande"
+			 		class="material-btn-float"
+			 		ng-class="{vert: commande.servie}"
+			 		ng-click="servir(commande, $event)"
+			 	><img src="{{asset('/public/img/icons/done.svg')}}"></button><!--
+			 --><button
+			 		title="Régler la commande"
+			 		class="material-btn-float"
+			 		ng-class="{vert: commande.paye}"
+			 	><img src="{{asset('/public/img/icons/money.svg')}}"></button>
 			</div>
 		</div>
 		<div ng-init="commande.show=true" ng-class="{hide: !commande.show}" class="commande-products">
@@ -37,11 +54,6 @@
 				<li ng-hide="commande.produits.length"><span></span>Aucun produit</li>
 			</ul>
 		</div>
-<!--
-		<button ng-show="commande.produits.length > 0" ng-click="show=!show" ng-class="{toggle: !show}" class="commande-toggle">
-			<img src="{{asset('/public/img/icons/down.svg')}}">
-		</button>
--->
 	</div>
 
 </div>

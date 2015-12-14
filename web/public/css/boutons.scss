@@ -1,0 +1,167 @@
+@keyframes entrance {
+	0% {
+		opacity: 0;
+		transform:translateX(100%);
+	}
+
+	100% {
+		opacity: 1;
+		transform:translateX(0%);
+	}
+}
+
+@keyframes leave {
+
+	0% {
+		opacity: 1;
+		transform:translateX(0%);
+	}
+
+	100% {
+		opacity: 0;
+		transform:translateX(100%);
+	}
+}
+
+
+.flash {
+	background:$vert;
+	min-width: 200px;
+	max-width: 400px;
+	color: #FFF;
+	position: fixed;
+	right: 35px;
+	top:35px;
+	z-index: 100;
+	border-radius: 4px;
+	padding: .7rem .9rem;
+	font-size: .95rem;
+	transform:translateX(100%);
+	opacity: 0;
+	animation:entrance .7s;
+	animation-delay: .5s;
+	animation-fill-mode:forwards;
+	.flash-close {
+		position: absolute;
+		right: 8px;
+		top:8px;
+		background: none;
+		border:none;
+		cursor: pointer;
+		background-image: url(../img/icons/close.svg);
+		background-size: 12px;
+		background-repeat: no-repeat;
+		height: 12px;
+		width: 12px;
+		opacity: .8;
+		transition:all $anim-duration;
+		&:hover {
+			opacity:1;
+		}
+	}
+}
+.flash.ng-hide {
+	display: block !important;
+	animation:leave .5s;
+	animation-fill-mode: forwards;
+}
+.flash.err {
+	background: $rouge;
+}
+
+.flash.notice {
+	background: $bleu;
+}
+
+.material-btn-float {
+	font-size: 3.5rem;
+	width: 1em;
+	z-index: 10;
+	height: 1em;
+	border-radius: 50%;
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.38);
+	background: #FFF;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	vertical-align: middle;
+	transition: all $anim-duration, box-shadow 0.1s;
+	img {
+		display: block;
+		margin: auto;
+		height: 0.5em;
+		filter: invert(35%);
+	}
+
+	&.vert {
+		background: $vert;
+		color: #FFF;
+		img {
+			filter: invert(100%);
+		}
+	}
+
+	&.rouge {
+		background: $rouge;
+		color: #FFF;
+		img {
+			filter: invert(100%);
+		}
+	}
+
+	&.bleu {
+		color: #FFF;
+		background: $bleu;
+		img {
+			filter: invert(100%);
+		}
+	}
+
+	&:hover {
+		background: $bleu;
+		img {
+			filter: invert(100%);
+		}
+	}
+
+	&:active {
+		box-shadow:0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.3), inset 1px 1px 2px 0px rgba(0, 0, 0, 0.27);
+	}
+
+	&.disable {
+		cursor: not-allowed;
+		box-shadow:0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
+		&:hover{
+			background: #FFF;
+			img {
+				filter: invert(35%);
+			}
+		}
+	}
+}
+
+.btn {
+	border:1px solid $gris;
+	border-radius: 5px;
+	padding: .417rem 2.2em;
+	font-size: 1.2rem;
+	display: inline-block;
+	transition:all $anim-duration;
+	&:hover {
+		background:$gris;
+		color: #FFF;
+	}
+}
+
+@mixin bouton($color) {
+	@extend .btn;
+	color: $color;
+	border-color: $color;
+	&:hover {
+		background: $color;
+	}
+}
+
+.btn-rouge {
+	@include bouton($rouge);
+}

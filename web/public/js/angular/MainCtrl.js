@@ -46,29 +46,111 @@ logicorpo.controller('MenuCtrl',function($scope, $http, $cookieStore) {
 
 });
 
-logicorpo.controller('CommandeCtrl',function($scope) {
-	$scope.commande = {
-		produits: [
-			{
-				produit: 0,
-				quantite: 1,
-				delete: function() {
-					if(this.produit !=0) {
-						//delete this;
-						$scope.commande.produits.splice($scope.commande.produits.indexOf(this), 1);
-					}
-				}
-			}
-		],
-		addProduit: function(id, qtt) {
-			if(this.produits[this.produits.length-1].produit != 0 && this.produits[this.produits.length-1].quantite > 0) {	
-				this.produits.push({
-					produit: id,
-					quantite: qtt
+logicorpo.controller('CommandeCtrl',function($scope, $http) {
+
+	$http.get('/app_dev.php/produit/list')
+		.success(function(data, status, headers, config) {
+			$scope.categories = data;
+			console.log(data);
+		})
+		.error(function(data, status, headers, config) {
+		});
+
+	var produits = {
+		list: [],
+		add: function(id) {
+			produit = this.exist(id);
+			if(produit) {
+				produit.quantite++;
+			} else {
+				angular.forEach($scope.categories, function(categorie) {
+					angular.forEach(categorie.produits, function(prod) {
+						if(prod.id == id)
+							produit = prod;
+					});
+				});
+
+				if(typeof produit == 'undefined') return null;		
+
+				this.list.push({
+					id: id,
+					quantite: 1,
+					libelle: produit.libelle,
+					prix: produit.prixVente,
+					stock: produit.stock
 				});
 			}
+		},
+		remove: function(id) {
+			that = this;
+			angular.forEach(that.list, function(produit, index) {
+				if(produit.id == id)
+					that.list.splice(index, 1);
+			});
+		},
+		exist: function(id) {
+			r = false;
+			angular.forEach(this.list, function(produit) {
+				if(produit.id == id)
+					r = produit;
+			});
+			return r;
+		},
+		isEmpty: function() {
+			return this.list.length == 0;
+		},
+		getTotal: function() {
+			total = 0;
+			angular.forEach(this.list, function(produit) {
+				total += produit.quantite*produit.prix;
+			});
+			return total;
 		}
+
 	};
+
+	$scope.produits = Object.create(produits);
+
+	$scope.ajouter = function(id) {
+		produit = getProduit(id);
+		$scope.produits.push({
+			produit: {
+				label: produit.libelle,
+				prixVente: produit.prixVente,
+				id: id
+			},
+			quantite: 1
+		});
+	};
+
+	$scope.retirer = function(id) {
+		angular.forEach($scope.produits, function(produit) {
+			if(produit.produit.id = id)
+				$scope
+		});
+	};
+
+	function getProduit(id) {
+		r = null;
+		angular.forEach($scope.categories, function(categorie) {
+			angular.forEach(categorie.produits, function(produit) {
+				if(produit.id == id)
+					r = produit;
+			});
+		});
+
+		return r;
+	}
+
+	$scope.getTotal = function() {
+		total = 0;
+		angular.forEach($scope.produits, function(produit) {
+			total += produit.quantite*produit.produit.prixVente;
+		});
+		return total;
+	};
+
+
 });
 
 logicorpo.controller('ServiceCtrl',function($scope, $http) {
@@ -80,9 +162,15 @@ logicorpo.controller('ServiceCtrl',function($scope, $http) {
 				if(commande.etat != "vert")
 					return commande;
 			};
-			$scope.commandes
 		};
+
 	}).error(function(data, status, headers, config) {
 	    console.log('failed');
   });;
+		$scope.servir = function(commande, $event) {
+			$event.stopPropagation();
+			commande.servie = true;
+			if(commande.paye)
+				commande.etat = "vert";
+		}
 });

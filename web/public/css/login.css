@@ -30,6 +30,26 @@ hr {
   border-bottom: 1px solid;
   border-color: #e9e9e9; }
 
+.line-sep {
+  border-bottom: 4px dotted #2980b9;
+  position: relative;
+  z-index: -100; }
+  .line-sep:before {
+    content: '';
+    background: url(../img/icons/position.svg) no-repeat;
+    width: 26px;
+    transform: rotate(-90deg);
+    height: 30px;
+    display: block;
+    position: absolute;
+    left: -30px;
+    bottom: -15px; }
+  .line-sep:after {
+    content: '';
+    display: block;
+    height: 292px;
+    margin-top: -292px; }
+
 dl {
   font-size: 1.2rem; }
   dl dt {
@@ -51,6 +71,10 @@ dl {
 
 button::-moz-focus-inner {
   border: 0; }
+
+button {
+  background: none;
+  border: none; }
 
 .lien {
   text-decoration: underline; }
@@ -81,7 +105,7 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
 
 .form {
   font-size: 1rem; }
-  .form .form-input-base, .form .form-specialcheck, .form .form-input input, .form .form-input select {
+  .form .form-input-base, .form .form-specialcheck, .form .form-produit .form-produit-input, .form .form-input input, .form .form-input select, .form .form-input textarea {
     border: 1px solid #bdbdbd;
     padding: .4em 1em;
     border-radius: 5px;
@@ -92,11 +116,11 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
     background: #FFF;
     box-sizing: border-box;
     transition: all 0.3s; }
-    .form .form-input-base:focus, .form .form-specialcheck:focus, .form .form-input input:focus, .form .form-input select:focus {
+    .form .form-input-base:focus, .form .form-specialcheck:focus, .form .form-produit .form-produit-input:focus, .form .form-input input:focus, .form .form-input select:focus, .form .form-input textarea:focus {
       color: #000; }
-    .form .form-input-base:focus:invalid, .form .form-specialcheck:focus:invalid, .form .form-input input:focus:invalid, .form .form-input select:focus:invalid {
+    .form .form-input-base:focus:invalid, .form .form-specialcheck:focus:invalid, .form .form-produit .form-produit-input:focus:invalid, .form .form-input input:focus:invalid, .form .form-input select:focus:invalid, .form .form-input textarea:focus:invalid {
       border-color: #bf3737; }
-    .form .form-input-base:focus:valid, .form .form-specialcheck:focus:valid, .form .form-input input:focus:valid, .form .form-input select:focus:valid {
+    .form .form-input-base:focus:valid, .form .form-specialcheck:focus:valid, .form .form-produit .form-produit-input:focus:valid, .form .form-input input:focus:valid, .form .form-input select:focus:valid, .form .form-input textarea:focus:valid {
       border-color: #27ae60; }
   .form .form-label-base, .form .form-input p, .form .form-partition p {
     color: #828282;
@@ -151,6 +175,53 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
     color: #878787;
     cursor: initial;
     text-decoration: line-through; }
+  .form .form-produit {
+    display: inline-block;
+    transition: all 0.3s;
+    margin: .5em 0; }
+    .form .form-produit .form-produit-input {
+      width: 25em;
+      display: inline-block; }
+      .form .form-produit .form-produit-input label {
+        font-size: 1.2em; }
+      .form .form-produit .form-produit-input input[type="number"] {
+        margin-right: 0.5em;
+        background: none;
+        border: none;
+        width: 2em;
+        color: #858585;
+        font-size: 1.15em;
+        font-weight: lighter; }
+      .form .form-produit .form-produit-input .form-produit-price {
+        float: right;
+        font-size: 1.2em; }
+    .form .form-produit .form-produit-tools {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: .4em; }
+      .form .form-produit .form-produit-tools img {
+        width: 1.7em;
+        opacity: 0;
+        transition: all 0.18s;
+        cursor: pointer; }
+    .form .form-produit:hover .form-produit-tools img {
+      opacity: .4; }
+    .form .form-produit .form-input-helper {
+      position: absolute;
+      color: #757575;
+      font-size: .9em;
+      line-height: 1em;
+      margin-top: .4em;
+      margin-bottom: .4em; }
+      .form .form-produit .form-input-helper ul {
+        margin: 0;
+        padding: 0;
+        list-style: none; }
+        .form .form-produit .form-input-helper ul li {
+          margin: 0;
+          padding: 0; }
+    .form .form-produit .form-input-helper.err {
+      color: #bf3737; }
   .form .form-input {
     margin-bottom: 1.5em;
     position: relative;
@@ -296,7 +367,7 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
   cursor: pointer;
   padding: 0;
   vertical-align: middle;
-  transition: all 0.3s; }
+  transition: all 0.3s, box-shadow 0.1s; }
   .material-btn-float img {
     display: block;
     margin: auto;
@@ -324,7 +395,12 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
   .material-btn-float:active {
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.3), inset 1px 1px 2px 0px rgba(0, 0, 0, 0.27); }
   .material-btn-float.disable {
-    cursor: default; }
+    cursor: not-allowed;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.3); }
+    .material-btn-float.disable:hover {
+      background: #FFF; }
+      .material-btn-float.disable:hover img {
+        filter: invert(35%); }
 
 .btn, .form input[type="submit"], .form input[type="button"], .form button, .btn-rouge {
   border: 1px solid #595959;

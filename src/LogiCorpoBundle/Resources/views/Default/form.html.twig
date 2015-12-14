@@ -35,9 +35,10 @@
 	{%- endif %}
 {%- endblock time_widget %}
 
+
 {#
 {% block date_widget %}
-<div>
+<div>²
 	<select style="width:27%">
 		<option>s</option>
 	</select><!--
@@ -50,3 +51,25 @@
 </div>
 {% endblock %}
 #}
+
+{% block produits_commande_widget %}
+	<div class="form-produit">
+		<div class="form-produit-input">
+			<input
+				min="1"
+				max="[[ produit.stock ? produit.stock : '99' ]]"
+				ng-model="produit.quantite"
+				id="form[produits][[ '[' + $index + ']' ]][quantite]"
+				name="form[produits][[ '[' + $index + ']' ]][quantite]"
+				type="number"/>
+			<label for="form[produits][[ '[' + $index + ']' ]][quantite]">[[ produit.libelle ]]</label>
+			<input
+				ng-model="produit.id"
+				name="form[produits][[ '[' + $index + ']' ]][produit]"
+				hidden/>
+			<span class="form-produit-price">[[ produit.prix*produit.quantite | price ]]</span>
+		</div>
+		<div class="form-produit-tools"><img ng-click="produits.remove(produit.id)" title="Retirer" src="{{ asset('/public/img/icons/remove.svg') }}"></div>
+		<div ng-show="produit.err" class="form-input-helper err">[[ produit.err ]]</div>
+	</div>
+{% endblock %}

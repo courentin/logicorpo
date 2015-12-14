@@ -18,7 +18,8 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  *                        "mouvement_banque"  = "TransactionBanque",
  *                        "erreur_caisse"     = "TransactionErreurCaisse",
  *                        "remboursement"     = "TransactionRemboursement",
- *                        "frais_adhesion"    = "TransactionFraisAdhesion"})
+ *                        "frais_adhesion"    = "TransactionFraisAdhesion",
+ *                        null                = "Transaction"})
  * @ORM\Table(name="transactionn", indexes={
  *               @ORM\Index(name="transactionn_id_utilisateur_fkey",  columns={"id_utilisateur"}),
  *               @ORM\Index(name="transactionn_id_commande_fkey", columns={"id_commande"}),
@@ -29,7 +30,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  *  repositoryClass="LogiCorpoBundle\Entity\TransactionRepository"
  * )
  */
-abstract class Transaction
+class Transaction
 {
     /**
      * @var integer

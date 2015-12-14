@@ -11,6 +11,7 @@
 		<span class="solde:{{app.user.solde}}"></span>
 	</header>
 	<nav>
+		{#
 		{% for item in items %}
 			{% if item == '|' %}
 			<br/>
@@ -18,7 +19,8 @@
 			<a href="{{path(item.route)}}">{{ item.label }}</a>
 			{% endif %}
 		{% endfor %}
-		<a href="{{path('lc_service_commande_new', {id: 1} )}}">Passer commande</a>
+		#}
+		<a href="{{path('lc_service_commande_new', {idService: 1} )}}">Passer commande</a>
 		<a href="{{path('lc_compte_home')}}">Mon compte</a>
 		<a href="{{path('lc_produit_home')}}">Produits</a>
 		{% if is_granted('ROLE_PARTICIPANT') %}

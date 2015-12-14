@@ -11,6 +11,10 @@ services:
         class: LogiCorpoBundle\Form\ProduitsCommandeType
         tags:
             - { name: form.type }
+    produits_commande_collection:
+        class: LogiCorpoBundle\Form\ProduitsCommandeCollectionType
+        tags:
+            - { name: form.type }
     produit:
         class: LogiCorpoBundle\Form\ProduitType
         tags:

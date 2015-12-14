@@ -1,0 +1,36 @@
+$gris:#595959;
+$rouge:#bf3737;
+$bleu: #2980b9;
+$vert:#27ae60;
+$orange:#e67e22;
+
+$anim-duration:.3s;
+
+@import 'base';
+@import 'form';
+@import 'boutons';
+
+body {
+	background: $gris;
+
+	.box {
+		position: absolute;
+		top:50%;
+		left: 50%;
+		transform:translateX(-50%) translateY(-60%);
+	}
+	.form {
+		h1 {
+			font-size: 2.5em;
+		}
+		background: #FFF;
+		width: 400px;
+		padding: .5em 2em;
+	}
+	.logo {
+		background-image: url(../img/logo-blanc.svg);
+		background-repeat: no-repeat;
+		background-position: center center;
+		height: 170px;
+	}
+}

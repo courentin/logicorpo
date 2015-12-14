@@ -1,0 +1,20 @@
+.card {
+	box-shadow: 0 1px 2px #AAA;
+	border-radius: 3px;
+}
+.card-style {
+	font-size: 1rem;
+	padding: 1rem;
+
+	.card-actions {
+		color: $bleu;
+		font-weight: normal;
+		text-align: right;
+		text-transform: uppercase;
+		margin-top: .5em;
+		font-size: 1.2em;
+		* {
+			margin: 0 .5em;
+		}
+	}
+}

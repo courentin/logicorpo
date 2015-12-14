@@ -3,12 +3,15 @@ namespace LogiCorpoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JsonSerializable;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(
+ *   repositoryClass="LogiCorpoBundle\Entity\CategorieRepository"
+ * )
  * @ORM\Table(name="Categorie")
  */
-class Categorie
+class Categorie implements JsonSerializable
 {
 	/**
 	 * @ORM\Id
@@ -42,6 +45,13 @@ class Categorie
 		$this->produits = new ArrayCollection();
 	}
 
+    public function jsonSerialize() {
+    	return array(
+    		'libelle' => $this->getLibelle(),
+    		'libellePluriel' => $this->getLibellePluriel(),
+    		'produits' => $this->getProduits()->toArray()
+    	);
+    }
 
 	public function getId() {
 		return $this->id;

@@ -109,9 +109,9 @@ class Produit implements JsonSerializable
             'id'        => $this->getId(),
             'libelle'   => $this->getLibelle(),
             'stock'     => $this->getStock(),
+            'dispo'     => $this->isDispo(),
             'prixVente' => $this->getPrixVente(),
-            'prixAchat' => $this->getPrixAchat(),
-            'stock'     => $this->getStock(),
+            'prixAchat' => $this->getPrixAchat()
         );
     }
 
@@ -258,7 +258,7 @@ class Produit implements JsonSerializable
      *
      * @return boolean 
      */
-    public function getDispo()
+    public function isDispo()
     {
         return $this->dispo;
     }
@@ -306,7 +306,12 @@ class Produit implements JsonSerializable
     }
 
     public function addStock($number) {
-        if($this->solde !=null) $this->stock += $number;
+        if($this->stock !=null) $this->stock += $number;
+        return $this;
+    }
+
+    public function removeStock($number) {
+        if($this->stock !=null) $this->stock -= $number;
         return $this;
     }
 

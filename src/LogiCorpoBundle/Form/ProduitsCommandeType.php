@@ -40,7 +40,8 @@ class ProduitsCommandeType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'LogiCorpoBundle\Entity\ProduitsCommande'
+			'data_class' => 'LogiCorpoBundle\Entity\ProduitsCommande',
+			'cascade_validation' => true
 		));
 	}
 }

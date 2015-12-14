@@ -32,11 +32,10 @@ class ProduitController extends Controller
 	public function jsonListAction()
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repository = $em->getRepository('LogiCorpoBundle:Produit');
-		$produits = $repository->getProductsByCategory();
+		$categorieRep = $em->getRepository('LogiCorpoBundle:Categorie');
 
 		$response = new JsonResponse();
-		$response->setData($produits);
+		$response->setData($categorieRep->getProduits());
 
 		return $response;
 	}

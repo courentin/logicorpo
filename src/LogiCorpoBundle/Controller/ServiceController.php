@@ -3,19 +3,13 @@
 namespace LogiCorpoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use LogiCorpoBundle\Entity\Service;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use LogiCorpoBundle\Form\ServiceType;
-use LogiCorpoBundle\Form\CommandeType;
 use LogiCorpoBundle\Entity\Commande;
 use LogiCorpoBundle\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Collections\Collection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class ServiceController extends Controller
 {
@@ -42,7 +36,6 @@ class ServiceController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery("SELECT c FROM LogiCorpoBundle:Commande c JOIN LogiCorpoBundle:ProduitsCommande p WHERE c.service = :service")
 			->setParameter('service', $service);
-			dump($query->getResult());
 		return $this->render('LogiCorpoBundle:Service:effectuer.html.twig',[
 			'service'   => $service,
 			'commandes' => $query->getResult()
@@ -91,7 +84,10 @@ class ServiceController extends Controller
 		return $this->render('LogiCorpoBundle:Service:nouveau.html.twig', ['form' => $form]);
 	}
 
-	public function nouvelleCommandeAction($id, Service $service, Request $req, Utilisateur $user = null) {
+	/**
+	 * @ParamConverter("service", class="LogiCorpoBundle:Service", options={"id" = "idService"})
+	 */
+	public function nouvelleCommandeAction(Service $service, Request $req, Utilisateur $user = null) {
 		if($user === null) $user = $this->getUser();
 		$produitRep = $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Produit');
 		$lastProducts = $produitRep->getLastOrder($user,5,4);
@@ -102,13 +98,14 @@ class ServiceController extends Controller
 				->add('Commander', 'submit');
 		*/
 		$form = $this->get('form.factory')->createBuilder('form', $commande)
-		     ->add('produits', 'collection', array(
-		     	'type' => 'produits_commande',
+		     ->add('produits', 'collection', [
+		    	'type' => 'produits_commande',
 				'allow_add'          => true,
 				'allow_delete'       => true,
 				'cascade_validation' => true,
-				'by_reference'       => false
-		     ))
+				'by_reference'       => false,
+				'label'              => ''
+		     ])
 			 ->add('Commander', 'submit')
 			 ->getForm();
 
@@ -130,6 +127,7 @@ class ServiceController extends Controller
 				}
 			}
 		}
+		dump($_POST);
 		return $this->render('LogiCorpoBundle:Service:nouvelleCommande.html.twig', [
 			'lastProductsCommande' => $lastProducts,
 			'form' => $form->createView()

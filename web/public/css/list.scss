@@ -1,0 +1,46 @@
+@import "card";
+.list {
+  .item {
+    @extend .card;
+    margin: 1em 0;
+    .item-title {
+      font-size: 1.9em;
+      cursor: pointer;
+      padding: .4em 1.2em;
+      background-image: url(../img/icons/right.svg);
+      background-repeat:no-repeat;
+      background-position: right;
+      border-bottom: 1px solid #E6E6E6;
+    }
+    .item-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-size: 1.4em;
+      li {
+        padding: .4em 1.4em;
+        border-bottom: 1px solid #E6E6E6;
+        cursor: pointer;
+      }
+      li.disable {
+        cursor:not-allowed;
+        background: #f6f6f6;
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+
+.list-produit-actions {
+  float: right;
+  * {
+    opacity: .7;
+    vertical-align: middle;
+  }
+}
+
+.list-produit-price {
+  float: right;
+  font-size: 1.2em;
+}

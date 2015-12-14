@@ -1,0 +1,19 @@
+.menu.hidden {
+	transform:translateX(-100%);
+	.tools {
+		transform:translateX(100%);
+		button {
+			background-color: rgba(0,0,0,.5);
+			&:hover {
+				background-color: rgba(0,0,0,.7);
+			}
+		}
+		#tools-toogle-menu {
+			background-image: url(../img/icons/menu.svg);
+		}
+	}
+}
+
+.menu.hidden + .content {
+	margin-left: 0;
+}

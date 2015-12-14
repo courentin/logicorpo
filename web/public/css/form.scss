@@ -1,0 +1,271 @@
+.form {
+	font-size: 1rem;
+
+	.form-input-base {
+		border:1px solid #bdbdbd;
+		padding: .4em 1em;
+		border-radius: 5px;
+		color:#858585;
+		font-size: 1.15em;
+		font-weight: lighter;
+		box-shadow: none;
+		background: #FFF;
+		box-sizing:border-box;
+		transition:all $anim-duration;
+
+		&:focus {
+			color:#000;
+		}
+		&:focus:invalid {
+			border-color: $rouge;
+		}
+		&:focus:valid {
+			border-color: $vert;
+		}
+	}
+
+	.form-label-base {
+		color: #828282;
+		margin: 0 0 .1em 0;
+		font-size: 1.53em;
+	}
+
+	input[type="submit"], input[type="button"], button  {
+		background: none;
+		color: $gris;
+		font-weight: lighter;
+		cursor: pointer;
+		@extend .btn;
+	}
+
+	input[disabled] {
+		background-image: url(../img/icons/motif-diago.png);
+		opacity: .7;
+	}
+
+	.form-specialcheck {
+		@extend .form-input-base;
+		position: relative;
+		display: inline-block;
+		width: 300px;
+		* {
+			cursor: pointer;
+		}
+		i {
+			font-style: normal;
+		}
+		input[type="text"] {
+			font-weight: lighter;
+			border:none;
+			position: absolute;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background: none;
+			padding: 0 .3em;
+			width: 2em;
+			font-size: 1em;
+			color: #858585;
+			text-align: center;
+		}
+		input[type="checkbox"] {
+			display: none;
+		}
+		.form-specialcheck-label {
+			padding-left: 1.4em;
+			height: 100%;
+		}
+		.form-specialcheck-prix {
+			position: absolute;
+			right: .4em;
+			text-align: right;
+		}
+	}
+	.form-specialcheck.checked {
+		background: #909090;
+		border-color: #909090;
+		color: #FFF;
+		input[type="text"] {
+			color:#FFF;
+		}
+	}
+
+	.form-specialcheck.indispo {
+		background-image: url(../img/icons/motif-diago.png);
+		color: #878787;
+		cursor: initial;
+		text-decoration: line-through;
+	}
+
+	.form-produit {
+		display: inline-block;
+		transition: all $anim-duration;
+		margin: .5em 0;
+		.form-produit-input {
+			@extend .form-input-base;
+			width: 25em;
+			display: inline-block;
+
+			label {
+				font-size: 1.2em;
+			}
+			input[type="number"] {
+				margin-right: 0.5em;
+				background: none;
+				border: none;
+				width: 2em;
+				color:#858585;
+				font-size: 1.15em;
+				font-weight: lighter;
+			}
+			.form-produit-price {
+				float: right;
+				font-size: 1.2em;
+			}
+		}
+		.form-produit-tools {
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: .4em;
+			img {
+				width: 1.7em;
+				opacity: 0;
+				transition: all $anim-duration*0.6;
+				cursor: pointer;
+			}
+		}
+		&:hover .form-produit-tools img {
+			opacity: .4;
+		}
+
+		.form-input-helper {
+			position: absolute;
+			color: #757575;
+			font-size: .9em;
+			line-height: 1em;
+			margin-top: .4em;
+			margin-bottom: .4em;
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				li {
+					margin: 0;
+					padding: 0;
+				}
+			}
+		}
+		.form-input-helper.err {
+			color: $rouge;
+		}
+	}
+
+
+	.form-input {
+		margin-bottom: 1.5em;
+		position: relative;
+		vertical-align: bottom;
+		display: table;
+		p {
+			@extend .form-label-base;
+		}
+		input {
+			position: relative;
+			width: 15em;
+			margin: 0;
+			@extend .form-input-base;
+			-webkit-appearance:none;
+			-moz-appearance:none;
+			appearance:none;
+		}
+		select {
+			@extend .form-input-base;
+			-webkit-appearance:none;
+			-moz-appearance:none;
+			appearance:none;
+			width: 15em;
+			background-image: url(../img/icons/down.svg);
+			background-size: 1em;
+			background-repeat: no-repeat;
+			background-position: right 9px center;
+			padding-right: 30px;
+		}
+
+		textarea {
+			@extend .form-input-base;
+			
+		}
+		span {
+			color: #858585;
+			font-size: 1.2em;
+			position: absolute;
+			right: 12px;
+			bottom:.4em;
+		}
+		.form-input-helper {
+			position: absolute;
+			color: #757575;
+			font-size: .9em;
+			line-height: 1em;
+			margin-top: .5em;
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				li {
+					margin: 0;
+					padding: 0;
+				}
+			}
+		}
+		.form-input-helper.err {
+			color: $rouge;
+		}
+	}
+
+	.form-check {
+		color: #828282;
+		font-size: 1.53em;
+		vertical-align: middle;
+		input {
+
+			margin: 0 .5em;
+			vertical-align: middle;
+		}
+	}
+
+	.form-partition {
+		position: relative;
+		p {
+			@extend .form-label-base;
+		}
+		input {
+			width: 15em;
+			margin: 0;
+			-webkit-appearance:none;
+			-moz-appearance:none;
+			appearance:none;
+			margin-top: 2.7em;
+		}
+		.form-partition-label {
+			position: absolute;
+			span {
+				display: block;
+				line-height: 1;
+				font-size: 1.2em;
+				padding-bottom: 22px;
+			}
+		}
+		.form-partition-left {
+			@extend .form-partition-label;
+			border-left:1px solid rgb(100,100,100);
+			margin-left: 19px;
+			padding-left: 10px;
+		}
+		.form-partition-right {
+			@extend .form-partition-label;
+			text-align: right;
+			right: 0;
+		}
+	}
+}

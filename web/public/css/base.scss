@@ -1,0 +1,122 @@
+/*
+Style des elements de base
+*/
+* {
+	outline: none none !important;
+	font-family: "Open Sans", sans-serif;
+}
+*:focus {outline:0;}
+html {
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+	color: #000;
+	margin: 0;
+	font-weight: lighter;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: lighter;
+}
+
+hr {
+	border:0;
+	border-bottom:1px solid;
+	border-color: #e9e9e9;
+}
+
+.line-sep {
+	border-bottom: 4px dotted $bleu;
+	position: relative;
+	z-index: -100;
+	&:before {
+		content: '';
+		background: url(../img/icons/position.svg) no-repeat;
+		width: 26px;
+		transform: rotate(-90deg);
+		height: 30px;
+		display: block;
+		position: absolute;
+		left: -30px;
+		bottom: -15px;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		height: 292px;
+		margin-top: -292px;
+	}
+}
+
+dl {
+	font-size: 1.2rem;
+	dt {
+		background:#5f9be3;
+		color:#fff;
+		float:left;
+		font-weight: normal;
+		margin-right:10px;
+		padding:5px;  
+		min-width:10em;
+		text-align: right; 
+	}
+
+	dd {
+		margin:2px 0; 
+		padding:5px 0;
+		border-bottom: 1px solid #5f9be3
+	}
+}
+
+.cb {
+	clear: both;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+button {
+	background: none;
+	border: none;
+}
+.lien {
+	text-decoration: underline;
+}
+/*
+Represente les infos de l'utilisateur (nom, prenom, solde)
+*/
+.user-infos {
+	.user-name {
+		font-size: 1em;
+		margin: 0 0 0 0;
+		margin-bottom: -.42em;
+		word-wrap: break-word;
+	}
+
+	.user-role {
+		display:block;
+		font-size: .5em;
+		margin-top: .5em;
+	}
+
+}
+	.user-solde {
+		font-size: .55em;
+		margin: 0;
+		padding: 0em .4em;
+		border-radius: 3px;
+		background: $bleu;
+		color: #FFF;
+
+	}
+	.user-solde.negative {
+		background: $rouge;
+	}

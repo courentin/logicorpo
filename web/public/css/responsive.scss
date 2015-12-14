@@ -1,0 +1,21 @@
+/* Tablette */
+@media screen and (max-width: 1000px) {
+	.content {
+		padding: 0 20px;
+	}
+
+	.commande-btn-bottom {
+		right: 2em;
+	}
+}
+
+/* Phone */
+@media screen and (max-width: 630px) {
+	.menu {
+		width: 100%;
+		z-index: 100;
+	}
+	.commande-btn-bottom {
+		right: 1em;
+	}
+}
