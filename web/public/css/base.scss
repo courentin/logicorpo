@@ -2,7 +2,7 @@
 Style des elements de base
 */
 * {
-	outline: none none !important;
+	outline: none !important;
 	font-family: "Open Sans", sans-serif;
 }
 *:focus {outline:0;}
@@ -111,7 +111,7 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
 	.user-solde {
 		font-size: .55em;
 		margin: 0;
-		padding: 0em .4em;
+		padding: 0 .4em;
 		border-radius: 3px;
 		background: $bleu;
 		color: #FFF;
