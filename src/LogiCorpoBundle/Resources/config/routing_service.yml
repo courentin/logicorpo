@@ -2,6 +2,31 @@ lc_service_home:
     path:     /
     defaults: { _controller: LogiCorpoBundle:Service:index }
 
+lc_service_commander:
+    path: /commander
+    defaults: { _controller: LogiCorpoBundle:Service:mesCommandes }
+
+lc_service_commande_new:
+    path:     /{idService}/commande/new
+    defaults: { _controller: LogiCorpoBundle:Service:nouvelleCommande }
+    requirements:
+        idService: \d+
+
+lc_service_commande_edit:
+    path:     /{idService}/commande/{idCommande}/edit
+    defaults: { _controller: LogiCorpoBundle:Service:editCommande }
+    requirements:
+        idService: \d+
+        idCommande: \d+
+    methods: [GET, POST]
+
+lc_service_commande_delete:
+    path:     /{idService}/commande/{idCommande}/delete
+    defaults: { _controller: LogiCorpoBundle:Service:deleteCommande }
+    requirements:
+        idService: \d+
+        idCommande: \d+
+
 lc_service_do_choice:
     path:     /effectuer
     defaults: { _controller: LogiCorpoBundle:Service:effectuerChoice }
@@ -12,19 +37,13 @@ lc_service_do:
     requirements:
         id: \d+
 
+
 lc_service_commande_json:
     path:     /{idService}/commande/{idCommande}
     defaults: { _controller: LogiCorpoBundle:Service:commandeJson }
     requirements:
         idService:  \d+
         idCommande: \d+
-
-
-lc_service_do_api:
-    path:     /effectuer/api/{id}
-    defaults: { _controller: LogiCorpoBundle:Service:effectuerApi }
-    requirements:
-        id: \d+
 
 lc_service_new_now:
     path:     /nouveau/now
@@ -33,9 +52,3 @@ lc_service_new_now:
 lc_service_new:
     path:     /nouveau/
     defaults: { _controller: LogiCorpoBundle:Service:nouveau }
-
-lc_service_commande_new:
-    path:     /{idService}/commande/nouvelle
-    defaults: { _controller: LogiCorpoBundle:Service:nouvelleCommande }
-    requirements:
-        idService: \d+

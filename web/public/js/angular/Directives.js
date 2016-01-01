@@ -25,6 +25,22 @@ logicorpo.directive('popup', function() {
 	};
 });
 
+logicorpo.directive('ngRange', function() {
+	return {
+		scope: {
+			min: '@', max: '@', cursorMin: '@', cursorMax: '@'
+		},
+		link: function(scope, element, attrs) {
+
+			element.css('padding-left', '50px');
+			element.css('padding-right', '50px');
+			scope.down = function() {
+				console.log('okok');
+			}
+		}
+	};
+});
+
 logicorpo.filter('capitalize', function() {
     return function(input, all) {
       var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
@@ -38,6 +54,16 @@ logicorpo.filter('price',
 		return function(amount, currencySymbol) {
 			if(amount == 0) return "Gratuit";
 			else return currencyFilter(amount, currencySymbol);
+		}
+	}]
+);
+
+logicorpo.filter('hours',
+	[ '$filter', function(filter) {
+		return function(minutes) {
+			h = Math.trunc(minutes /60);
+			m = minutes%60;
+			return m>0 ? h+"h"+m : h+"h";
 		}
 	}]
 );

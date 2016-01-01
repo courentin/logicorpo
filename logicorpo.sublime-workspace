@@ -419,7 +419,7 @@
 			"file": "src/LogiCorpoBundle/Resources/views/Default/form.html.twig",
 			"settings":
 			{
-				"buffer_size": 2444,
+				"buffer_size": 2497,
 				"line_ending": "Unix"
 			}
 		},
@@ -427,7 +427,7 @@
 			"file": "src/LogiCorpoBundle/Controller/ServiceController.php",
 			"settings":
 			{
-				"buffer_size": 4573,
+				"buffer_size": 4246,
 				"line_ending": "Unix"
 			}
 		},
@@ -435,7 +435,7 @@
 			"file": "src/LogiCorpoBundle/Resources/views/Service/nouvelleCommande.html.twig",
 			"settings":
 			{
-				"buffer_size": 2041,
+				"buffer_size": 2361,
 				"line_ending": "Unix"
 			}
 		},
@@ -443,7 +443,7 @@
 			"file": "web/public/js/angular/MainCtrl.js",
 			"settings":
 			{
-				"buffer_size": 4256,
+				"buffer_size": 3821,
 				"line_ending": "Windows"
 			}
 		}
@@ -703,15 +703,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2444,
+						"buffer_size": 2497,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1971,
-								1971
+								0,
+								0
 							]
 						],
 						"settings":
@@ -733,15 +733,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4573,
+						"buffer_size": 4246,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3758,
-								3758
+								3576,
+								3576
 							]
 						],
 						"settings":
@@ -763,15 +763,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2041,
+						"buffer_size": 2361,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								678,
-								678
+								0,
+								0
 							]
 						],
 						"settings":
@@ -793,15 +793,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4256,
+						"buffer_size": 3821,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2730,
-								2730
+								0,
+								0
 							]
 						],
 						"settings":

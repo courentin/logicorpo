@@ -419,6 +419,47 @@ Represente les infos de l'utilisateur (nom, prenom, solde)
   .btn-rouge:hover {
     background: #bf3737; }
 
+.range {
+  background: #eaeaea;
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 50px;
+  margin-top: 30px;
+  box-sizing: border-box;
+  transition: all .1s;
+  border-radius: 50px; }
+  .range .range-slide {
+    background: #2980b9;
+    height: 4px;
+    width: 100%;
+    border-radius: 100px;
+    margin: .4em 0;
+    position: relative; }
+    .range .range-slide .range-slide-grip {
+      border: 3px solid #2980b9;
+      background: #FFF;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      cursor: pointer; }
+      .range .range-slide .range-slide-grip:first-child {
+        left: 0;
+        transform: translateY(-50%) translateX(-50%); }
+      .range .range-slide .range-slide-grip:last-child {
+        right: 0;
+        transform: translateY(-50%) translateX(50%); }
+      .range .range-slide .range-slide-grip span {
+        position: absolute;
+        text-align: center;
+        transform: translateX(-50%); }
+      .range .range-slide .range-slide-grip .range-slide-left-value {
+        top: -27px;
+        font-weight: normal; }
+      .range .range-slide .range-slide-grip .range-slide-left-label {
+        bottom: -50px; }
+
 body {
   background: #595959; }
   body .box {

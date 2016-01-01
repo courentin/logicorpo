@@ -97,6 +97,12 @@ dmishh_settings:
                 options:
                     required: false
 
+        autoriserCommandeMultiple:
+            validation:
+                type: checkbox
+                options:
+                    required: false
+
         debutService:
             validation:
                 type: time

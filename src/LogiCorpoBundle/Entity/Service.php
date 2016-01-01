@@ -59,14 +59,22 @@ class Service
      *   targetEntity="LogiCorpoBundle\Entity\Commande",
      *   mappedBy="service"
      * )
+     * @ORM\OrderBy({"date" = "ASC"})
      */
     private $commandes;
+
+    public function __construct()
+    {
+        $this->commandes  = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @Assert\True
      */
     public function datesAreCorrect() {
-        return $debutCommande <= $finCommande && $debut <= $fin && $finCommande <= $fin;
+        return $this->debutCommande <= $this->finCommande
+            && $this->debut <= $this->fin
+            && $this->finCommande <= $this->fin;
     }
 
     public function getCommandes() {

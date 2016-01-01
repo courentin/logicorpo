@@ -48,7 +48,7 @@
 			 	><img src="{{asset('/public/img/icons/money.svg')}}"></button>
 			</div>
 		</div>
-		<div ng-init="commande.show=true" ng-class="{hide: !commande.show}" class="commande-products">
+		<div class="commande-products">
 			<ul>
 				<li ng-repeat="produit in commande.produits"><span>[[ produit.quantite ]]</span>[[ produit.produit.libelle ]]</li>
 				<li ng-hide="commande.produits.length"><span></span>Aucun produit</li>

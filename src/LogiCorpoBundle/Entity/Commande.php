@@ -12,10 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="commande", indexes={
  *       @ORM\Index(name="commande_id_utilisateur_fkey", columns={"id_utilisateur"}),
- *       @ORM\Index(name="commande_id_transaction_fkey", columns={"id_transaction"}),
  *       @ORM\Index(name="commande_id_service_fkey", columns={"id_service"})
  * })
- * @ORM\Entity
+ * @ORM\Entity( repositoryClass="LogiCorpoBundle\Entity\CommandeRepository")
  */
 class Commande implements JsonSerializable
 {
@@ -76,16 +75,13 @@ class Commande implements JsonSerializable
     /**
      * @var LogiCorpoBundle\Entity\Transaction\TransactionCommande
      *
-     * @ORM\ManyToOne(targetEntity="LogiCorpoBundle\Entity\Transaction\TransactionCommande")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_transaction", referencedColumnName="id_transaction")
-     * })
+     * @ORM\OneToMany(targetEntity="LogiCorpoBundle\Entity\Transaction\TransactionCommande", mappedBy="commande")
      */
-    private $transaction;
+    private $transactions;
 
     /**
      * @var ProduitsCommande
-     * @ORM\OneToMany(targetEntity="ProduitsCommande", mappedBy="commande", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ProduitsCommande", mappedBy="commande", cascade={"persist", "remove"})
      * @Assert\Valid()
      */
     private $produits;
@@ -99,6 +95,16 @@ class Commande implements JsonSerializable
     public function __toString()
     {
         return "#$this->id";
+    }
+
+    public function preSave()
+    {
+        $montantTransaction = 0;
+        foreach ($this->transactions as $transaction) {
+            $montantTransaction += $transaction->getMontant();
+        }
+        if($montantTransaction == $this->getMontant()) $this->paye = true;
+        else $this->paye = false;
     }
 
     public function getProduits()
@@ -168,9 +174,9 @@ class Commande implements JsonSerializable
      * @param \LogiCorpoBundle\Entity\Transaction $transaction
      * @return Commande
      */
-    public function setTransaction(\LogiCorpoBundle\Entity\Transaction\Transaction $transaction = null)
+    public function setTransactions(\LogiCorpoBundle\Entity\Transaction\TransactionCommande $transactions = null)
     {
-        $this->transaction = $transaction;
+        $this->transactions = $transactions;
 
         return $this;
     }
@@ -180,20 +186,19 @@ class Commande implements JsonSerializable
      *
      * @return \LogiCorpoBundle\Entity\Transaction
      */
-    public function getTransaction()
+    public function getTransactions()
     {
-        return $this->transaction;
+        return $this->transactions;
     }
 
-
-    public function addTransaction(\LogiCorpoBundle\Entity\Transaction\Transaction $transaction)
+    public function addTransaction(\LogiCorpoBundle\Entity\Transaction\TransactionCommande $transaction)
     {
-        $this->transactions[] = $transaction;
+        $this->transactions->add($transaction);
 
         return $this;
     }
 
-    public function removeTransaction(\LogiCorpoBundle\Entity\Transaction\Transaction $transaction)
+    public function removeTransaction(\LogiCorpoBundle\Entity\Transaction\TransactionCommande $transaction)
     {
         $this->transaction->removeElement($transaction);
     }
@@ -283,5 +288,10 @@ class Commande implements JsonSerializable
             'produits'    => $this->getProduits()->toArray(),
             'montant'     => $this->getMontant()
         );
+    }
+
+    public function isEditable()
+    {
+        return new \DateTime() < $this->service->getDebut() && !$this->paye && !$this->servie;
     }
 }

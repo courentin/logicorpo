@@ -2,6 +2,7 @@ labels:
     seuil: Seuil
     montantAdhesion: "Frais d'adhesion"
     interdictionCommandeSeuil: "Autoriser les commandes en dessous du seuil"
+    autoriserCommandeMultiple: "Autoriser les commandes multiple"
     debutService: Debut de service
     finService: Fin de service
     debutCommande: Début des commandes

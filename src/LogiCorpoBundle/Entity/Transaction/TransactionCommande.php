@@ -13,7 +13,7 @@ class TransactionCommande extends Transaction
     /**
      * @var LogiCorpoBundle\Entity\Commande
      *
-     * @ORM\ManyToOne(targetEntity="LogiCorpoBundle\Entity\Commande")
+     * @ORM\ManyToOne(targetEntity="LogiCorpoBundle\Entity\Commande", inversedBy="transactions")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_commande", referencedColumnName="id_commande")
      * })

@@ -11,11 +11,11 @@ class LoadRangData extends AbstractFixture implements OrderedFixtureInterface
 	public function load(ObjectManager $manager)
 	{
 		$rangs = array(
-			array('NON_MEMBRE', 'Non-membre', false, '€'),
-			array('MEMBRE', 'Membre', true, '€'),
-			array('PARTICIPANT', 'Participant', true, '€'),
-			array('TRESORIER', 'Trésorier', true, '€'),
-			array('PRESIDENT', 'Président', true, '€'),
+			array('NON_MEMBRE', 'Non-membre', 0.00, '€'),
+			array('MEMBRE', 'Membre', 0.05, '€'),
+			array('PARTICIPANT', 'Participant', 0.05, '€'),
+			array('TRESORIER', 'Trésorier', 0.05, '€'),
+			array('PRESIDENT', 'Président', 0.05, '€'),
 		);
 
 		foreach ($rangs as list($slug, $nom, $reduc, $typeReduc)) {
@@ -26,7 +26,7 @@ class LoadRangData extends AbstractFixture implements OrderedFixtureInterface
 			     ->setTypeReduc($typeReduc);
 
 			$manager->persist($rang);
-			$this->setReference($slug);
+			$this->setReference($slug, $rang);
 		}
 		$manager->flush();
 	}

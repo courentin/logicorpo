@@ -22,6 +22,20 @@
 			{{ form_row(settings_form.finService) }}
 			{{ form_row(settings_form.finCommande) }}
 		</div>
+		{{ form_row(settings_form.autoriserCommandeMultiple) }}
+		<div class="cb"></div>
+		<div class="range" ng-range="{min: 420, max: 960, cursorMin: 540, cursorMax: 750 }">
+			<div class="range-slide">
+				<div class="range-slide-grip" ng-mousedown="console.log('ok')">
+					<span class="range-slide-left-value">9h30</span>
+					<span class="range-slide-left-label">Début des commandes</span>
+				</div>
+				<div class="range-slide-grip">
+					<span class="range-slide-left-value">[[ 750 | hours ]]</span>
+					<span class="range-slide-left-label">Fin des commandes</span>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="cb"></div>
 	<hr/>

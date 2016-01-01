@@ -4,12 +4,14 @@ namespace LogiCorpoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LogiCorpoBundle\Entity\Service;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use LogiCorpoBundle\Form\ServiceType;
 use LogiCorpoBundle\Entity\Commande;
 use LogiCorpoBundle\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ServiceController extends Controller
 {
@@ -84,11 +86,20 @@ class ServiceController extends Controller
 		return $this->render('LogiCorpoBundle:Service:nouveau.html.twig', ['form' => $form]);
 	}
 
+
 	/**
 	 * @ParamConverter("service", class="LogiCorpoBundle:Service", options={"id" = "idService"})
 	 */
 	public function nouvelleCommandeAction(Service $service, Request $req, Utilisateur $user = null) {
 		if($user === null) $user = $this->getUser();
+
+		// si la commande multiple est fausse et que l'utilisateur a déjà une commande -> redirect
+		$commandeRep = $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Commande');
+		if(!$this->get('settings_manager')->get('autoriserCommandeMultiple')
+		  && !empty($commandeRep->getCommandes($service, $user))) {
+			throw new AccessDeniedException();
+		}
+
 		$produitRep = $this->getDoctrine()->getManager()->getRepository('LogiCorpoBundle:Produit');
 		$lastProducts = $produitRep->getLastOrder($user,5,4);
 
@@ -122,15 +133,58 @@ class ServiceController extends Controller
 				try {
 					$em->flush();
 					$req->getSession()->getFlashBag()->add('success', "La commande $commande a bien été enregistré.");
+					return $this->redirectToRoute('lc_service_commander');
 				} catch(\Exception $e) {
 					$req->getSession()->getFlashBag()->add('err', "Erreur, la commande $commande n'a pas été enregistré.");
 				}
 			}
 		}
-		dump($_POST);
+
 		return $this->render('LogiCorpoBundle:Service:nouvelleCommande.html.twig', [
 			'lastProductsCommande' => $lastProducts,
 			'form' => $form->createView()
 		]);
+	}
+
+	/**
+	 * @ParamConverter("service", class="LogiCorpoBundle:Service", options={"id" = "idService"})
+	 * @ParamConverter("commande", class="LogiCorpoBundle:Commande", options={"id" = "idCommande"})
+	 */
+	public function deleteCommandeAction(Service $service, Commande $commande, Request $request) {
+		// si c'est ma commande ou si je suis adherent -> ok
+		if(!($this->get('security.authorization_checker')->isGranted('ROLE_PARTICIPANT')
+		  || $commande->getUtilisateur() == $this->getUser())) {
+			$this->get('session')->getFlashBag()->add('err', "Vous n'êtes pas autorisé à supprimer la commande $commande");
+			throw $this->createAccessDeniedException();
+		}
+		if($commande->getTransactions()->count() > 0) {
+			$this->get('session')->getFlashBag()->add('err', "La commande $commande ne peut pas être supprimée car elle est associée à une transaction.");
+			throw $this->createAccessDeniedException();
+		}
+
+		if(!$this->get('security.authorization_checker')->isGranted('ROLE_PARTICIPANT')
+			&& !$commande->isEditable()) {
+			$this->get('session')->getFlashBag()->add('err', "La commande $commande ne peut pas être supprimée car le service a déjà débuté.");
+			throw $this->createAccessDeniedException();
+		}
+
+		$em = $this->getDoctrine()->getEntityManager();
+		$em->remove($commande);
+		try {
+			$title = $commande->__toString();
+			$em->flush();
+			$this->get('session')->getFlashBag()->add('succes', "La commande $title a bien été supprimée.");
+		} catch(\Exception $e) {
+			$this->get('session')->getFlashBag()->add('err', "Erreur, la commande $commande ne peut pas être supprimée.");
+		}
+		$referer = $request->headers->get('referer');
+		return $this->redirect($referer);
+	}
+
+	public function mesCommandesAction() {
+		$serviceRep = $this->getDoctrine()->getEntityManager()->getRepository('LogiCorpoBundle:Service');
+
+		$services = $serviceRep->getServicesAndCommandes($this->getUser());
+		return $this->render('LogiCorpoBundle:Commande:home.html.twig', ['services' => $services]);
 	}
 }

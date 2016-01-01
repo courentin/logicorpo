@@ -4,12 +4,13 @@ namespace LogiCorpoBundle\DataFixtures;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use LogiCorpoBundle\Entity\Utilisateur;
 
 class LoadUtilisateurData extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function load(ObjectManager $manager)
 	{
-		$utilisateur = new utilisateur();
+		$utilisateur = new Utilisateur();
 		$utilisateur
 			->setUsername('admin')
 			->setNom('')

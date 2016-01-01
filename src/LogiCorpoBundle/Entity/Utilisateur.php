@@ -91,7 +91,7 @@ class Utilisateur implements UserInterface, JsonSerializable
 	private $lastLog = null;
 
 	/**
-	 * @var \Rang
+	 * @var \LogiCorpoBundle\Entity\Rang
 	 *
 	 * @ORM\ManyToOne(targetEntity="Rang")
 	 * @ORM\JoinColumns({
@@ -303,7 +303,7 @@ class Utilisateur implements UserInterface, JsonSerializable
 		return $this->lastLog;
 	}
 
-	public function neverLogged() {
+	public function hasNeverLogin() {
 		return $this->lastLog===null;
 	}
 

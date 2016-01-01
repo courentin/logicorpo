@@ -24,7 +24,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 	{
 		$user = $token->getUser();
 
-		if(null === $user->getLastLog()) {
+		if($user->hasNeverLogin()) {
 			$response = new RedirectResponse($this->router->generate('lc_compte_mdp'));
 		} else {
 			$response = new RedirectResponse($this->router->generate('lc_homepage'));

@@ -1,0 +1,50 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Commander' %}
+
+{% block content %}
+    {% for service in services %}
+        <h2 class="content-title">Service de {{ service.debut | date("G\\hi") }}</h2>
+        {% if get_setting('autoriserCommandeMultiple') or service.commandes is empty %}
+            <a href="{{ path('lc_service_commande_new', {idService: service.id} ) }}" class="btn">Passer commande</a>
+        {% endif %}
+        <br/><br/>
+        {% for commande in service.commandes %}
+            <div class="commande">
+                <div class="commande-infos {{ commande.etat }}">
+                    <div class="commande-user">Commande {{ commande }}</div>
+                    <div class="commande-price">[[ {{ commande.montant }} | price ]]</div>
+                    <div class="commande-btn-bottom">
+                        <button
+                        {% if commande.isEditable %}
+                                title="Modifier la commande"
+                        {% else %}
+                                title="La commande n'est plus modifiable"
+                        {% endif %}
+                                class="material-btn-float {{ not commande.isEditable ? 'disable' }}"
+                        ><img src="{{asset('/public/img/icons/modifier.svg')}}"></button><!--
+                     --><button
+                        {% if commande.isEditable %}
+                                title="Supprimer la commande"
+                        {% else %}
+                                title="La commande n'est plus supprimable"
+                        {% endif %}
+                                onclick="location.href='{{ path('lc_service_commande_delete', { idService: service.id, idCommande: commande.id }) }}';"
+                                class="material-btn-float {{ not commande.isEditable ? 'disable' }}"
+                        ><img src="{{asset('/public/img/icons/delete.svg')}}"></button>
+                    </div>
+                </div>
+                <div class="commande-products">
+                    <ul>
+                        {% for produit in commande.produits %}
+                            <li><span>{{ produit.quantite }}</span>{{ produit }}</li>
+                        {% else %}
+                            <li><span></span>Aucun produit</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="content-title">Aucun service aujourd'hui :(</h2>
+    {% endfor %}
+{% endblock %}

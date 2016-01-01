@@ -75,7 +75,6 @@ class ProduitsCommande implements JsonSerializable
      */
     public function isQuantiteDisponible()
     {
-        dump('je passe là');
         return $this->getProduit()->getStock() === null || $this->quantite <= $this->getProduit()->getStock();
     }
 

@@ -20,20 +20,20 @@
 			{% endif %}
 		{% endfor %}
 		#}
-		<a href="{{path('lc_service_commande_new', {idService: 1} )}}">Passer commande</a>
-		<a href="{{path('lc_compte_home')}}">Mon compte</a>
-		<a href="{{path('lc_produit_home')}}">Produits</a>
+		<a href="{{ path('lc_service_commander') }}">Passer commande</a>
+		<a href="{{ path('lc_compte_home') }}">Mon compte</a>
+		<a href="{{ path('lc_produit_home') }}">Produits</a>
 		{% if is_granted('ROLE_PARTICIPANT') %}
-		<a href="{{path('lc_service_do_choice')}}">Effectuer un service</a>
+		<a href="{{ path('lc_service_do_choice') }}">Effectuer un service</a>
 		<br/>
-		<a href="{{path('lc_utilisateur_home')}}">Gestion utilisateurs</a>
+		<a href="{{ path('lc_utilisateur_home') }}">Gestion utilisateurs</a>
 		{% endif %}
 		{% if is_granted('ROLE_SECRETAIRE') %}
-		<a href="{{path('dmishh_settings_manage_global')}}">Paramètres</a>
-		<a href="{{path('lc_service_home')}}">Gestion services</a>
+		<a href="{{ path('dmishh_settings_manage_global') }}">Paramètres</a>
+		<a href="{{ path('lc_service_home') }}">Gestion services</a>
 		{% endif %}
 		{% if is_granted('ROLE_TRESORIER') %}
-		<a href="{{path('lc_caisse_home')}}">Gestion caisse</a>
+		<a href="{{ path('lc_caisse_home') }}">Gestion caisse</a>
 		{% endif %}
 	</nav>
 </section>
