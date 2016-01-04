@@ -1,0 +1,7 @@
+lc_statistiques_home:
+    path: /
+    defaults: { _controller: LogiCorpoBundle:Statistiques:index }
+
+lc_statistiques_commandes:
+    path: /commandes
+    defaults: { _controller: LogiCorpoBundle:Statistiques:commandes }
