@@ -63,7 +63,7 @@ class Service
     private $commandes;
 
     /**
-     * @Assert\True
+     * @Assert\IsTrue
      */
     public function datesAreCorrect() {
         return $debutCommande <= $finCommande && $debut <= $fin && $finCommande <= $fin;

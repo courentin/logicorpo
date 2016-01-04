@@ -71,7 +71,7 @@ class ProduitsCommande implements JsonSerializable
     }
 
     /**
-     * @Assert\True(message="La quantité de produit n'est plus disponible")
+     * @Assert\IsTrue(message="La quantité de produit n'est plus disponible")
      */
     public function isQuantiteDisponible()
     {
