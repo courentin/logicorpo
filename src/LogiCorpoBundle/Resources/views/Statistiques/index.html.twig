@@ -1,0 +1,26 @@
+{% extends '::layout.html.twig' %}
+{% set subtitle = 'Statistiques' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/public/js/chartjs/Chart.min.js') }}"></script>
+    <script src="{{ asset('/public/js/chartjs/angular-chart.min.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{asset('/public/css/angular-chart.min.css')}}">
+{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+    {% form_theme form 'LogiCorpoBundle:Default:form.html.twig' %}
+    {{ form(form, { 'attr': {'class': 'form'} }) }}
+
+{% endblock %}
+{% block content %}
+    <div ng-controller="StatistiquesCtrl">
+        <canvas id="line" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-legend="true" chart-series="series"
+                chart-click="onClick" >
+        </canvas>
+    </div>
+{% endblock %}

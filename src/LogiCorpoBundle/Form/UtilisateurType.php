@@ -1,8 +1,13 @@
 <?php
 namespace LogiCorpoBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UtilisateurType extends AbstractType
@@ -10,39 +15,29 @@ class UtilisateurType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('nom', 'text')
-			->add('prenom', 'text', ['label' => 'Prénom'])
-			->add('username', 'text', ['label' => 'Login'])
-			->add('mail', 'email')
-			->add('rang', 'entity', [
+			->add('nom', TextType::class)
+			->add('prenom', TextType::class, ['label' => 'Prénom'])
+			->add('username', TextType::class, ['label' => 'Login'])
+			->add('mail', EmailType::class)
+			->add('rang', EntityType::class, [
 				'class' => 'LogiCorpoBundle:Rang'
 			]);
 			if($options['solde']) {
-				$builder->add('solde', 'money', [
+				$builder->add('solde', MoneyType::class, [
 					'label' => 'Solde initial',
 					'data'  => 0
 				]);
 			}
 	}
 
-	public function getName()
+	public function configureOptions(OptionsResolver $resolver)
 	{
-		return 'utilisateur';
+		$resolver->setDefaults(
+			array(
+				'solde' => true,
+			)
+		);
+
+		$resolver->setAllowedTypes('solde', 'boolean');
 	}
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(
-            array(
-                'solde' => true,
-            )
-        );
-
-        $resolver->addAllowedTypes(
-            array(
-                'solde' => 'boolean'
-            )
-        );
-    }
-
 }

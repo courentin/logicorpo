@@ -3,6 +3,9 @@
 namespace LogiCorpoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use LogiCorpoBundle\Entity\Utilisateur;
@@ -36,14 +39,14 @@ class SecurityController extends Controller
 	public function changePassAction(Request $req) {
 		$user = $this->getUser();
 
-		$form = $this->get('form.factory')->createBuilder()
-			->add('old_password', 'password', ['label' => 'Mot de passe actuel'])
-			->add('new_password', 'repeated', [
-				'type' => 'password',
+		$form = $this->createFormBuilder()
+			->add('old_password', PasswordType::class, ['label' => 'Mot de passe actuel'])
+			->add('new_password', RepeatedType::class, [
+				'type' => PasswordType::class,
 				'first_options'  => ['label' => 'Nouveau mot de passe'],
 				'second_options' => ['label' => 'Confirmation']
 			])
-			->add('Enregistrer', 'submit')
+			->add('Enregistrer', SubmitType::class)
 			->getForm()
 		;
 

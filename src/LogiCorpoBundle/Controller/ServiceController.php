@@ -5,6 +5,9 @@ namespace LogiCorpoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LogiCorpoBundle\Entity\Service;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use LogiCorpoBundle\Form\ProduitsCommandeType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use LogiCorpoBundle\Form\ServiceType;
 use LogiCorpoBundle\Entity\Commande;
@@ -81,9 +84,12 @@ class ServiceController extends Controller
 
 	public function nouveauAction() {
 		$service = new Service();
-		$form = $this->createForm(new ServiceType($service), $service, ['submit' => 'Ajouter']);
 
-		return $this->render('LogiCorpoBundle:Service:nouveau.html.twig', ['form' => $form]);
+		$form = $this->createForm(ServiceType::class, $service)
+			         ->add('Ajouter', SubmitType::class);
+
+
+		return $this->render('LogiCorpoBundle:Service:nouveau.html.twig', ['form' => $form->createView()]);
 	}
 
 
@@ -104,20 +110,15 @@ class ServiceController extends Controller
 		$lastProducts = $produitRep->getLastOrder($user,5,4);
 
 		$commande = new Commande();
-		/*
-		$form = $this->createForm('produits', $commande)
-				->add('Commander', 'submit');
-		*/
-		$form = $this->get('form.factory')->createBuilder('form', $commande)
-		     ->add('produits', 'collection', [
-		    	'type' => 'produits_commande',
+		$form = $this->createFormBuilder($commande)
+		     ->add('produits', CollectionType::class, [
+		    	'entry_type' => ProduitsCommandeType::class,
 				'allow_add'          => true,
 				'allow_delete'       => true,
-				'cascade_validation' => true,
 				'by_reference'       => false,
 				'label'              => ''
 		     ])
-			 ->add('Commander', 'submit')
+			 ->add('Commander', SubmitType::class)
 			 ->getForm();
 
 		$form->handleRequest($req);
@@ -139,7 +140,6 @@ class ServiceController extends Controller
 				}
 			}
 		}
-
 		return $this->render('LogiCorpoBundle:Service:nouvelleCommande.html.twig', [
 			'lastProductsCommande' => $lastProducts,
 			'form' => $form->createView()

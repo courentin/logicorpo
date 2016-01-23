@@ -30,6 +30,13 @@ lc_parametre:
     resource: "@LogiCorpoBundle/Resources/config/routing_parametre.yml"
     prefix:   /parametre
 
+lc_statistiques:
+    resource: "@LogiCorpoBundle/Resources/config/routing_statistiques.yml"
+    prefix:   /stats/{start}/{end}/{step}
+    defaults: { step: jour }
+    requirements:
+        step: jour|mois|annee
+
 login:
     path:   /login
     defaults:  { _controller: LogiCorpoBundle:Security:login }

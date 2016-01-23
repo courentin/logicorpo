@@ -1,4 +1,4 @@
-var logicorpo = angular.module('logicorpo', ['ngCookies']);
+var logicorpo = angular.module('logicorpo', ['ngCookies', 'chart.js']);
 
 logicorpo.config(function($interpolateProvider){
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
@@ -173,4 +173,26 @@ logicorpo.controller('ServiceCtrl',function($scope, $http) {
 			if(commande.paye)
 				commande.etat = "vert";
 		}
+});
+
+logicorpo.controller('StatistiquesCtrl',function($scope, $http) {
+	$http.get('/app_dev.php/stats/2015-01-03/2016-01-03/jour/commandes').success(function(data, status, headers, config) {
+		$scope.labels = data.labels;
+		$scope.series = data.series;
+		$scope.data = data.datas;
+		console.log($scope.data);
+	}).error(function(data, status, headers, config) {
+		console.log('failed : '+status);
+	});
+
+	$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+	$scope.series = ['Nombre de commande', 'Montant'];
+	$scope.data = [
+		[65, 59, 80, 81, 56, 55, 40],
+		[28, 48, 40, 19, 86, 27, 90]
+	];
+
+	$scope.onClick = function (points, evt) {
+		console.log(points, evt);
+	};
 });

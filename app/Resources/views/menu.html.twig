@@ -34,6 +34,7 @@
 		{% endif %}
 		{% if is_granted('ROLE_TRESORIER') %}
 		<a href="{{ path('lc_caisse_home') }}">Gestion caisse</a>
+		<a href="{{path('lc_statistiques_home', {start:date('-1year') | date('Y-m-d') , end: date() | date('Y-m-d'), step: 'jour'} )}}">Statistiques</a>
 		{% endif %}
 	</nav>
 </section>

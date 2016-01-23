@@ -69,7 +69,7 @@ class Service
     }
 
     /**
-     * @Assert\True
+     * @Assert\IsTrue
      */
     public function datesAreCorrect() {
         return $this->debutCommande <= $this->finCommande

@@ -3,13 +3,17 @@
 namespace LogiCorpoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use LogiCorpoBundle\Entity\Utilisateur;
 use LogiCorpoBundle\Entity\Transaction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use LogiCorpoBundle\Form\UtilisateurType;
 /**
  * @Security("has_role('ROLE_PARTICIPANT')")
  */
@@ -38,8 +42,8 @@ class UtilisateurController extends Controller
 	public function nouveauAction(Request $req) {
 		$user = new Utilisateur();
 
-		$form = $this->createForm('utilisateur', $user)
-		             ->add('Ajouter', 'submit');
+		$form = $this->createForm(UtilisateurType::class, $user)
+		             ->add('Ajouter', SubmitType::class);
 
 		$form->handleRequest($req);
 
@@ -62,13 +66,13 @@ class UtilisateurController extends Controller
 		 * Formulaire
 		 */
 		$form = $this->createFormBuilder()
-			->add('fichier', 'file', [
+			->add('fichier', FileType::class, [
 				'label' => 'Fichier *.csv',
 				'attr' => [
 					'accept' => '.csv'
 				]
 			])
-			->add('Importer', 'submit')
+			->add('Importer', SubmitType::class)
 			->getForm();
 		
 		$form->handleRequest($req);
@@ -202,9 +206,9 @@ class UtilisateurController extends Controller
 	}
 
 	public function modifierAction($id, Utilisateur $user, Request $req) {
-		$form = $this->createForm('utilisateur', $user, [ 'solde' => false ])
-					 ->add('Enregistrer', 'submit')
-					 ->add('Supprimer', 'submit', [
+		$form = $this->createForm(UtilisateurType::class, $user, [ 'solde' => false ])
+					 ->add('Enregistrer', SubmitType::class)
+					 ->add('Supprimer', SubmitType::class, [
 					 	 'attr' => ['class' => 'btn-rouge']
 					 ]);
 
@@ -245,17 +249,18 @@ class UtilisateurController extends Controller
 
 	public function soldeAction($id, Utilisateur $user, Request $req)
 	{
-		$form = $this->get('form.factory')->createBuilder('form')
-			->add('type','choice',[
+		$form = $this->createFormBuilder()
+			->add('type', ChoiceType::class,[
 				'choices' => [
 					'mouvement_carte' => 'Approvisionement de compte',
 					'remboursement'   => 'Remboursement'
 				],
+				'choices_as_values' => true,
 				'preferred_choices' => 'mouvement_carte',
 				'label' => 'Motif'
 			])
-			->add('montant','money')
-			->add('submit','submit', [
+			->add('montant', MoneyType::class)
+			->add('submit', SubmitType::class, [
 				'label' => 'Débiter/Créditer'
 			])
 			->getForm();
