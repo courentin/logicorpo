@@ -10,6 +10,9 @@ namespace LogiCorpoBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,13 +26,14 @@ class StatistiquesController extends Controller
 	public function indexAction(\DateTime $start, \DateTime $end, $step = 'jour', Request $req)
 	{
 		$dateForm = $this->createFormBuilder()
-			->add('start', 'date', ['data' => $start, 'label' => 'Du'])
-			->add('end', 'date', ['data' => $end, 'label' => 'Au'])
-			->add('step', 'choice', [
+			->add('start', DateType::class, ['data' => $start, 'label' => 'Du'])
+			->add('end', DateType::class, ['data' => $end, 'label' => 'Au'])
+			->add('step', ChoiceType::class, [
 				'choices' => ['jour' => 'Jour', 'mois' => 'Mois', 'annee' => 'Année'],
+				'choices_as_values' => true,
 				'data'    => $step
 			])
-			->add('Filtrer', 'submit')
+			->add('Filtrer', SubmitType::class)
 			->getForm();
 		$dateForm->handleRequest($req);
 		if($dateForm->isSubmitted()) {
