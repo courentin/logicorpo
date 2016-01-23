@@ -51,6 +51,7 @@ class ProduitsCommande implements JsonSerializable
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Commande", inversedBy="produits", cascade={"persist"})
      * @ORM\JoinColumn(name="id_commande", referencedColumnName="id_commande", nullable=false)
+     * @Assert\Valid
      */
     private $commande;
 
@@ -59,6 +60,7 @@ class ProduitsCommande implements JsonSerializable
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Produit")
      * @ORM\JoinColumn(name="id_produit", referencedColumnName="id_produit", nullable=false)
+     * @Assert\Valid
      */
     private $produit;
 

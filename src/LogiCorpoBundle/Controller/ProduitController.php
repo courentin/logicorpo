@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProduitController extends Controller
 {
@@ -46,8 +47,8 @@ class ProduitController extends Controller
 	public function nouveauAction(Request $req) {
 		$produit = new Produit();
 
-		$form = $this->createForm('produit', $produit)
-		             ->add('Ajouter', 'submit');
+		$form = $this->createForm(ProduitType::class, $produit)
+		             ->add('Ajouter', SubmitType::class);
 
 		$form->handleRequest($req);
 
@@ -67,8 +68,8 @@ class ProduitController extends Controller
 	* @Security("has_role('ROLE_SECRETAIRE')")
 	*/
 	public function editAction(Request $req, $id, Produit $produit) {
-		$form = $this->createForm('produit', $produit)
-		             ->add('Modifier', 'submit');
+		$form = $this->createForm(ProduitType::class, $produit)
+		             ->add('Modifier', SubmitType::class);
 
 		$form->handleRequest($req);
 
@@ -88,8 +89,8 @@ class ProduitController extends Controller
 	*/
 	public function nouvelleCategorieAction(Request $req) {
 		$categorie = new Categorie();
-		$form = $this->createForm('produit_categorie', $categorie)
-		             ->add('Ajouter', 'submit');
+		$form = $this->createForm(CategorieType::class, $categorie)
+		             ->add('Ajouter', SubmitType::class);
 		
 		$form->handleRequest($req);
 
@@ -110,8 +111,8 @@ class ProduitController extends Controller
 	*/
 	public function editerCategorieAction(Request $req, Categorie $categorie, $id) {
 
-		$form = $this->createForm('produit_categorie', $categorie)
-		             ->add('Modifier', 'submit');
+		$form = $this->createForm(CategorieType::class, $categorie)
+		             ->add('Modifier', SubmitType::class);
 
 		$form->handleRequest($req);
 

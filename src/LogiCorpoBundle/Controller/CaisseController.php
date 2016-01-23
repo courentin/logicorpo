@@ -2,7 +2,14 @@
 
 namespace LogiCorpoBundle\Controller;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityRepository;
 use LogiCorpoBundle\Entity\Transaction;
@@ -56,15 +63,16 @@ class CaisseController extends Controller
 		$transaction = new Transaction\Transaction();
 		$transaction->setUtilisateur($this->getUser())
 					->setMoyenPaiement('espece');
-		$form = $this->get('form.factory')->createBuilder('form', $transaction)
-			->add('type_transaction', 'choice', [
+		$form = $this->createFormBuilder($transaction)
+			->add('type_transaction', ChoiceType::class, [
 				'choices' => [
 					'mouvement_banque' => 'Mouvement banque',
 					'erreur_caisse'    => 'Erreur de caisse'
-				]
+				],
+				'choices_as_values' => true
 			])
-			->add('montant','money')
-			->add('Enregistrer', 'submit')
+			->add('montant',MoneyType::class)
+			->add('Enregistrer', SubmitType::class)
 			->getForm();
 		$form->handleRequest($req);
 
@@ -83,7 +91,7 @@ class CaisseController extends Controller
 	public function chercherAction(Request $req) {
 		$data = ['utilisateur' => null];
 		$form = $this->createFormBuilder($data)
-			->add('type', 'choice', [
+			->add('type', ChoiceType::class, [
 				'choices' => [
 					'mouvement_banque' => 'Mouvement banque',
 					'erreur_caisse'    => 'Erreur de caisse',
@@ -92,21 +100,22 @@ class CaisseController extends Controller
 					'achat_commande'   => 'Achat/Commande',
 					'remboursement'    => 'Remboursement'
 				],
-				'empty_value' => 'Tous les types',
+				'choices_as_values' => true,
+				'placeholder' => 'Tous les types',
 				'empty_data' => null,
 				'required'    => false
 			])
-			->add('du','date', [
+			->add('du', DateType::class, [
 				'data' => new \DateTime()
 			])
-			->add('au','date', [
+			->add('au', DateType::class, [
 				'data' => new \DateTime(),
 				'constraints' => [
 				]
 			])
-			->add('utilisateur','entity', [
+			->add('utilisateur', EntityType::class, [
 				'class'         => 'LogiCorpoBundle:Utilisateur',
-				'empty_value'   => 'Tous les utilisateurs',
+				'placeholder'   => 'Tous les utilisateurs',
 				'empty_data'    => null,
 				'required'      => false,
 				'query_builder' => function(EntityRepository $er) {
@@ -114,10 +123,10 @@ class CaisseController extends Controller
 							  ->orderBy('u.nom');
 				}
 			])
-			->add('ref','number', [
+			->add('ref', NumberType::class, [
 				'required' => false
 			])
-			->add('rechercher', 'submit')
+			->add('rechercher', SubmitType::class)
 			->getForm();
 		$form->handleRequest($req);
 
@@ -157,11 +166,11 @@ class CaisseController extends Controller
 
 	public function corrigerAction($id, Transaction\Transaction $transaction, Request $req) {
 		$form = $this->createFormBuilder($transaction)
-					 ->add('utilisateur', 'text', [
+					 ->add('utilisateur', TextType::class, [
 					 	'data' => $transaction->getUtilisateur(),
 					 	'disabled' => true
 					 ])
-					->add('type', 'choice', [
+					->add('type', ChoiceType::class, [
 						'choices' => [
 							'mouvement_banque' => 'Mouvement banque',
 							'erreur_caisse'    => 'Erreur de caisse',
@@ -170,11 +179,12 @@ class CaisseController extends Controller
 							'achat_commande'   => 'Achat/Commande',
 							'remboursement'    => 'Remboursement'
 						],
+						'choices_as_values' => true,
 						'data' => $transaction->getType(),
 						'disabled' => true
 					])
-					 ->add('montant', 'money')
-					 ->add('corriger', 'submit')
+					 ->add('montant', MoneyType::class)
+					 ->add('corriger', SubmitType::class)
 					 ->getForm();
 
 		$form->handleRequest($req);

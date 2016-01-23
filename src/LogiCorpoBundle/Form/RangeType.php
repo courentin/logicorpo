@@ -2,6 +2,7 @@
 namespace LogiCorpoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -13,12 +14,7 @@ class RangeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    	$builder->add('value', 'number');
-	}
-
-	public function getName()
-	{
-		return 'range';
+    	$builder->add('value', NumberType::class);
 	}
 
 	public function getParent()
